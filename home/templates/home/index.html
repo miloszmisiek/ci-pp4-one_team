@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<main role="main" class="main">
+    <div class="container-fluid mt-5 mt-sm-0">
+        <div class="row hero-section-row d-none d-sm-flex">
+            <div class="col-12 col-lg-8 hero-section-col text-center">
+                <h1 class="my-0 pl-4 white-font logo-font text-center hero-section-logo text-shadow">OneTeam<i
+                        class="bi bi-chevron-double-down pl-2 chevron__logo d-inline"></i></h1>
+                <p class="hero-section-text text-center">Organize your tasks onboard the ship</p>
+                <a href="/accounts/signup/" class="get-started-btn text-center mt-4">
+                    Get started
+                </a>
+            </div>
+        </div>
+        <div class="row home-rows-center">
+            <div class="col-12 col-lg-6 home-ship">
+                <div class="home-content home-content-left">
+                    <p class="home-content-text">Our mission is to help seafarers organize work onboard to enhance safety culture by good management.</p>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 home-ship home-container-right">
+                <div class="home-content home-content-right p-0">
+                    <img src="{% static 'images/seafarers.jpg' %}" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5vh home-rows-center">
+            <div class="col-12 col-lg-6 home-ship order-lg-12">
+                <div class="home-content home-content-left">
+                    <p class="home-content-text">Well-organised task manager will help you and the crew onboard to stay on track with planned work.</p>
+                </div>
+            </div>
+            <div class="col-12 col-lg-6 home-ship home-container-right">
+                <div class="home-content home-content-right p-0">
+                    <img src="{% static 'images/coiled-rope.jpg' %}" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="row hero-section-row">
+            <div class="col-12 col-lg-8 hero-section-col text-center">
+                <p class="hero-section-text text-center">Start using OneTeam and boost your's crew productivity!</p>
+                <a href="/accounts/signup/" class="get-started-btn text-center mt-4">
+                    Get started
+                </a>
+            </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
