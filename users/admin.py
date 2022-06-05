@@ -8,4 +8,16 @@ class CustomUserAdmin(UserAdmin):
     model = CustomUser
     add_form = CustomUserCreationForm
 
+    fieldsets = (
+        *UserAdmin.fieldsets,
+        (
+            'User rank',
+            {
+                'fields': (
+                    'rank',
+                )
+            }
+        )
+    )
+
 admin.site.register(CustomUser, CustomUserAdmin)
