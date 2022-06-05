@@ -1,1 +1,1 @@
-web: gunicorn oneteam.wsgi
+web: gunicorn oneTeam.wsgi
