@@ -285,7 +285,7 @@ header {
     border-radius: var(--br);
     justify-content: center;
     align-items: center;
-    font-size: 1.9rem;
+    font-size: 1.5rem;
     max-width: 50rem;
     text-align: center;
 }
@@ -306,12 +306,50 @@ header {
     font-weight: 500;
 }
 
+.forms-top-message a {
+    color: var(--clr-gray-solid);
+}
+
 .forms-container {
     width: 100%;
 }
 
 .forms-container label {
     display: none;
+}
+
+#div_id_remember {
+    flex-direction: row;
+}
+
+#div_id_remember label {
+    display: flex;
+    font-size: 0.8em;
+    padding-left: 0.5em;
+    align-self: center;
+    margin-bottom: 0;
+}
+
+#div_id_remember input {
+    align-self: center;
+}
+
+.login-submit-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.login-submit-container button {
+    margin: 0;
+}
+
+.login-submit-container a {
+    font-size: 0.8em;
+    color: black;
+    padding-bottom: 1em;
 }
 
 .ctrlHolder {
@@ -332,7 +370,7 @@ header {
     border-radius: var(--br);
     border: none;
     padding: 0.4em 2.5em 0.43em 2.5em;
-    font-size: 2.3rem;
+    font-size: 2rem;
     font-weight: 900;
     margin: 1.3em 0 0.5em 0;
     cursor: pointer;
