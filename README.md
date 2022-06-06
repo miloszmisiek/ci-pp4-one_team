@@ -9,6 +9,7 @@
 - [Bootstrap Icons](https://icons.getbootstrap.com/) - chevron logo
 - [coolorc.co](https://coolors.co/) - choosing pallete colors for website
 - [cssgradient.io](https://cssgradient.io/) - for genertating background gradients
+- [django-crispy-forms](https://django-crispy-forms.readthedocs.io/en/latest/index.html) - rendering form elements
 
 ## Credits
 1. Models are based on project [Issue Tracker](https://github.com/IuliiaKonovalova/issue_tracker) created by my good friends [Juliia Konovalova](https://github.com/IuliiaKonovalova) and [Aleksei Konovalov](https://github.com/lexach91).

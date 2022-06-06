@@ -11,7 +11,14 @@ class CustomUserCreationForm(UserCreationForm):
         fields = "__all__"
 
 class UserSignupForm(SignupForm):
-    """Allauth Signup Form extended"""
+    """Allauth Signup Form customized and extended"""
+
+    def __init__(self, *args, **kwargs):
+        super(UserSignupForm, self).__init__(*args, **kwargs)
+        self.fields['email2'].widget.attrs['placeholder'] = 'Confirm your e-mail address'
+        self.fields['password2'].widget.attrs['placeholder'] = 'Confirm your password'
+    
+
     username = forms.CharField(
         max_length=50,
         label='Username',
@@ -27,21 +34,15 @@ class UserSignupForm(SignupForm):
         label='Last Name',
         widget=forms.TextInput(attrs={'placeholder': 'Last Name'})
     )
-    phone = forms.CharField(
-        max_length=30,
-        label='Phone Number',
-        widget=forms.TextInput(attrs={'placeholder': 'Phone Number'})
-    )
-    rank = forms.IntegerField(widget=forms.HiddenInput(), initial=5)
+    rank = forms.IntegerField(widget=forms.HiddenInput(), initial=4)
 
     def save(self, request):
         print(self.cleaned_data)
         user = super(UserSignupForm, self).save(request)
-        user.phone = self.cleaned_data.get('phone')
         user.username = self.cleaned_data.get('username')
         user.save()
         user.first_name = self.cleaned_data.get('first_name')
         user.last_name = self.cleaned_data.get('last_name')
-        user.role = self.cleaned_data.get('role')
+        user.rank = self.cleaned_data.get('rank')
         user.save()
         return user

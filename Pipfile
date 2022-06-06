@@ -10,6 +10,7 @@ dj-database-url = "*"
 psycopg2 = "*"
 whitenoise = "*"
 django-allauth = "==0.41.0"
+django-crispy-forms = "*"
 
 [dev-packages]
 
