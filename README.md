@@ -1,3 +1,8 @@
+## Important Notes
+- Master is assigning the rank and confirming an account
+- While user awaits his rank selection and profile approval he can see a site layout, but no tasks are displayed
+- After user is confirmed his profile page will display accordingly to his rank
+
 ## Tools
 - gunicorn
 - allauth
