@@ -38,7 +38,7 @@ class Task(models.Model):
     created_by = models.ForeignKey(
         CustomUser,
         on_delete=models.SET_NULL,
-        related_name='users',
+        related_name='task_creator',
         null=True
         )
     assigned_to = models.ForeignKey(
@@ -46,7 +46,7 @@ class Task(models.Model):
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
-        related_name='owner'
+        related_name='task_owner'
     )
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
