@@ -48,6 +48,8 @@ class Task(models.Model):
         null=True,
         related_name='task_owner'
     )
+    priority = models.IntegerField(choices=TASK_PRIORITY, default=2)
+    approval_status = models.IntegerField(choices=TASK_APPROVAL, default=1)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 

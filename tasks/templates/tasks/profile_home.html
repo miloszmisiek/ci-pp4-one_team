@@ -2,16 +2,26 @@
 {% load static %}
 
 {% block content %}
+<main>
 
-<table>
-    {% for task in tasks %}
-        <tr>
-            <td>{{ task.title }}</td>
-            <td>{{ task.status }}</td>
-            <td>{{ task.created_by}}</td>
-            <td>{{ task.created_on }}</td>
-        </tr>
-    {% endfor %}
-</table>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <table class="table-container">
+                {% for task in tasks %}
+                    <tr class="table-row">
+                        <td class="table-cell">{{ task.title }}</td>
+                        <td class="table-cell">{{ task.status }}</td>
+                        <td class="table-cell">{{ task.created_by}}</td>
+                        <td class="table-cell">{{ task.created_on }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+
+</main>
 
 {% endblock %}

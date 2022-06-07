@@ -232,8 +232,8 @@ header {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgb(128,128,128);
-    background: linear-gradient(90deg, rgba(128,128,128,1) 0%, rgba(255,255,255,1) 0%, rgba(228,228,228,1) 45%, rgba(233,233,233,1) 83%);
+    background: rgb(128, 128, 128);
+    background: linear-gradient(90deg, rgba(128, 128, 128, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(228, 228, 228, 1) 45%, rgba(233, 233, 233, 1) 83%);
     padding: 4em;
     border-radius: var(--br);
     -webkit-box-shadow: 0px 2px 13px 2px rgb(34 60 80 / 20%);
@@ -353,8 +353,8 @@ header {
 }
 
 .ctrlHolder {
-   display: flex;
-   flex-direction: column;
+    display: flex;
+    flex-direction: column;
     padding: 1em 0;
 }
 
@@ -377,6 +377,24 @@ header {
     -webkit-box-shadow: 0px 2px 13px 2px rgb(34 60 80 / 20%);
     -moz-box-shadow: 0px 2px 13px 2px rgba(34, 60, 80, 0.2);
     box-shadow: 0px 2px 13px 2px rgb(34 60 80 / 20%);
+}
+
+/*------ Tasks ------*/
+.table-container {
+    background-color: var(--clr-blue);
+    font-size: 1.5rem;
+    margin: 5rem auto 0;
+    width: 100%;
+    max-width: 35em;
+}
+
+.table-row {
+
+}
+
+.table-cell {
+    padding: 1em;
+    border: 1px solid black;
 }
 
 /*------ Footer ------*/
@@ -464,7 +482,7 @@ footer {
     .home-content {
         padding: 1.4em;
     }
-    
+
     .home-content p {
         font-size: 1.2em;
     }
