@@ -7,11 +7,11 @@ class CustomUser(AbstractUser):
     """Custom user model."""
     # Roles to assign to users
     ROLES = (
-        (0, 'master'),
-        (1, 'senior officer'),
-        (2, 'junior officer'),
-        (3, 'bosun'),
-        (4, 'potential user')
+        (0, 'Master'),
+        (1, 'Senior Officer'),
+        (2, 'Junior Officer'),
+        (3, 'Bosun'),
+        (4, 'Potential User')
     )
 
     username = models.CharField(
