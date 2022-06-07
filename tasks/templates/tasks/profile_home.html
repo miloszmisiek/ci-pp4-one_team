@@ -4,28 +4,35 @@
 {% block content %}
 <main>
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-                <table class="table-container">
-                    {% for task in tasks %}
-                        <tr>
-                            <th>ID</th>
-                            <th>Status</th>
-                            <th>Owner</th>
-                            <th>Title</th>
-                        </tr>
-                        <tr class="table-row">
-                            <td class="table-cell">{{ task.id }}</td>
-                            <td class="table-cell">{{ task.get_status_display }}</td>
-                            <td class="table-cell">{{ task.assigned_to.get_rank_display }}</td>
-                            <td class="table-cell">{{ task.title }}</td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            </div>
-        </div>
-    </div>
+
+    <table>
+        {% for task in tasks %}
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Status</th>
+                <th>Owner</th>
+                <th>Priority</th>
+                <th>Title</th>
+                <th>Start Date</th>
+                <th>Duration</th>
+                <th>Approval</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tr>
+            <td>{{ task.id }}</td>
+            <td>{{ task.get_status_display }}</td>
+            <td>{{ task.assigned_to.get_rank_display }}</td>
+            <td>{{ task.get_priority_display }}</td>
+            <td>{{ task.title }}</td>
+            <td>{{ task.created_on | date:"d F Y" }}</td>
+            <td>{{ task.duration }} days</td>
+            <td>{{ task.get_approval_status_display }}</td>
+            <td>..button here..</td>
+        </tr>
+        {% endfor %}
+    </table>
 
 
 </main>
