@@ -3,6 +3,15 @@
 
 {% block content %}
 
-{{ tasks }}
+<table>
+    {% for task in tasks %}
+        <tr>
+            <td>{{ task.title }}</td>
+            <td>{{ task.status }}</td>
+            <td>{{ task.created_by}}</td>
+            <td>{{ task.created_on }}</td>
+        </tr>
+    {% endfor %}
+</table>
 
 {% endblock %}
