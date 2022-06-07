@@ -381,26 +381,6 @@ header {
 
 /*------ Tasks ------*/
 
-/* .table-container {
-    background-color: var(--clr-blue);
-    font-size: 1rem;
-    margin: 5rem auto 0;
-    width: 100%;
-    max-width: 70em;
-}
-
-.table-row {
-
-}
-
-.table-cell {
-    padding: 1em;
-    border: 1px solid #343a40;
-} */
-
-/* 
-Generic Styling, for Desktops/Laptops 
-*/
 table { 
     width: 100%;
     max-width: 80em; 
