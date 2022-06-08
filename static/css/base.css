@@ -387,7 +387,7 @@ table {
     border-collapse: collapse;
     margin: 5em auto 0; 
   }
-  /* Zebra striping */
+  
   tr:nth-of-type(odd) { 
     background: #eee; 
   }
@@ -547,8 +547,7 @@ footer {
 }
 
 /* Media queries for table formatting */
-@media 
-only screen and (max-width: 760px),
+@media only screen and (max-width: 760px),
 (min-device-width: 768px) and (max-device-width: 1024px)  {
 
 	table, thead, tbody, th, td, tr { 

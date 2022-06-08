@@ -4,9 +4,35 @@
 {% block content %}
 <main>
 
-
-    <table>
-        {% for task in tasks %}
+    <div class="container-fluid mt-5vh">
+        <div class="row text-center">
+            <div class="col-4 p-2 m-auto h2">
+                <i class="fas fa-ship"></i> What's Next?
+            </div>
+            <div class="col-4 p-2 m-auto h5">
+                <label for="months"><strong>Enter Month:</strong></label>
+                <select class="d-block mx-auto" name="months" id="months">
+                    <option value='1'>Janaury</option>
+                    <option value='2'>February</option>
+                    <option value='3'>March</option>
+                    <option value='4'>April</option>
+                    <option value='5'>May</option>
+                    <option value='6'>June</option>
+                    <option value='7'>July</option>
+                    <option value='8'>August</option>
+                    <option value='9'>September</option>
+                    <option value='10'>October</option>
+                    <option value='11'>November</option>
+                    <option value='12'>December</option>
+                </select>
+            </div>
+            <div class="col-4 p-2 h5">
+                <strong>Today is:</strong>
+                <div id="date"></div>
+            </div>
+        </div>
+    </div>
+    <table class="mx-auto mt-5vh">
         <thead>
             <tr>
                 <th>ID</th>
@@ -20,21 +46,48 @@
                 <th>Description</th>
             </tr>
         </thead>
-        <tr>
-            <td>{{ task.id }}</td>
-            <td>{{ task.get_status_display }}</td>
-            <td>{{ task.assigned_to.get_rank_display }}</td>
-            <td>{{ task.get_priority_display }}</td>
-            <td>{{ task.title }}</td>
-            <td>{{ task.created_on | date:"d F Y" }}</td>
-            <td>{{ task.duration }} days</td>
-            <td>{{ task.get_approval_status_display }}</td>
-            <td>..button here..</td>
-        </tr>
-        {% endfor %}
+        <tbody>
+            {% for task in tasks %}
+            <tr>
+                <td>{{ task.id }}</td>
+                <td>{{ task.get_status_display }}</td>
+                <td>{{ task.assigned_to.get_rank_display }}</td>
+                <td>{{ task.get_priority_display }}</td>
+                <td>{{ task.title }}</td>
+                <td>{{ task.created_on | date:"d F Y" }}</td>
+                <td>{{ task.duration }} days</td>
+                <td>{{ task.get_approval_status_display }}</td>
+                <td>..button here..</td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
 
 
 </main>
+
+<script>
+
+    n = new Date();
+    y = n.getFullYear();
+    let m = n.toLocaleString('default', { month: 'long' });
+    d = n.getDate();
+    document.getElementById("date").innerHTML = d + " " + m + " " + y;
+
+    const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
+
+    const comparer = (idx, asc) => (a, b) => ((v1, v2) =>
+        v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
+    )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
+
+    // do the work...
+    document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() => {
+        const table = th.closest('table');
+        const tbody = table.querySelector('tbody');
+        Array.from(tbody.querySelectorAll('tr'))
+            .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
+            .forEach(tr => tbody.appendChild(tr));
+    })));
+</script>
 
 {% endblock %}
