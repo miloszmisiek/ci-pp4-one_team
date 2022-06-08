@@ -387,6 +387,10 @@ table {
     border-collapse: collapse;
     margin: 5em auto 0; 
   }
+
+  tr {
+      background: rgb(183, 179, 179);
+  }
   
   tr:nth-of-type(odd) { 
     background: #eee; 

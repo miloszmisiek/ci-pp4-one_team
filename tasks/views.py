@@ -12,9 +12,7 @@ def profile_home(request):
     if request.GET:
         if 'months' in request.GET:
             months = request.GET['months']
-
-            
-            tasks = tasks.filter(end_date__month=months)
+            tasks = tasks.filter(created_on__month=months)
 
     context = {
         'tasks': tasks,
