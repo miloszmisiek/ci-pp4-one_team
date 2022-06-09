@@ -32,7 +32,6 @@ class Task(models.Model):
         blank=False,
         default='Untitled Task'
         )
-    # slug = models.SlugField(max_length=100, blank=False)
     description = models.TextField(max_length=300, blank=True)
     status = models.IntegerField(choices=TASK_STATUS, default=0)
     created_by = models.ForeignKey(
@@ -53,17 +52,15 @@ class Task(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     end_date = models.DateTimeField(null=True)
-    
 
-    class Meta:
-        ordering = ['-created_on']
+    # class Meta:
+    #     ordering = ['-created_on']
 
     def __str__(self):
         return self.title
 
     def duration(self):
         return (self.end_date - self.created_on).days
-
 
 class Comment(models.Model):
     task = models.ForeignKey(

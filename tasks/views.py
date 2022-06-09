@@ -5,7 +5,7 @@ from .models import Task, Comment
 # Create your views here.
 
 def profile_home(request):
-    """ A view to return the index page """
+    """ A view to return the tasks home page """
 
     tasks = Task.objects.all()
 
