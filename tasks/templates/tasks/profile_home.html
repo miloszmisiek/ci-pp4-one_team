@@ -13,6 +13,7 @@
                 <form action="" method="get" id="my_form">
                     <label for="months"><strong>Select Month:</strong></label>
                     <select onchange="submit_form()" class="d-block mx-auto" name="months" id="months">
+                        <option disabled>Select Month</option>
                         <option value='1'>Janaury</option>
                         <option value='2'>February</option>
                         <option value='3'>March</option>
@@ -76,7 +77,10 @@
         for (let opt of options) {
             if (opt.value == month) {
                 opt.selected = true;
-            } 
+            }
+            if (opt.value === 'Select Month') {
+                opt.selected = true;
+            }
         }
 });
 
