@@ -60,12 +60,29 @@
                 <td>{{ task.created_on | date:"d F Y" }}</td>
                 <td>{{ task.duration }} days</td>
                 <td>{{ task.get_approval_status_display }}</td>
-                <td>..button here..</td>
+                <td>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                        data-title="{{ task.title }}" data-description="{{ task.description }}">Open</button>
+                </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body"></div>
+            </div>
+        </div>
+    </div>
 
 </main>
 
@@ -82,7 +99,16 @@
                 opt.selected = true;
             }
         }
-});
+    });
+
+    $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var title = button.data('title'); // Extract info from data-* attributes
+        var description = button.data('description');
+        var modal = $(this)
+        modal.find('.modal-title').text(title);
+        modal.find('.modal-body').text(description);
+    })
 
     n = new Date();
     y = n.getFullYear();
