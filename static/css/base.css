@@ -385,7 +385,10 @@ table {
     width: 100%;
     max-width: 80em; 
     border-collapse: collapse;
-    margin: 5em auto 0; 
+    margin: 5em auto 0;
+    -webkit-box-shadow: 0px 2px 13px 2px rgb(34 60 80 / 20%);
+    -moz-box-shadow: 0px 2px 13px 2px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 2px 13px 2px rgb(34 60 80 / 20%);
   }
 
   tr {
@@ -403,7 +406,7 @@ table {
   td, th { 
     padding: 6px; 
     border: 1px solid #ccc; 
-    text-align: left; 
+    text-align: center;
   }
 
 
@@ -438,6 +441,7 @@ footer {
     align-items: baseline;
 }
 
+/*----------------------------*/
 /*------ Media Queries ------*/
 
 @media (max-width: 992px) {
@@ -571,7 +575,8 @@ footer {
 		border: none;
 		border-bottom: 1px solid #eee; 
 		position: relative;
-		padding-left: 50%; 
+		padding-left: 50%;
+        text-align: left; 
 	}
 	
 	td:before { 
