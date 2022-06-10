@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views import i18n
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('', include('home.urls')),
     path('tasks/', include('tasks.urls')),
+    path('jsi18n/', i18n.JavaScriptCatalog.as_view(), name='jsi18n'),
 ]

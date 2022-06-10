@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.admin import widgets
 from .models import Task
 
 
@@ -12,6 +13,6 @@ class AddTask(forms.ModelForm):
             'priority',
             'end_date'
         ]
-        widgets = {
-            'end_date': forms.DateTimeInput(),
-        }
+    def __init__(self, *args, **kwargs):
+        super(AddTask, self).__init__(*args, **kwargs)
+        self.fields['end_date'].widget = widgets.AdminSplitDateTime()
