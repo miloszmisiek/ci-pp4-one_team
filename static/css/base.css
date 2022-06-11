@@ -134,7 +134,8 @@ header {
 }
 
 .get-started-btn,
-.menu-btn {
+.menu-btn,
+.add-task-btn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -158,6 +159,8 @@ header {
     vertical-align: 0 !important;
     padding: 0.4em 2.0em 0.4em 2.0em
 }
+
+.add-task-btn
 
 .home-btn:hover {
     color: #000;
@@ -409,6 +412,26 @@ table {
     text-align: center;
   }
 
+  .add-task-btn {
+    font-size: 1.2rem;
+    max-width: 10rem;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    background-color: #e955ad;;
+    padding: 0.2em;
+}
+
+.add-task-btn:hover {
+    background-color: #ad5188;
+}
+
+.add-task-btn a {
+    color: ghostwhite;
+    text-decoration: none;
+}
+
 
 /*------ Footer ------*/
 
@@ -467,6 +490,10 @@ footer {
 
     .menu-btn {
         padding: 0.4em 1.4em 0.4em 1.4em;
+    }
+
+    .add-task-btn {
+        margin: 2vh auto 0;
     }
 }
 
