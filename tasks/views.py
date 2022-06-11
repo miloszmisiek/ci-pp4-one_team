@@ -10,7 +10,11 @@ from .forms import AddTask
 def profile_home(request):
     """ A view to return the tasks home page """
 
+    show_completed = True
     tasks = Task.objects.all()
+    
+    if not show_completed:
+        tasks = tasks.exclude(status=1)
 
     if request.GET:
         if 'months' in request.GET:

@@ -28,7 +28,7 @@
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    
+
     {% endblock%}
 
     {% block extra_css %}
@@ -73,8 +73,8 @@
                             </a>
                         </li>
                         <li class="list-inline-item dropdown">
-                            <a class="nav-link" href="#" id="user-options" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
                                 <div class="my-0 mx-md-5 white-font menu-btn text-center">
                                     Menu
                                 </div>
@@ -105,14 +105,16 @@
     {% block page_header %}
     {% endblock %}
 
-    {% block content %}
-    
-    {% endblock %}
+    <main role="main" class="w-100 h-100 m-auto">
+        {% block content %}
+
+        {% endblock %}
+    </main>
 
     {% block postloadjs %}
     {% endblock %}
 
-    <footer class="mt-auto container-fluid bg-gray">
+    <footer class="container-fluid bg-gray">
         <div class="row p-3">
             <div class="col-12 py-3 col-lg-4 my-auto text-center text-lg-left">
                 <a href="{% url 'home' %}" class="nav-link main-logo-link">
@@ -121,9 +123,15 @@
                 </a>
             </div>
             <div class="col-12 py-3 col-lg-4 my-auto text-center text-lg-left footer-text">
-                <div class="contact-info"><i class="far fa-envelope pr-3"></i><p class="py-1">oneteam@example.com</p></div>
-                <div class="contact-info"><i class="fas fa-phone-alt pr-3"></i><p class="py-1">+48 696 969 696</p></div>
-                <div class="contact-info contact-info-address"><i class="fas fa-map-pin pr-3"></i><p class="py-1">Poland, Szczecin, ul. Wojska Polskiego 69, 71-696</p></div>
+                <div class="contact-info"><i class="far fa-envelope pr-3"></i>
+                    <p class="py-1">oneteam@example.com</p>
+                </div>
+                <div class="contact-info"><i class="fas fa-phone-alt pr-3"></i>
+                    <p class="py-1">+48 696 969 696</p>
+                </div>
+                <div class="contact-info contact-info-address"><i class="fas fa-map-pin pr-3"></i>
+                    <p class="py-1">Poland, Szczecin, ul. Wojska Polskiego 69, 71-696</p>
+                </div>
             </div>
             <div class="col-12 py-3 col-lg-4 my-auto text-center footer-text">
                 <p>
@@ -133,17 +141,19 @@
                     <li class="list-inline-item px-3">
                         <a href="mailto:m1l0sz@protonmail.com" aria-label="Go to email page">
                             <i class="far fa-envelope" aria-hidden="true"></i>
-                          </a>
+                        </a>
                     </li>
                     <li class="list-inline-item px-3">
-                        <a href="https://www.linkedin.com/in/milosz-misiek/" target="_blank" rel="noopener" aria-label="Visit Milosz Misiek LinkedIn page">
+                        <a href="https://www.linkedin.com/in/milosz-misiek/" target="_blank" rel="noopener"
+                            aria-label="Visit Milosz Misiek LinkedIn page">
                             <i class="fab fa-linkedin-in" aria-hidden="true"></i>
-                          </a>
+                        </a>
                     </li>
                     <li class="list-inline-item px-3">
-                        <a href="https://github.com/miloszmisiek" target="_blank" rel="noopener" aria-label="Visit Milosz Misiek GitHub page">
+                        <a href="https://github.com/miloszmisiek" target="_blank" rel="noopener"
+                            aria-label="Visit Milosz Misiek GitHub page">
                             <i class="fab fa-github" aria-hidden="true"></i>
-                          </a>
+                        </a>
                     </li>
                 </ul>
             </div>
