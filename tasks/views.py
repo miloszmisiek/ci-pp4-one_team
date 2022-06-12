@@ -9,7 +9,6 @@ from .forms import AddTask
 
 def profile_home(request):
     """ A view to return the tasks home page """
-    
     tasks = Task.objects.all()
 
     if request.GET:
@@ -33,7 +32,7 @@ def add_task(request):
         form = AddTask(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('tasks/')
+            return HttpResponseRedirect('/tasks/')
     else:
         form = AddTask
 
