@@ -9,7 +9,7 @@ from .forms import AddTask
 
 def profile_home(request):
     """ A view to return the tasks home page """
-
+    
     tasks = Task.objects.all()
 
     if request.GET:

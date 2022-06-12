@@ -83,7 +83,7 @@
         <div class="col-12 mx-auto col-sm-4 mt-4 ml-sm-auto mr-sm-0 pr-0 text-center">
                 <form action="" method="post">
                     {% csrf_token %}
-                    <button class="add-task-btn mr-sm-0 border-0" type="submit" value="1" name="clear_completed">Clear Completed</button>
+                    <button class="add-task-btn mr-sm-0 border-0" type="submit">Clear Completed</button>
                 </form>
         </div>
     </div>
@@ -126,7 +126,7 @@
         var button = $(event.relatedTarget); // Button that triggered the modal
         var title = button.data('title'); // Extract info from data-* attributes
         var description = button.data('description');
-        var modal = $(this)
+        var modal = $(this);
         modal.find('.modal-title').text(title);
         modal.find('.modal-body').text(description);
     })
