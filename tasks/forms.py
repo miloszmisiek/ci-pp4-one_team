@@ -13,6 +13,6 @@ class AddTask(forms.ModelForm):
             'priority',
             'end_date'
         ]
-    def __init__(self, *args, **kwargs):
-        super(AddTask, self).__init__(*args, **kwargs)
-        self.fields['end_date'].widget = widgets.AdminSplitDateTime()
+    # def __init__(self, *args, **kwargs):
+    #     super(AddTask, self).__init__(*args, **kwargs)
+    #     self.fields['end_date'].widget = widgets.AdminSplitDateTime()

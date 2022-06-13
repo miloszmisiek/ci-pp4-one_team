@@ -49,9 +49,9 @@ class Task(models.Model):
     )
     priority = models.IntegerField(choices=TASK_PRIORITY, default=2)
     approval_status = models.IntegerField(choices=TASK_APPROVAL, default=1)
-    created_on = models.DateTimeField(auto_now_add=True)
-    updated_on = models.DateTimeField(auto_now=True)
-    end_date = models.DateTimeField(null=True)
+    created_on = models.DateField(auto_now_add=True)
+    updated_on = models.DateField(auto_now=True)
+    end_date = models.DateField(null=True)
 
     # class Meta:
     #     ordering = ['-created_on']
