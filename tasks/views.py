@@ -4,8 +4,12 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from .models import Task, Comment
 from .forms import AddTask
+from users.models import CustomUser
+from django.contrib.auth.decorators import user_passes_test
 
-# Create your views here.
+
+def is_not_bosun(user):
+    return user.rank != 3
 
 def profile_home(request):
     """ A view to return the tasks home page """
@@ -26,16 +30,28 @@ def profile_home(request):
     return render(request, 'tasks/profile_home.html', context)
 
 @login_required(login_url="/accounts/login/")
+@user_passes_test(is_not_bosun, login_url='tasks')
 def add_task(request):
     """ A view to add tasks to database """
+    
+    current_user = request.user
+    
     if request.method == "POST":
         form = AddTask(request.POST)
+        print(form.assigned_to)
+        print('form in post')
+        print(form)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/tasks/')
     else:
-        form = AddTask
-
+        if current_user.rank == 2:
+            form = AddTask(initial={'assigned_to': current_user.id})
+            print('form in get')
+            print(form)
+            form.fields['assigned_to'].disabled = True
+        else:
+            form = AddTask()
 
     context = {
         'form': form
