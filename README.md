@@ -22,7 +22,7 @@
 3. Fixed bug with static files directory from [Stack Overflow](https://stackoverflow.com/questions/67698211/getting-get-static-css-base-css-http-1-1-404-1795-error-for-static-files)
 4. Tables styling come from [css-tricks.com](https://css-tricks.com/responsive-data-tables/)
 5. Sorting function used in tables comes from [Stack Overflow](https://stackoverflow.com/questions/14267781/sorting-html-table-with-javascript/53880407#53880407)
-<!-- 6. Date & Time picker solution for Add Task functionality comes from [Stack Overflow](https://stackoverflow.com/questions/61077802/how-to-use-a-datepicker-in-a-modelform-in-django) -->
+6. Favicon generated using [favicon.cc](https://www.favicon.cc/)
 
 ## Acknowledgments
 1. My girlfriend for being my biggest supporter throught the entire time!

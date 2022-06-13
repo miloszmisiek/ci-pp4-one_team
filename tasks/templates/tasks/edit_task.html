@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/widgets.css' %}" />
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'admin/js/core.js' %}"></script>
+<script src="{% url 'jsi18n' %}"></script>
+{{ form.media }}
+{% endblock %}
+
+{% block content %}
+<h1>Edit Task</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Update Task" />
+</form>
+{% endblock %}

@@ -71,7 +71,7 @@
                         <td>
                             <button type="button" class="btn btn-primary" data-toggle="modal"
                                 data-target="#exampleModal" data-title="{{ task.title }}"
-                                data-description="{{ task.description }}">Open</button>
+                                data-description="{{ task.description }}" data-id="{{ task.id }}">Open</button>
                         </td>
                     </tr>
                     {% endfor %}
@@ -81,10 +81,10 @@
     </div>
     <div class="row text-right clear-completed-row">
         <div class="col-12 mx-auto col-sm-4 mt-4 ml-sm-auto mr-sm-0 pr-0 text-center">
-                <form action="" method="post">
-                    {% csrf_token %}
-                    <button class="add-task-btn mr-sm-0 border-0" type="submit">Clear Completed</button>
-                </form>
+            <form action="" method="post">
+                {% csrf_token %}
+                <button class="add-task-btn mr-sm-0 border-0" type="submit">Clear Completed</button>
+            </form>
         </div>
     </div>
 
@@ -98,7 +98,16 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body"></div>
+                <div class="modal-body text-center">
+                </div>
+                <div class="description-buttons d-flex justify-content-around p-2">
+                    <a id="edit-task-anchor" href="#">
+                        <button type="button" class="btn btn-warning">Edit Task</button>
+                    </a>
+                    <a id="delete-task-anchor" class="confirm-delete" href="">
+                        <button type="button" class="btn btn-danger">Delete Task</button>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -126,9 +135,16 @@
         var button = $(event.relatedTarget); // Button that triggered the modal
         var title = button.data('title'); // Extract info from data-* attributes
         var description = button.data('description');
+        var taskId = button.data('id');
         var modal = $(this);
         modal.find('.modal-title').text(title);
         modal.find('.modal-body').text(description);
+        modal.find('#edit-task-anchor').attr('href', `/tasks/edit/${taskId}`);
+        modal.find('#delete-task-anchor').attr('href', `/tasks/delete/${taskId}`);
+    })
+
+    $(document).on('click', '.confirm-delete', function () {
+        return confirm('Are you sure you want to delete this?');
     })
 
     n = new Date();
