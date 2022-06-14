@@ -69,7 +69,22 @@
                         <td>{{ task.title }}</td>
                         <td>{{ task.created_on | date:"d F Y" }}</td>
                         <td>{{ task.duration }} days</td>
+                        {% if request.user.is_superuser %}
+                        {% if task.approval_status == 1 %}
+                        <td>
+                            <!-- <form method="post">
+                                {% csrf_token %} -->
+                                <button type="submit" class="btn btn-success approve-btn" data-id="{{ task.id }}"
+                                    data-approval="{{ task.approval_status }}">Approve</button>
+                                <input type="hidden" name="approve-request" />
+                            <!-- </form> -->
+                        </td>
+                        {% else %}
                         <td>{{ task.get_approval_status_display }}</td>
+                        {% endif %}
+                        {% else %}
+                        <td>{{ task.get_approval_status_display }}</td>
+                        {% endif %}
                         <td>
                             <button type="button" class="btn btn-primary" data-toggle="modal"
                                 data-target="#exampleModal" data-title="{{ task.title }}"
@@ -86,6 +101,7 @@
             <form action="" method="post">
                 {% csrf_token %}
                 <button class="add-task-btn mr-sm-0 border-0" type="submit">Clear Completed</button>
+                <input type="hidden" name="clear-completed" />
             </form>
         </div>
     </div>
@@ -133,6 +149,14 @@
                 opt.selected = true;
             }
         }
+    });
+
+    $(document).on('click', '.approve-btn', function (event) {
+        var taskId = $(this).data('id');
+        var approvalStatus = $(this).data('approval');
+        console.log(taskId);
+        console.log(approvalStatus);
+
     });
 
     $('#exampleModal').on('show.bs.modal', function (event) {

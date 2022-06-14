@@ -20,8 +20,10 @@ def profile_home(request):
             months = request.GET['months']
             tasks = tasks.filter(created_on__month=months)
 
-    if request.POST:
-        tasks = tasks.exclude(status=1)
+    if request.method == "POST":
+        if 'clear-completed' in request.POST:
+            tasks = tasks.exclude(status=1)
+
 
 
     context = { 
