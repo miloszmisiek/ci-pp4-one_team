@@ -68,12 +68,22 @@ def add_task(request):
 def edit_task(request, task_id):
     """ A view to edit tasks in database """
     task = get_object_or_404(Task, id=task_id)
+    current_user = request.user
     if request.method == "POST":
         form = AddTask(request.POST, instance=task)
         if form.is_valid():
-            form.save()
+            if current_user.rank == 2:
+                obj = form.save(commit=False)
+                obj.assigned_to = current_user
+                obj.save()
+            else:
+                form.save()
             return HttpResponseRedirect('/tasks/')
-    form = AddTask(instance=task)
+    else:
+        form = AddTask(instance=task)
+        if current_user.rank == 2:
+            form.fields['assigned_to'].disabled = True
+
     context ={
         'form' : form,
     }

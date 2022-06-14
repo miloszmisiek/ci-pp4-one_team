@@ -1,7 +1,4 @@
 from django.db import models
-
-# Create your models here.
-from django.db import models
 from users.models import CustomUser
 
 DEFAULT_TASK_ID = 1
@@ -53,8 +50,8 @@ class Task(models.Model):
     updated_on = models.DateField(auto_now=True)
     end_date = models.DateField(null=True)
 
-    # class Meta:
-    #     ordering = ['-created_on']
+    class Meta:
+        ordering = ['id']
 
     def __str__(self):
         return self.title
