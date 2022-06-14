@@ -90,6 +90,14 @@ def edit_task(request, task_id):
     return render(request, 'tasks/edit_task.html', context)
 
 @login_required(login_url="/accounts/login/")
+def approve_task(request, task_id):
+    """ A view to approve tasks in the database """
+    task = get_object_or_404(Task, id=task_id)
+    task.approval_status = 0
+    task.save()
+    return redirect('tasks')
+
+@login_required(login_url="/accounts/login/")
 def delete_task(request, task_id):
     """ A view to delete tasks from database """
     task = get_object_or_404(Task, id=task_id)
