@@ -38,18 +38,21 @@ def add_task(request):
     
     if request.method == "POST":
         form = AddTask(request.POST)
-        print(form.assigned_to)
         print('form in post')
         print(form)
         if form.is_valid():
-            form.save()
+            if current_user.rank == 2:
+                obj = form.save(commit=False)
+                obj.assigned_to = current_user
+                obj.save()
+            else:
+                form.save()
             return HttpResponseRedirect('/tasks/')
     else:
         if current_user.rank == 2:
             form = AddTask(initial={'assigned_to': current_user.id})
-            print('form in get')
-            print(form)
             form.fields['assigned_to'].disabled = True
+        
         else:
             form = AddTask()
 

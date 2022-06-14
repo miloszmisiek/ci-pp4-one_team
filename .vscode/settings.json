@@ -32,5 +32,6 @@
    },
    "[html]": {
       "editor.defaultFormatter": "vscode.html-language-features"
-   }
+   },
+   "python.formatting.provider": "black"
 }
