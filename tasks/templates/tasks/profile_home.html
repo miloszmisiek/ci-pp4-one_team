@@ -4,6 +4,13 @@
 {% block content %}
 <div class="container-fluid profile-home-container">
     <div class="row text-center">
+        <div class="col-12 mx-auto p-2 mt-4 d-flex justify-content-center align-items-center">
+            <h1>
+                Hello {{ request.user.first_name}} !<br><span class="title-rank">({{ request.user.get_rank_display }})</span>
+            </h1>
+        </div>
+    </div>
+    <div class="row text-center">
         <div class="col-12 col-md-4 p-2 mx-auto mt-4 d-flex">
             <h2 class="d-flex justify-content-between align-self-center"><i
                     class="fas fa-ship pr-3 align-self-center"></i> What's Next?</h2>
@@ -98,7 +105,7 @@
         </div>
     </div>
     <div class="row text-right clear-completed-row">
-        <div class="col-12 mx-auto col-sm-4 mt-4 ml-sm-auto mr-sm-0 pr-0 text-center">
+        <div class="col-12 mx-auto col-sm-4 my-4 ml-sm-auto mr-sm-0 pr-0 text-center">
             <form action="" method="post">
                 {% csrf_token %}
                 <button class="add-task-btn mr-sm-0 border-0" type="submit">Clear Completed</button>

@@ -43,14 +43,17 @@ def add_task(request):
     current_user = request.user
 
     if request.method == "POST":
-        form = AddTask(request.POST)
-        print("form in post")
-        print(form)
+        form = AddTask(request.POST, assigned_to=ALL_USERS)
         if form.is_valid():
             if current_user.rank == 2:
                 obj = form.save(commit=False)
                 obj.assigned_to = current_user
                 obj.save()
+            elif current_user.rank == 1:
+                obj = form.save(commit=False)
+                if obj.priority != 0:
+                    obj.approval_status = 2
+                    obj.save()
             else:
                 form.save()
             return HttpResponseRedirect("/tasks/")
@@ -78,11 +81,15 @@ def edit_task(request, task_id):
     task = get_object_or_404(Task, id=task_id)
     current_user = request.user
     if request.method == "POST":
-        form = AddTask(request.POST, instance=task)
+        form = AddTask(request.POST, assigned_to=ALL_USERS, instance=task)
         if form.is_valid():
             if current_user.rank == 2:
                 obj = form.save(commit=False)
                 obj.assigned_to = current_user
+                obj.save()
+            elif current_user.rank == 1:
+                obj = form.save(commit=False)
+                obj.approval_status = 2 if obj.priority != 0 else 1
                 obj.save()
             else:
                 form.save()
@@ -95,7 +102,7 @@ def edit_task(request, task_id):
                 assigned_to=ALL_USERS, initial={"assigned_to": current_user.id}
             )
         )
-        
+
         form.fields["assigned_to"].disabled = True if current_user.rank == 2 else False
 
     context = {

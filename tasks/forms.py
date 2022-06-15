@@ -4,12 +4,6 @@ from .models import Task
 
 
 class AddTask(forms.ModelForm):
-    STAFF_CHOICES = (
-        (1, 'Senior Officer'),
-        (2, 'Junior Officer'),
-        (3, 'Bosun'),
-        (4, 'Potential User')
-    )
     class Meta:
         model = Task
         fields = [
