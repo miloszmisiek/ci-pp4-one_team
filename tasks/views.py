@@ -3,43 +3,48 @@ from django.db.models import Q
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from .models import Task, Comment
+from .models import Task
 from .forms import AddTask
-from users.models import CustomUser
 from django.contrib.auth.decorators import user_passes_test
 
 USER = get_user_model()
 ALL_USERS = USER.objects.all()
 MASTER_EXCLUDED = ALL_USERS.exclude(is_superuser=True)
 
+
 def is_not_bosun(user):
     return user.rank != 3
 
+
 def profile_home(request):
-    """ A view to return the tasks home page """
+    """A view to return the tasks home page"""
     tasks = Task.objects.all()
 
-    if request.GET and 'months' in request.GET:
-        months = request.GET['months']
+    if request.GET and "months" in request.GET:
+        months = request.GET["months"]
         tasks = tasks.filter(created_on__month=months)
 
-    tasks = tasks.exclude(status=1) if request.POST and 'clear-completed' in request.POST else tasks
+    tasks = (
+        tasks.exclude(status=1)
+        if request.POST and "clear-completed" in request.POST
+        else tasks
+    )
 
-    context = { 
-        'tasks': tasks,
+    context = {
+        "tasks": tasks,
     }
-    return render(request, 'tasks/profile_home.html', context)
+    return render(request, "tasks/profile_home.html", context)
+
 
 @login_required(login_url="/accounts/login/")
-@user_passes_test(is_not_bosun, login_url='tasks')
+@user_passes_test(is_not_bosun, login_url="tasks")
 def add_task(request):
-    """ A view to add tasks to database """
+    """A view to add tasks to database"""
     current_user = request.user
-   
-    
+
     if request.method == "POST":
         form = AddTask(request.POST)
-        print('form in post')
+        print("form in post")
         print(form)
         if form.is_valid():
             if current_user.rank == 2:
@@ -48,24 +53,28 @@ def add_task(request):
                 obj.save()
             else:
                 form.save()
-            return HttpResponseRedirect('/tasks/')
+            return HttpResponseRedirect("/tasks/")
     else:
-        if not current_user.is_superuser:
-            form = AddTask(assigned_to=MASTER_EXCLUDED, initial={'assigned_to': current_user.id})
-        else:
-            form = AddTask(assigned_to=ALL_USERS, initial={'assigned_to': current_user.id})
-            
-            form.fields['assigned_to'].disabled = True if current_user.rank == 2 else False
+        form = (
+            AddTask(
+                assigned_to=MASTER_EXCLUDED, initial={"assigned_to": current_user.id}
+            )
+            if not current_user.is_superuser
+            else AddTask(
+                assigned_to=ALL_USERS, initial={"assigned_to": current_user.id}
+            )
+        )
 
-    context = {
-        'form': form
-    }
+        form.fields["assigned_to"].disabled = True if current_user.rank == 2 else False
+
+    context = {"form": form}
 
     return render(request, "tasks/add_task.html", context)
 
+
 @login_required(login_url="/accounts/login/")
 def edit_task(request, task_id):
-    """ A view to edit tasks in database """
+    """A view to edit tasks in database"""
     task = get_object_or_404(Task, id=task_id)
     current_user = request.user
     if request.method == "POST":
@@ -77,31 +86,36 @@ def edit_task(request, task_id):
                 obj.save()
             else:
                 form.save()
-            return HttpResponseRedirect('/tasks/')
+            return HttpResponseRedirect("/tasks/")
     else:
-        if not current_user.is_superuser:
-            form = AddTask(assigned_to=ALL_USERS, instance=task)
-        else:
-            form = AddTask(assigned_to=ALL_USERS, initial={'assigned_to': current_user.id})
+        form = (
+            AddTask(assigned_to=MASTER_EXCLUDED, instance=task)
+            if not current_user.is_superuser
+            else AddTask(
+                assigned_to=ALL_USERS, initial={"assigned_to": current_user.id}
+            )
+        )
         
-        form.fields['assigned_to'].disabled = True if current_user.rank == 2 else False
+        form.fields["assigned_to"].disabled = True if current_user.rank == 2 else False
 
-    context ={
-        'form' : form,
+    context = {
+        "form": form,
     }
-    return render(request, 'tasks/edit_task.html', context)
+    return render(request, "tasks/edit_task.html", context)
+
 
 @login_required(login_url="/accounts/login/")
 def approve_task(request, task_id):
-    """ A view to approve tasks in the database """
+    """A view to approve tasks in the database"""
     task = get_object_or_404(Task, id=task_id)
     task.approval_status = 0
     task.save()
-    return redirect('tasks')
+    return redirect("tasks")
+
 
 @login_required(login_url="/accounts/login/")
 def delete_task(request, task_id):
-    """ A view to delete tasks from database """
+    """A view to delete tasks from database"""
     task = get_object_or_404(Task, id=task_id)
     task.delete()
-    return redirect('tasks')
+    return redirect("tasks")
