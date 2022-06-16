@@ -22,7 +22,7 @@ def profile_home(request):
 
     if request.GET and "months" in request.GET:
         months = request.GET["months"]
-        tasks = tasks.filter(created_on__month=months)
+        tasks = tasks.filter(Q(created_on__month=months) | Q(end_date__month=months))
 
     tasks = (
         tasks.exclude(status=1)

@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import CustomUser
+import datetime
 
 DEFAULT_TASK_ID = 1
 
@@ -48,6 +49,7 @@ class Task(models.Model):
     approval_status = models.IntegerField(choices=TASK_APPROVAL, default=1)
     created_on = models.DateField(auto_now_add=True)
     updated_on = models.DateField(auto_now=True)
+    start_date = models.DateField(default=datetime.date.today)
     end_date = models.DateField(null=True)
 
     class Meta:
@@ -57,7 +59,7 @@ class Task(models.Model):
         return self.title
 
     def duration(self):
-        return (self.end_date - self.created_on).days
+        return (self.end_date - self.start_date).days
 
 class Comment(models.Model):
     task = models.ForeignKey(

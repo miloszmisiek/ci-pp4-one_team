@@ -11,6 +11,7 @@ class AddTask(forms.ModelForm):
             'description',
             'assigned_to',
             'priority',
+            'start_date',
             'end_date'
         ]
     def __init__(self, *args, **kwargs):

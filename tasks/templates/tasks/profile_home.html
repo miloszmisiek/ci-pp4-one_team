@@ -60,34 +60,34 @@
                         <th>Owner</th>
                         <th>Priority</th>
                         <th>Title</th>
-                        <th>Start Date</th>
-                        <th>Duration</th>
+                        <!-- <th>Start Date</th> -->
+                        <th>End Date</th>
+                        <!-- <th>Duration</th> -->
                         <th>Approval</th>
-                        <th>Description</th>
+                        <th>Details</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for task in tasks %}
                     <tr>
                         <td>{{ forloop.counter }}</td>
-                        <td>
-                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                        <td class="p-md-0">
+                            {% if request.user.rank != 3 and request.user.rank != 4 %}
+                            <button type="button" class="btn h-100 w-100 {% if task.status == 1 %} task-completed {% else %} task-inprogress{% endif %}" data-toggle="modal"
                             data-target="#completeModal" data-title="{{ task.title }}"
                             data-task-status="{{ task.status }}" data-assigned="{{ task.assigned_to }}"
                             data-id="{{ task.id }}" data-username="{{ request.user.username }}"
                             data-user-rank="{{ request.user.rank }}">{{ task.get_status_display }}</button>
-
-                            <!-- <a href="{% url 'complete' task.id %}">
-                                <button>
-                                    {{ task.get_status_display }}
-                                </button>
-                            </a> -->
+                            {% else %}
+                            {{ task.get_status_display }}
+                            {% endif %}
                         </td>
                         <td>{{ task.assigned_to.get_rank_display }}</td>
                         <td>{{ task.get_priority_display }}</td>
                         <td>{{ task.title }}</td>
-                        <td>{{ task.created_on | date:"d F Y" }}</td>
-                        <td>{{ task.duration }} days</td>
+                        <!-- <td>{{ task.created_on | date:"d F Y" }}</td> -->
+                        <td>{{ task.end_date | date:"d F Y" }}</td>
+                        <!-- <td>{{ task.duration }} {% if task.duration > 1 %} days {% else %} day {% endif %}</td> -->
                         {% if request.user.is_superuser or request.user.rank == 1 and task.priority != 0 %}
                         {% if task.approval_status == 1 %}
                         <td>
@@ -165,7 +165,6 @@
             </div>
             <div class="modal-body text-center">
             </div>
-            {% if user.rank != 3 %}
             <div class="description-buttons d-flex justify-content-around p-2">
                 <a id="yes-anchor" href="#">
                     <button type="button" class="btn btn-warning">Yes</button>
@@ -174,7 +173,6 @@
                     <button type="button" class="btn btn-danger">No</button>
                 </a>
             </div>
-            {% endif %}
         </div>
     </div>
 </div>
@@ -237,9 +235,9 @@
         modal.find('.modal-body').text(`Do you want to mark this task as ${changeStatus} ?`);
         modal.find('#yes-anchor').attr('href', `/tasks/complete/${taskId}`);
         modal.find('#no-anchor').attr('href', `/tasks/`);
-        // if (userRank === 2 && !(assigned == username)) {
-        //     modal.find('.description-buttons').removeClass('d-flex').addClass('d-none');
-        // }
+        if (status === 1) {
+            modal.find('.description-buttons').removeClass('d-flex').addClass('d-none');
+        }
     })
 
     $(document).on('click', '.confirm-delete', function () {
