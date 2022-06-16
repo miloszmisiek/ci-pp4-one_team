@@ -6,7 +6,7 @@
     <div class="row text-center">
         <div class="col-12 mx-auto p-2 mt-4 d-flex justify-content-center align-items-center">
             <h1>
-                Hello {{ request.user.first_name}} !<br><span class="title-rank">({{ request.user.get_rank_display }})</span>
+                Hello {{ request.user.first_name}} !<br> ({{ request.user.get_rank_display}})
             </h1>
         </div>
     </div>
@@ -70,33 +70,47 @@
                     {% for task in tasks %}
                     <tr>
                         <td>{{ forloop.counter }}</td>
-                        <td>{{ task.get_status_display }}</td>
+                        <td>
+                            <button type="button" class="btn btn-primary" data-toggle="modal"
+                            data-target="#completeModal" data-title="{{ task.title }}"
+                            data-task-status="{{ task.status }}" data-assigned="{{ task.assigned_to }}"
+                            data-id="{{ task.id }}" data-username="{{ request.user.username }}"
+                            data-user-rank="{{ request.user.rank }}">{{ task.get_status_display }}</button>
+
+                            <!-- <a href="{% url 'complete' task.id %}">
+                                <button>
+                                    {{ task.get_status_display }}
+                                </button>
+                            </a> -->
+                        </td>
                         <td>{{ task.assigned_to.get_rank_display }}</td>
                         <td>{{ task.get_priority_display }}</td>
                         <td>{{ task.title }}</td>
                         <td>{{ task.created_on | date:"d F Y" }}</td>
                         <td>{{ task.duration }} days</td>
                         {% if request.user.is_superuser or request.user.rank == 1 and task.priority != 0 %}
-                            {% if task.approval_status == 1 %}
-                                <td>
-                                    <a href="{% url 'approve' task.id %}">
-                                        <button type="button" class="btn btn-success approve-btn" data-id="{{ task.id }}"
-                                            data-approval="{{ task.approval_status }}">Approve</button>
-                                    </a>
+                        {% if task.approval_status == 1 %}
+                        <td>
+                            <a href="{% url 'approve' task.id %}">
+                                <button type="button" class="btn btn-success approve-btn" data-id="{{ task.id }}"
+                                    data-approval="{{ task.approval_status }}">Approve</button>
+                            </a>
 
-                                    <input type="hidden" name="approve-request" />
+                            <input type="hidden" name="approve-request" />
 
-                                </td>
-                            {% else %}
-                                <td>{{ task.get_approval_status_display }}</td>
-                            {% endif %}
+                        </td>
                         {% else %}
-                            <td>{{ task.get_approval_status_display }}</td>
+                        <td>{{ task.get_approval_status_display }}</td>
+                        {% endif %}
+                        {% else %}
+                        <td>{{ task.get_approval_status_display }}</td>
                         {% endif %}
                         <td>
                             <button type="button" class="btn btn-primary" data-toggle="modal"
                                 data-target="#exampleModal" data-title="{{ task.title }}"
-                                data-description="{{ task.description }}" data-id="{{ task.id }}">Open</button>
+                                data-description="{{ task.description }}" data-assigned="{{ task.assigned_to }}"
+                                data-id="{{ task.id }}" data-username="{{ request.user.username }}"
+                                data-user-rank="{{ request.user.rank }}">Open</button>
                         </td>
                     </tr>
                     {% endfor %}
@@ -126,7 +140,7 @@
                 </div>
                 <div class="modal-body text-center">
                 </div>
-                {% if user.rank is not 3 %}
+                {% if user.rank != 3 %}
                 <div class="description-buttons d-flex justify-content-around p-2">
                     <a id="edit-task-anchor" href="#">
                         <button type="button" class="btn btn-warning">Edit Task</button>
@@ -139,6 +153,31 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="completeModal" tabindex="-1" role="dialog" aria-labelledby="completeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="completeModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+            </div>
+            {% if user.rank != 3 %}
+            <div class="description-buttons d-flex justify-content-around p-2">
+                <a id="yes-anchor" href="#">
+                    <button type="button" class="btn btn-warning">Yes</button>
+                </a>
+                <a id="no-anchor" href="">
+                    <button type="button" class="btn btn-danger">No</button>
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
 </div>
 
 {% endblock %}
@@ -165,15 +204,42 @@
     });
 
     $('#exampleModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget); // Button that triggered the modal
-        var title = button.data('title'); // Extract info from data-* attributes
+        var button = $(event.relatedTarget);
+        var title = button.data('title');
         var description = button.data('description');
         var taskId = button.data('id');
+        var userRank = button.data('userRank');
+        var assigned = button.data('assigned');
+        var username = button.data('username');
         var modal = $(this);
+        modal.find('.description-buttons').addClass('d-flex').removeClass('d-none');
         modal.find('.modal-title').text(title);
         modal.find('.modal-body').text(description);
         modal.find('#edit-task-anchor').attr('href', `/tasks/edit/${taskId}`);
         modal.find('#delete-task-anchor').attr('href', `/tasks/delete/${taskId}`);
+        if (userRank === 2 && !(assigned == username)) {
+            modal.find('.description-buttons').removeClass('d-flex').addClass('d-none');
+        }
+    })
+
+    $('#completeModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var title = button.data('title');
+        var taskId = button.data('id');
+        var userRank = button.data('userRank');
+        var assigned = button.data('assigned');
+        var username = button.data('username');
+        var taskStatus = button.data('taskStatus');
+        var changeStatus = taskStatus === 0 ? "Completed" : "In Progress";
+        var modal = $(this);
+        // modal.find('.description-buttons').addClass('d-flex').removeClass('d-none');
+        modal.find('.modal-title').text(title);
+        modal.find('.modal-body').text(`Do you want to mark this task as ${changeStatus} ?`);
+        modal.find('#yes-anchor').attr('href', `/tasks/complete/${taskId}`);
+        modal.find('#no-anchor').attr('href', `/tasks/`);
+        // if (userRank === 2 && !(assigned == username)) {
+        //     modal.find('.description-buttons').removeClass('d-flex').addClass('d-none');
+        // }
     })
 
     $(document).on('click', '.confirm-delete', function () {
@@ -204,8 +270,8 @@
         form.submit();
     }
 
-    function catchHref() {
-        let month = window.location.href.split('months=')[1];
-    }
+    // function catchHref() {
+    //     let month = window.location.href.split('months=')[1];
+    // }
 </script>
 {% endblock%}

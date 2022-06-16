@@ -119,6 +119,13 @@ def approve_task(request, task_id):
     task.save()
     return redirect("tasks")
 
+@login_required(login_url="/accounts/login/")
+def complete_task(request, task_id):
+    """A view to complete tasks in the database"""
+    task = get_object_or_404(Task, id=task_id)
+    task.status = 1 if task.status == 0 else 0
+    task.save()
+    return redirect("tasks")
 
 @login_required(login_url="/accounts/login/")
 def delete_task(request, task_id):
