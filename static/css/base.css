@@ -408,6 +408,12 @@ table {
     color: white; 
     font-weight: bold; 
   }
+
+  .table-head {
+    cursor: pointer;
+    user-select: none;
+  }
+
   td, th { 
     padding: 6px; 
     border: 1px solid #ccc; 

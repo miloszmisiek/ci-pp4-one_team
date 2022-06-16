@@ -54,17 +54,17 @@
         <div class="col">
             <table class="mx-auto mt-5">
                 <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Status</th>
-                        <th>Owner</th>
-                        <th>Priority</th>
-                        <th>Title</th>
+                    <tr class="table-head">
+                        <th><span class="head-text">ID </span></th>
+                        <th><span class="head-text">Status </span></th>
+                        <th><span class="head-text">Owner </span></th>
+                        <th><span class="head-text">Priority </span></th>
+                        <th><span class="head-text">Title </span></th>
                         <!-- <th>Start Date</th> -->
-                        <th>End Date</th>
+                        <th><span class="head-text">End Date </span></th>
                         <!-- <th>Duration</th> -->
-                        <th>Approval</th>
-                        <th>Details</th>
+                        <th><span class="head-text">Approval </span></th>
+                        <th><span class="head-text">Details </span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -255,7 +255,16 @@
         v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
     )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
 
-    document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() => {
+    var count = 0
+    let thNodes = document.querySelectorAll('th');
+    thNodes.forEach(th => th.addEventListener('click', ((e) => {
+        count++
+        thNodes.forEach(node => node.querySelector('i') ? node.querySelector('i').classList.add('d-none') : null);
+        e.target.querySelector('i') ? e.target.querySelector('i').classList.remove('d-none') : null;
+        // let headTeaxt = e.querySelector('.head-text').textContent;
+        let arrowUp = `<i class="fas fa-caret-up"></i>`;
+        let arrowDown = `<i class="fas fa-caret-down"></i>`;
+        th.innerHTML = count % 2 == 0 ? th.textContent + arrowDown : th.textContent + arrowUp;
         const table = th.closest('table');
         const tbody = table.querySelector('tbody');
         Array.from(tbody.querySelectorAll('tr'))
