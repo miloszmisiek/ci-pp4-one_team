@@ -61,7 +61,9 @@
                         <th><span class="head-text">Priority </span></th>
                         <th><span class="head-text">Title </span></th>
                         <!-- <th>Start Date</th> -->
-                        <th><span class="head-text">End Date </span></th>
+                        <th><span class="head-text">End Date </span>
+                            <!-- <i class="fas fa-caret-up" id="remove-this"></i> -->
+                        </th>
                         <!-- <th>Duration</th> -->
                         <th><span class="head-text">Approval </span></th>
                         <th><span class="head-text">Details </span></th>
@@ -258,13 +260,21 @@
     var count = 0
     let thNodes = document.querySelectorAll('th');
     thNodes.forEach(th => th.addEventListener('click', ((e) => {
-        count++
+        count++;
+        // let removeThis = document.getElementById('remove-this');
+        // console.log(removeThis);
+        // console.log(count);
+        // if (e.target == removeThis) {
+        //     removeThis.remove();
+        //     count++;
+        // }
+        console.log(count);
         thNodes.forEach(node => node.querySelector('i') ? node.querySelector('i').classList.add('d-none') : null);
         e.target.querySelector('i') ? e.target.querySelector('i').classList.remove('d-none') : null;
         // let headTeaxt = e.querySelector('.head-text').textContent;
         let arrowUp = `<i class="fas fa-caret-up"></i>`;
         let arrowDown = `<i class="fas fa-caret-down"></i>`;
-        th.innerHTML = count % 2 == 0 ? th.textContent + arrowDown : th.textContent + arrowUp;
+        th.innerHTML = count % 2 == 0 ? th.textContent +  arrowDown : th.textContent +  arrowUp;
         const table = th.closest('table');
         const tbody = table.querySelector('tbody');
         Array.from(tbody.querySelectorAll('tr'))

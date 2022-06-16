@@ -53,7 +53,7 @@ class Task(models.Model):
     end_date = models.DateField(null=True)
 
     class Meta:
-        ordering = ['id']
+        ordering = ['end_date']
 
     def __str__(self):
         return self.title
