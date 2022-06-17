@@ -24,6 +24,10 @@ def profile_home(request):
         months = request.GET["months"]
         tasks = tasks.filter(Q(created_on__month=months) | Q(end_date__month=months))
 
+    elif request.GET and "sorting" in request.GET:
+        sort_by = request.GET
+        print(sort_by["sorting"])
+
     tasks = (
         tasks.exclude(status=1)
         if request.POST and "clear-completed" in request.POST

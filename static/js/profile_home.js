@@ -67,8 +67,10 @@ let m = n.toLocaleString('default', { month: 'long' });
 d = n.getDate();
 document.getElementById("date").innerHTML = d + " " + m + " " + y;
 
-function submit_form() {
-    var form = document.getElementById("my_form");
+function submit_form(id) {
+    console.log(typeof(id));
+    var form = document.getElementById(id);
+    console.log(form);
     form.submit();
 }
 
