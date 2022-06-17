@@ -1,6 +1,3 @@
-const thNodes = document.querySelectorAll('th');
-var count = 0
-
 document.addEventListener("DOMContentLoaded", () => {
     let month = window.location.href.split('months=')[1];
     let options = document.querySelectorAll("option");
@@ -54,9 +51,10 @@ $('#completeModal').on('show.bs.modal', function (event) {
     modal.find('.modal-body').text(`Do you want to mark this task as ${changeStatus} ?`);
     modal.find('#yes-anchor').attr('href', `/tasks/complete/${taskId}`);
     modal.find('#no-anchor').attr('href', `/tasks/`);
-    if (status === 1) {
-        modal.find('.description-buttons').removeClass('d-flex').addClass('d-none');
-    }
+    console.log(userRank);
+    // if (userRank === 2 && assigned !== username) {
+    //     modal.find('.description-buttons').removeClass('d-flex').addClass('d-none');
+    // }
 })
 
 $(document).on('click', '.confirm-delete', function () {
@@ -69,44 +67,75 @@ let m = n.toLocaleString('default', { month: 'long' });
 d = n.getDate();
 document.getElementById("date").innerHTML = d + " " + m + " " + y;
 
-const getCellValue = (tr, idx) => tr.children[idx].innerText || tr.children[idx].textContent;
-const comparer = (idx, asc) => (a, b) => ((v1, v2) =>
-    v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
-)(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
-
-thNodes.forEach(th => th.addEventListener('click', ((e) => {
-    const table = th.closest('table');
-    const tbody = table.querySelector('tbody');
-    let arrowUp = `<i class="fas fa-caret-up"></i>`;
-    let arrowDown = `<i class="fas fa-caret-down"></i>`;
-    let detailsHeading = document.getElementById('details');
-    let endDate = document.getElementById('end-date');
-
-    thNodes.forEach(node => node.querySelector('i') ? node.querySelector('i').classList.add('d-none') : null);
-    if (e.target === endDate) {
-        if (count === 0 && e.target.querySelector('i')) {
-            th.innerHTML = th.textContent +  arrowDown;
-            count++;
-        }
-        else if (count % 2 == 0) {
-            th.innerHTML = th.textContent + arrowDown;
-            count++;
-        } else {
-            th.innerHTML = th.textContent + arrowUp;
-            count++;
-        }
-    } else {
-        th.innerHTML = count % 2 == 0 ? th.textContent + arrowUp : th.textContent + arrowDown;
-        count++;
-    }
-    e.target.querySelector('i') ? e.target.querySelector('i').classList.remove('d-none') : null;
-    Array.from(tbody.querySelectorAll('tr'))
-        .sort(comparer(Array.from(th.parentNode.children).indexOf(th), this.asc = !this.asc))
-        .forEach(tr => tbody.appendChild(tr));
-    detailsHeading.querySelector('i') ? detailsHeading.querySelector('i').classList.add('d-none') : null;
-})));
-
 function submit_form() {
     var form = document.getElementById("my_form");
     form.submit();
+}
+
+function sortTable(n) {
+    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+    const headings = document.getElementsByTagName('th');
+    let arrowUp = `<i class="fas fa-caret-up"></i>`;
+    let arrowDown = `<i class="fas fa-caret-down"></i>`;
+    table = document.getElementById("home-table");
+    switching = true;
+    // Set the sorting direction to ascending:
+    dir = "asc";
+    /* Make a loop that will continue until
+    no switching has been done: */
+    while (switching) {
+        // Start by saying: no switching is done:
+        switching = false;
+        rows = table.rows;
+        /* Loop through all table rows (except the
+        first, which contains table headers): */
+        for (i = 1; i < (rows.length - 1); i++) {
+            // Start by saying there should be no switching:
+            shouldSwitch = false;
+            /* Get the two elements you want to compare,
+            one from current row and one from the next: */
+            x = rows[i].getElementsByTagName("TD")[n];
+            y = rows[i + 1].getElementsByTagName("TD")[n];
+            /* Check if the two rows should switch place,
+            based on the direction, asc or desc: */
+            if (dir == "asc") {
+                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    // If so, mark as a switch and break the loop:
+                    shouldSwitch = true;
+                    break;
+                }
+            } else if (dir == "desc") {
+                if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+        }
+        if (shouldSwitch) {
+            /* If a switch has been marked, make the switch
+            and mark that a switch has been done: */
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+            // Each time a switch is done, increase this count by 1:
+            switchcount++;
+        } else {
+            /* If no switching has been done AND the direction is "asc",
+            set the direction to "desc" and run the while loop again. */
+            if (switchcount == 0 && dir == "asc") {
+                dir = "desc";
+                switching = true;
+            }
+        }
+    };
+    for (let heading of headings) {
+        heading.innerHTML = heading.textContent;
+    }
+    if (dir === "asc") {
+        console.log('dir asc');
+        headings[n].innerHTML = headings[n].textContent + `  ` + arrowUp;
+    }
+    if (dir === "desc") {
+        console.log('dir asc');
+        headings[n].innerHTML = headings[n].textContent + `  ` + arrowDown;
+    }
 }
