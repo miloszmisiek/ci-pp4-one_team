@@ -82,7 +82,7 @@ function sortTable(n) {
     table = document.getElementById("home-table");
     switching = true;
     // Set the sorting direction to ascending:
-    dir = n===0? null:  "asc";
+    dir = "asc";
     /* Make a loop that will continue until
     no switching has been done: */
     while (switching) {
@@ -101,13 +101,21 @@ function sortTable(n) {
             /* Check if the two rows should switch place,
             based on the direction, asc or desc: */
             if (dir == "asc") {
-                if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                if (Number(x.innerHTML) > Number(y.innerHTML)) {
+                    shouldSwitch = true;
+                    break;
+                } 
+                if (n !==  0 && x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
                     // If so, mark as a switch and break the loop:
                     shouldSwitch = true;
                     break;
                 }
             } else if (dir == "desc") {
-                if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                if (Number(x.innerHTML) < Number(y.innerHTML)) {
+                    shouldSwitch = true;
+                    break;
+                } 
+                if (n !==  0 && x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
                     shouldSwitch = true;
                     break;
                 }
@@ -133,11 +141,9 @@ function sortTable(n) {
         heading.innerHTML = heading.textContent;
     }
     if (dir === "asc") {
-        console.log('dir asc');
         headings[n].innerHTML = headings[n].textContent + `  ` + arrowUp;
     }
     if (dir === "desc") {
-        console.log('dir asc');
         headings[n].innerHTML = headings[n].textContent + `  ` + arrowDown;
     }
 }
