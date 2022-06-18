@@ -24,9 +24,6 @@ def profile_home(request):
         months = request.GET["months"]
         tasks = tasks.filter(Q(created_on__month=months) | Q(end_date__month=months))
 
-    elif request.GET and "sorting" in request.GET:
-        sort_by = request.GET
-        print(sort_by["sorting"])
 
     tasks = (
         tasks.exclude(status=1)
@@ -38,6 +35,27 @@ def profile_home(request):
         "tasks": tasks,
     }
     return render(request, "tasks/profile_home.html", context)
+
+@login_required(login_url="/accounts/login/")
+def my_tasks(request):
+    """A view to return the tasks home page"""
+    tasks = Task.objects.all().filter(assigned_to=request.user)
+
+    if request.GET and "months" in request.GET:
+        months = request.GET["months"]
+        tasks = tasks.filter(Q(created_on__month=months) | Q(end_date__month=months))
+
+
+    tasks = (
+        tasks.exclude(status=1)
+        if request.POST and "clear-completed" in request.POST
+        else tasks
+    )
+
+    context = {
+        "tasks": tasks,
+    }
+    return render(request, "tasks/my_tasks.html", context)
 
 
 @login_required(login_url="/accounts/login/")

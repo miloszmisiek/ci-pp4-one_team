@@ -6,6 +6,7 @@
     --clr-magenta: #f15bb5;
     --clr-gray-solid: rgba(108, 117, 125, 1);
     --clr-gray-trasparent: rgba(108, 117, 125, 0.8);
+    --clr-gray-labels: rgba(180, 185, 189, 0.8);
     --ff-primary: 'Inter', sans-serif;
     --ff-secondary: 'Source Sans Pro', sans-serif;
     --ff-logo: 'Karla', sans-serif;
@@ -344,6 +345,27 @@ header {
 
 .forms-container label {
     display: none;
+}
+.task-forms label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--clr-gray-labels);
+    width: 100%;
+    max-width: 14rem;
+    margin: 0.5rem auto;
+    border-radius: var(--br);
+}
+.task-forms input,
+.task-forms select,
+.task-forms textarea {
+    text-align: center;
+    padding: 0.5em;
+}
+
+.task-forms div {
+    max-width: 34rem;
+    margin: auto;
 }
 
 #div_id_remember {
