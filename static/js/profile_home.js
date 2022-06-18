@@ -82,7 +82,7 @@ function sortTable(n) {
     table = document.getElementById("home-table");
     switching = true;
     // Set the sorting direction to ascending:
-    dir = "asc";
+    dir = n===0? null:  "asc";
     /* Make a loop that will continue until
     no switching has been done: */
     while (switching) {

@@ -83,7 +83,7 @@
                 </thead>
                 <tbody>
                     {% for task in tasks %}
-                    <tr>
+                    <tr class="{% if task.approval_status == 1 %} approval-styling {% endif %}">
                         <td>{{ forloop.counter }}</td>
                         <td class="p-md-0">
                             
@@ -97,7 +97,7 @@
                             {{ task.get_status_display }}
                             {% endif %}
                         </td>
-                        <td>{{ task.assigned_to.get_rank_display }}</td>
+                        <td id="task-assigned"><span class="assigned-rank">{{ task.assigned_to.get_rank_display }}</span><span class="assigned-username">{{ task.assigned_to }}</span></td>
                         <td>{{ task.get_priority_display }}</td>
                         <td>{{ task.title }}</td>
                         <!-- <td>{{ task.created_on | date:"d F Y" }}</td> -->
