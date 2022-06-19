@@ -13,6 +13,10 @@ class CustomUser(AbstractUser):
         (3, 'Bosun'),
         (4, 'Potential User')
     )
+    RANK_STATUS = (
+        (0, 'Approved'),
+        (1, 'Denied'),
+        )
 
     username = models.CharField(
         max_length=50, blank=False,

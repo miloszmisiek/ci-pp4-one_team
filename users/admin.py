@@ -20,4 +20,6 @@ class CustomUserAdmin(UserAdmin):
         )
     )
 
+    list_display = ('first_name', 'last_name', 'rank', 'is_active')
+
 admin.site.register(CustomUser, CustomUserAdmin)

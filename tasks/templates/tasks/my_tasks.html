@@ -14,7 +14,7 @@
         <div class="col-12 col-md-4 p-2 mx-auto mt-4 d-flex flex-column justify-content-center align-items-center">
             <h3 class="d-flex w-100 justify-content-center align-self-center">{{ request.user.username }} Profile</h3>
             <div class="profile-buttons w-100 d-flex justify-content-around align-items-center">
-                <a id="edit-profile-anchor" href="#">
+                <a id="edit-profile-anchor" href="{% url 'edit_profile' request.user.id %}">
                     <button type="button" class="btn btn-warning">Edit</button>
                 </a>
                 <a id="delete-profile-anchor" class="confirm-delete" href="#">

@@ -34,8 +34,11 @@ class UserSignupForm(SignupForm):
         label='Last Name',
         widget=forms.TextInput(attrs={'placeholder': 'Last Name'})
     )
-    rank = forms.IntegerField(widget=forms.HiddenInput(), initial=4)
 
+    rank = forms.ChoiceField(
+        label='Rank',
+        choices=CustomUser.ROLES, initial=4)
+    
     def save(self, request):
         print(self.cleaned_data)
         user = super(UserSignupForm, self).save(request)
@@ -44,5 +47,18 @@ class UserSignupForm(SignupForm):
         user.first_name = self.cleaned_data.get('first_name')
         user.last_name = self.cleaned_data.get('last_name')
         user.rank = self.cleaned_data.get('rank')
+        user.is_active = self.cleaned_data.get('is_active')
+        user.is_active = False
         user.save()
         return user
+
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = (
+            'first_name',
+            'last_name',
+            'email',
+            'phone',
+            'rank',
+        )
