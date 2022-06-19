@@ -21,8 +21,9 @@
 2. Views are based on project [Cool School](https://github.com/IuliiaKonovalova/school_app) by [Juliia Konovalova](https://github.com/IuliiaKonovalova).
 3. Fixed bug with static files directory from [Stack Overflow](https://stackoverflow.com/questions/67698211/getting-get-static-css-base-css-http-1-1-404-1795-error-for-static-files)
 4. Tables styling come from [css-tricks.com](https://css-tricks.com/responsive-data-tables/)
-5. Sorting function used in tables comes from [Stack Overflow](https://stackoverflow.com/questions/14267781/sorting-html-table-with-javascript/53880407#53880407)
-6. Favicon generated using [favicon.cc](https://www.favicon.cc/)
+5. Sorting function used in tables comes from [W3Schools](https://www.w3schools.com/howto/howto_js_sort_table.asp)
+6. SelectWithDisabled widget comes from [djangosnippets](https://djangosnippets.org/snippets/2453/)
+7. Favicon generated using [favicon.cc](https://www.favicon.cc/)
 
 ## Acknowledgments
 1. My girlfriend for being my biggest supporter throught the entire time!

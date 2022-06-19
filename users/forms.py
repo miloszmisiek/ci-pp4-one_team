@@ -2,8 +2,18 @@
 from allauth.account.forms import SignupForm
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from django.db.models.fields import BLANK_CHOICE_DASH
 from .models import CustomUser
+from .widgets import SelectWithDisabled
 
+RANNK_CHOICES = (
+        ('', {'label': 'Select Your Rank', 'disabled': True}),
+        (0, 'Master'),
+        (1, 'Senior Officer'),
+        (2, 'Junior Officer'),
+        (3, 'Bosun'),
+        (4, 'Potential User')
+)
 class CustomUserCreationForm(UserCreationForm):
     """Custom user creation form for admin panel"""
     class Meta:
@@ -17,7 +27,6 @@ class UserSignupForm(SignupForm):
         super(UserSignupForm, self).__init__(*args, **kwargs)
         self.fields['email2'].widget.attrs['placeholder'] = 'Confirm your e-mail address'
         self.fields['password2'].widget.attrs['placeholder'] = 'Confirm your password'
-    
 
     username = forms.CharField(
         max_length=50,
@@ -37,7 +46,7 @@ class UserSignupForm(SignupForm):
 
     rank = forms.ChoiceField(
         label='Rank',
-        choices=CustomUser.ROLES, initial=4)
+        choices= RANNK_CHOICES,  widget=SelectWithDisabled())
     
     def save(self, request):
         print(self.cleaned_data)

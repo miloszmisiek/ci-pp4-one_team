@@ -346,6 +346,7 @@ header {
 .forms-container label {
     display: none;
 }
+
 .task-forms label,
 .edit-profile-form label {
     display: flex;

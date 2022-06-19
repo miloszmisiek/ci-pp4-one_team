@@ -6,13 +6,13 @@ from django.contrib.auth.models import AbstractUser
 class CustomUser(AbstractUser):
     """Custom user model."""
     # Roles to assign to users
-    ROLES = (
+    ROLES = [
         (0, 'Master'),
         (1, 'Senior Officer'),
         (2, 'Junior Officer'),
         (3, 'Bosun'),
         (4, 'Potential User')
-    )
+    ]
     RANK_STATUS = (
         (0, 'Approved'),
         (1, 'Denied'),
