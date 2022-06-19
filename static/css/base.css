@@ -368,6 +368,12 @@ header {
     padding: 0.5em;
 }
 
+.selectwithdisabled:invalid,
+.selectwithdisabled option[value=""]{
+    color: #999999;
+}
+
+
 .task-forms div {
     max-width: 34rem;
     margin: auto;
