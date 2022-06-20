@@ -60,33 +60,3 @@ class Task(models.Model):
 
     def duration(self):
         return (self.end_date - self.start_date).days
-
-class Comment(models.Model):
-    task = models.ForeignKey(
-        Task,
-        on_delete=models.CASCADE,
-        related_name='comments',
-        blank=False,
-    )
-    created_by = models.ForeignKey(
-        CustomUser,
-        on_delete=models.CASCADE,
-        related_name='written_comments',
-    )
-    comment_body = models.TextField(max_length=300, blank=False, default='')
-    created_on = models.DateTimeField(
-        auto_now_add=True,
-        blank=False,
-        editable=False
-        )
-    updated_on = models.DateTimeField(
-        auto_now=True,
-        blank=False,
-        editable=False
-        )
-
-    class Meta:
-        ordering = ['created_on']
-
-    def __str__(self):
-        return self.comment_body

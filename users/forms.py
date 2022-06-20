@@ -2,7 +2,6 @@
 from allauth.account.forms import SignupForm
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.db.models.fields import BLANK_CHOICE_DASH
 from .models import CustomUser
 from .widgets import SelectWithDisabled
 

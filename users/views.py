@@ -1,12 +1,10 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.db.models import Q
-from django.contrib.auth import get_user_model
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from tasks.views import ALL_USERS
 from .models import CustomUser
-from .forms import UserSignupForm, EditProfileForm
+from .forms import EditProfileForm
 
+@login_required(login_url="/accounts/login/")
 def edit_profile(request, user_id):
     current_user = request.user
 
