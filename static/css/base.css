@@ -303,6 +303,7 @@ header {
     font-size: 1.5rem;
     max-width: 50rem;
     text-align: center;
+    box-shadow: 0px 2px 13px 2px rgb(34 60 80 / 20%);
 }
 
 .users-forms-container h1 {
@@ -310,6 +311,13 @@ header {
     font-family: var(--ff-primary);
     font-weight: 700;
     color: ghostwhite;
+}
+
+.users-forms-container h2 {
+    font-family: var(--ff-primary);
+    font-weight: 700;
+    color: ghostwhite;
+    font-size: 1.5em;
 }
 
 .forms-top-message {
@@ -327,6 +335,11 @@ header {
     font-weight: 100;
     font-size: 1.5rem;
     font-weight: 500;
+}
+
+.forms-row .forms-message {
+    font-size: 1.1rem;
+    margin: 1em 0;
 }
 
 .forms-top-message a {
@@ -352,6 +365,17 @@ header {
     margin: 0.5rem auto;
     border-radius: var(--br);
 }
+
+.email_list label {
+    display: initial;
+    /* justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    max-width: 14rem;
+    margin: 0.5rem auto; */
+
+}
+
 .task-forms input,
 .task-forms select,
 .task-forms textarea,
@@ -449,6 +473,30 @@ header {
 
 .errorField {
     margin-bottom: 1em;
+}
+
+.forms-row {
+    background-color: var(--clr-blue-shadow);
+    border-radius: var(--br);
+    margin: 1em auto;
+    box-shadow: 0px 2px 13px 2px rgb(34 60 80 / 20%);
+}
+
+.fa-check {
+    color: green;
+}
+
+.fa-star {
+    color: gold;
+}
+
+.fa-times {
+    color: red;
+}
+
+.buttonHolder button,
+.add_email button {
+    font-size: 1.3rem;
 }
 
 /*------ Tasks ------*/
