@@ -15,6 +15,7 @@
 - [coolorc.co](https://coolors.co/) - choosing pallete colors for website
 - [cssgradient.io](https://cssgradient.io/) - for genertating background gradients
 - [django-crispy-forms](https://django-crispy-forms.readthedocs.io/en/latest/index.html) - rendering form elements
+- [django-session-security](https://django-session-security.readthedocs.io/en/master/index.html) - handling automatic logout after inactivity and browser close
 
 ## Credits
 1. Models are based on project [Issue Tracker](https://github.com/IuliiaKonovalova/issue_tracker) created by my good friends [Juliia Konovalova](https://github.com/IuliiaKonovalova) and [Aleksei Konovalov](https://github.com/lexach91).
@@ -24,6 +25,7 @@
 5. Sorting function used in tables comes from [W3Schools](https://www.w3schools.com/howto/howto_js_sort_table.asp)
 6. SelectWithDisabled widget comes from [djangosnippets](https://djangosnippets.org/snippets/2453/)
 7. Favicon generated using [favicon.cc](https://www.favicon.cc/)
+8. 
 
 ## Acknowledgments
 1. My girlfriend for being my biggest supporter throught the entire time!

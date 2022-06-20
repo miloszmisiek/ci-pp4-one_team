@@ -27,6 +27,9 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True # required by session-security
+SESSION_SECURITY_INSECURE = True # required by session-security
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -53,6 +56,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
 
     'crispy_forms',
+    'session_security',
 ]
 
 MIDDLEWARE = [
@@ -62,6 +66,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'session_security.middleware.SessionSecurityMiddleware', # django-session-security package
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -79,7 +84,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request', # required by allauth
+                'django.template.context_processors.request', # required by allauth and session-security
                 'django.contrib.auth.context_processors.auth', 
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -96,6 +101,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 SITE_ID = 1
+
 
 # logs confimration links in the console instead of sending emails
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

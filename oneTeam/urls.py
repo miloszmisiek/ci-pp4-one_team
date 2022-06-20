@@ -24,4 +24,5 @@ urlpatterns = [
     path('tasks/', include('tasks.urls')),
     path('users/', include('users.urls')),
     path('jsi18n/', i18n.JavaScriptCatalog.as_view(), name='jsi18n'),
+    path('session_security/', include('session_security.urls')),
 ]

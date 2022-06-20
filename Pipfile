@@ -11,6 +11,7 @@ psycopg2 = "*"
 whitenoise = "*"
 django-allauth = "==0.41.0"
 django-crispy-forms = "*"
+django-session-security = "*"
 
 [dev-packages]
 
