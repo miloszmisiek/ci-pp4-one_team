@@ -342,10 +342,6 @@ header {
     margin: 1em 0;
 }
 
-.forms-top-message a {
-    color: var(--clr-gray-solid);
-}
-
 .forms-container {
     width: 100%;
 }
@@ -459,6 +455,10 @@ header {
     box-shadow: 0px 2px 13px 2px rgb(34 60 80 / 20%);
 }
 
+.custom-btn:hover {
+    background-color: #cc4496;
+}
+
 #errorMsg ol li,
 .errorField {
     border: 2px var(--danger) solid;
@@ -497,6 +497,11 @@ header {
 .buttonHolder button,
 .add_email button {
     font-size: 1.3rem;
+}
+
+.forms-top-message a,
+.username-display {
+    color: #393333;
 }
 
 /*------ Tasks ------*/
