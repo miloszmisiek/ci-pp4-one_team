@@ -7,6 +7,7 @@
     --clr-gray-solid: rgba(108, 117, 125, 1);
     --clr-gray-trasparent: rgba(108, 117, 125, 0.8);
     --clr-gray-labels: rgba(180, 185, 189, 0.8);
+    --clr-orange-whtxt: #e86826;
     --ff-primary: 'Inter', sans-serif;
     --ff-secondary: 'Source Sans Pro', sans-serif;
     --ff-logo: 'Karla', sans-serif;
@@ -75,6 +76,10 @@ img {
 
 .mw-50 {
     max-width: 50%!important;
+}
+
+.bg-orange-pastel {
+    background-color: var(--clr-orange-whtxt)!important;
 }
 
 /*------ Header ------*/
@@ -216,17 +221,6 @@ header {
     align-self: center;
 }
 
-/* .home-ship::before {
-    content: "";
-    background-image: url(/static/images/home-sea.jpg);
-    background-size: cover;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
-    opacity: 0.75;
-} */
 
 .home-content {
     position: relative;

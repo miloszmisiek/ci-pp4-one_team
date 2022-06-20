@@ -5,7 +5,9 @@
 {% block head_title %}{% trans "Account Inactive" %}{% endblock %}
 
 {% block content %}
-<h1>{% trans "Account Inactive" %}</h1>
+<div class="users-forms-container my-5 bg-orange-pastel">
+    <h1 class="text-shadow">{% trans "Account Inactive" %}</h1>
 
-<p>{% trans "This account is inactive." %}</p>
+<p class="forms-message">{% trans "This account is inactive - your request must be accepted by Master first" %}.</p>
+</div>
 {% endblock %}
