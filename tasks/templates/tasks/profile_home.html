@@ -43,18 +43,6 @@
     </div>
     {% if user.rank is not 3 %}
     <div class="row text-right">
-        <!-- <div class="col-12 col-lg-4 mx-auto mt-4 mr-lg-auto text-center">
-            <form action="" method="get" id="sorting_form">
-                <label for="sorting"><strong>Sort By:</strong></label>
-                <select onchange="submit_form('sorting_form')" class="mx-auto" name="sorting" id="sorting">
-                    <option disabled>Sort By:</option>
-                    <option value='1'>Approved</option>
-                    <option value='2'>Waiting For Approval</option>
-                    <option value='3'>Priority</option>
-                    <option value='4'>Owner</option>
-                </select>
-            </form>
-        </div> -->
         <div class="col-12 mx-auto col-lg-4 mt-4 ml-lg-auto mr-lg-0 text-center">
             <div class="add-task-btn">
                 <a href="{% url 'add_task' %}">Add Task +</a>
@@ -83,38 +71,42 @@
                 </thead>
                 <tbody>
                     {% for task in tasks %}
-                    <tr class="{% if task.approval_status == 1 %} approval-styling {% endif %} {% if task.status == 1 %} clr-green {% endif %} ">
+                    <tr class="{% if task.approval_status == 1 %} 
+                    approval-styling {% endif %}
+                    {% if task.status == 1 %} clr-green {% endif %}
+                    {% if task.is_past_due.0 %}
+                    clr-red
+                    {% endif %}
+                    ">
                         <td>{{ forloop.counter }}</td>
                         <td {% if task.assigned_to == request.user and request.user.rank == 2 or request.user.rank == 1 or request.user.is_superuser %} class="progress-status-cell p-md-0 {% if task.status == 1 %} task-completed {% else %} task-inprogress{% endif %}" data-toggle="modal"
                         data-target="#completeModal" data-title="{{ task.title }}"
                         data-task-status="{{ task.status }}" data-assigned="{{ task.assigned_to }}"
                         data-id="{{ task.id }}" data-username="{{ request.user.username }}"
                         data-user-rank="{{ request.user.rank }}" {% else %} class="p-md-0" {% endif %}>
-                            {{ task.get_status_display }}
+                        {% if task.status == 1 %} <i class="fas fa-check-circle"></i> {% else %} {{ task.get_status_display }} {% endif %}
                         </td>
                         <td id="task-assigned"><span class="assigned-rank">{{ task.assigned_to.get_rank_display }}</span><span class="assigned-username">{{ task.assigned_to }}</span></td>
                         <td>{{ task.get_priority_display }}</td>
-                        <td>{{ task.title }}</td>
+                        <td class="tasks-titles">{{ task.title }}</td>
                         <!-- <td>{{ task.created_on | date:"d F Y" }}</td> -->
-                        <td>{{ task.end_date | date:"d F Y" }}</td>
-                        <!-- <td>{{ task.duration }} {% if task.duration > 1 %} days {% else %} day {% endif %}</td> -->
+                        <td>{% if task.is_past_due.0 %}<i class="fas fa-exclamation pr-1"></i>{% elif task.is_past_due.1 <= 2 %} <i class="fas fa-exclamation-triangle clr-gold pr-1"></i> {% endif %} {{ task.end_date | date:"d F Y" }}</td>
+                        <td>
                         {% if request.user.is_superuser or request.user.rank == 1 and task.priority != 0 %}
                             {% if task.approval_status == 1 %}
-                                <td>
                                     <a href="{% url 'approve' task.id %}">
                                         <button type="button" class="btn btn-success approve-btn" data-id="{{ task.id }}"
                                             data-approval="{{ task.approval_status }}">Approve</button>
                                     </a>
-
                                     <input type="hidden" name="approve-request" />
-
-                                </td>
                             {% else %}
-                                <td>{{ task.get_approval_status_display }}</td>
+                                {{ task.get_approval_status_display }}
                             {% endif %}
                         {% else %}
-                            <td>{{ task.get_approval_status_display }}</td>
+                            {% if task.approval_status == 1 %} <i class="fas fa-clock"></i> {% endif %}
+                            {{ task.get_approval_status_display }}
                         {% endif %}
+                        </td>
                         <td>
                             <button type="button" class="btn btn-primary" data-toggle="modal"
                                 data-target="#exampleModal" data-title="{{ task.title }}"

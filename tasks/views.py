@@ -19,6 +19,9 @@ def is_not_bosun(user):
 def profile_home(request):
     """A view to return the tasks home page"""
     tasks = Task.objects.all()
+    for task in tasks:
+        if task.is_past_due()[0]:
+            task.status = 2
 
     if request.GET and "months" in request.GET:
         months = request.GET["months"]
@@ -67,17 +70,16 @@ def add_task(request):
     if request.method == "POST":
         form = AddTask(request.POST, assigned_to=ALL_USERS)
         if form.is_valid():
+            obj = form.save(commit=False)
             if current_user.rank == 2:
-                obj = form.save(commit=False)
                 obj.assigned_to = current_user
                 obj.save()
             elif current_user.rank == 1:
-                obj = form.save(commit=False)
                 if obj.priority != 0:
                     obj.approval_status = 2
                     obj.save()
             else:
-                form.save()
+                obj.save()
             return HttpResponseRedirect("/tasks/")
     else:
         form = (
@@ -105,16 +107,15 @@ def edit_task(request, task_id):
     if request.method == "POST":
         form = AddTask(request.POST, assigned_to=ALL_USERS, instance=task)
         if form.is_valid():
+            obj = form.save(commit=False)
             if current_user.rank == 2:
-                obj = form.save(commit=False)
                 obj.assigned_to = current_user
                 obj.save()
             elif current_user.rank == 1:
-                obj = form.save(commit=False)
                 obj.approval_status = 2 if obj.priority != 0 else 1
                 obj.save()
             else:
-                form.save()
+                obj.save()
             return HttpResponseRedirect("/tasks/")
     else:
         form = (
@@ -145,7 +146,7 @@ def approve_task(request, task_id):
 def complete_task(request, task_id):
     """A view to complete tasks in the database"""
     task = get_object_or_404(Task, id=task_id)
-    task.status = 1 if task.status == 0 else 0
+    task.status = 1 if task.status == 0 or task.status == 2 else 0
     task.save()
     return redirect("tasks")
 

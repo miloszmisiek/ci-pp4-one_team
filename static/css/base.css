@@ -285,7 +285,12 @@ header {
 
 #task-assigned:hover .assigned-username {
     display: inline;
-    color: var(--clr-magenta);
+    font-weight: 600;
+}
+
+.profile-home-container h1 {
+    font-family: var(--ff-primary);
+    font-weight: 700;
 }
 
 /*------ Forms ------*/
@@ -318,6 +323,10 @@ header {
     font-weight: 700;
     color: ghostwhite;
     font-size: 1.5em;
+}
+
+.users-forms-container h3 {
+    color: ghostwhite;
 }
 
 .forms-top-message {
@@ -487,10 +496,16 @@ header {
     color: green;
 }
 
+.fa-check-circle {
+    font-size: 1.5rem;
+}
+
+.clr-gold,
 .fa-star {
     color: gold;
 }
 
+.clr-red,
 .fa-times {
     color: red;
 }
@@ -573,6 +588,7 @@ table {
 
 .approval-styling {
     border: 3px solid orange;
+    font-style: italic;
 }
 
 .progress-status-cell {
@@ -582,6 +598,10 @@ table {
 .progress-status-cell:hover {
     font-weight: 600;
     box-shadow: 0px 2px 13px 2px rgb(34 60 80 / 20%);
+}
+
+.tasks-titles {
+    font-weight: 600;
 }
 
 /*------ Footer ------*/

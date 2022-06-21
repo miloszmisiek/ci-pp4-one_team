@@ -7,8 +7,9 @@ DEFAULT_TASK_ID = 1
 # task model variables
 
 TASK_STATUS = (
-    (0, 'In Progress'),
+    (0, 'Scheduled'),
     (1, 'Completed'),
+    (2, 'Overdue'),
 )
 
 TASK_PRIORITY = (
@@ -20,7 +21,7 @@ TASK_PRIORITY = (
 TASK_APPROVAL = (
     (0, 'Approved'),
     (1, 'Waiting For Approval'),
-    (2, 'Approval Not Required')
+    (2, 'N/R'),
 )
 
 
@@ -60,3 +61,7 @@ class Task(models.Model):
 
     def duration(self):
         return (self.end_date - self.start_date).days
+
+    def is_past_due(self):
+        return (datetime.date.today() > self.end_date, (self.end_date - datetime.date.today()).days)
+

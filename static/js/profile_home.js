@@ -44,7 +44,7 @@ $('#completeModal').on('show.bs.modal', function (event) {
     var assigned = button.data('assigned');
     var username = button.data('username');
     var taskStatus = button.data('taskStatus');
-    var changeStatus = taskStatus === 0 ? "Completed" : "In Progress";
+    var changeStatus = taskStatus === 0 || taskStatus === 2 ? "Completed" : "In Progress";
     var modal = $(this);
     // modal.find('.description-buttons').addClass('d-flex').removeClass('d-none');
     modal.find('.modal-title').text(title);
