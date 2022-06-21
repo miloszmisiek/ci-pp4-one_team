@@ -13,6 +13,10 @@ class AddTask(forms.ModelForm):
             'start_date',
             'end_date'
         ]
+        widgets = {
+            'end_date': forms.widgets.DateInput(attrs={'type': 'date'}),
+            'start_date': forms.widgets.DateInput(attrs={'type': 'date'}),
+        }
     def __init__(self, *args, **kwargs):
          self.assigned_to = kwargs.pop('assigned_to', None)
          super(AddTask, self).__init__(*args, **kwargs)

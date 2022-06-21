@@ -5,20 +5,24 @@
 <div class="container-fluid profile-home-container">
     <div class="row text-center">
         <div class="col-12 mx-auto p-2 mt-4 d-flex justify-content-center align-items-center">
-            <h1>
-                Hello {{ request.user.first_name}} !<br> ({{ request.user.get_rank_display}})
-            </h1>
+            <div class="d-flex flex-column justify-content-center align-items-center p-4">
+                <h1>
+                    Hello {{ request.user.first_name}} !
+                </h1>
+                <h3>({{ request.user.get_rank_display}})</h3>
+            </div>
         </div>
     </div>
     <div class="row text-center">
-        <div class="col-12 col-md-4 p-2 mx-auto mt-4 d-flex">
-            <h2 class="d-flex justify-content-between align-self-center"><i
-                    class="fas fa-ship pr-3 align-self-center"></i> What's Next?</h2>
+        <div class="d-none col-lg-4 p-2 mx-auto mt-4 d-lg-flex justify-content-center justify-content-lg-start">
+            <div class="d-flex justify-content-between align-self-center">
+                <i class="fas fa-anchor font-weight-bold pr-3 align-self-center"></i> <span class="align-self-center h2 m-auto">What's Next ?</span>
+            </div>
         </div>
-        <div class="col-12 col-md-4 p-2 mx-auto mt-4 h5">
+        <div class="col-12 col-md-6 col-lg-4 p-2 mx-auto mt-4 h5">
             <form action="" method="get" id="my_form">
-                <label for="months"><strong>Select Month:</strong></label>
-                <select onchange="submit_form('my_form')" class="d-block mx-auto" name="months" id="months">
+                <!-- <label for="months"><strong>Select Month:</strong></label> -->
+                <select onchange="submit_form('my_form')" class="d-flex mx-lg-auto p-3 text-center select-month" name="months" id="months">
                     <option disabled>Select Month</option>
                     <option value='1'>Janaury</option>
                     <option value='2'>February</option>
@@ -35,8 +39,8 @@
                 </select>
             </form>
         </div>
-        <div class="col-12 col-md-4 p-2 h5 mx-auto mt-4">
-            <div class="mw-50 w-100 ml-auto"><strong>Today is:</strong>
+        <div class="col-12 col-md-6 col-lg-4 p-2 h5 mx-auto mt-4">
+            <div class="mw-50 w-100 ml-md-auto today-is"><strong>Today is:</strong>
                 <div id="date"></div>
             </div>
         </div>
@@ -79,11 +83,11 @@
                     {% endif %}
                     ">
                         <td>{{ forloop.counter }}</td>
-                        <td {% if task.assigned_to == request.user and request.user.rank == 2 or request.user.rank == 1 or request.user.is_superuser %} class="progress-status-cell p-md-0 {% if task.status == 1 %} task-completed {% else %} task-inprogress{% endif %}" data-toggle="modal"
+                        <td {% if task.assigned_to == request.user and request.user.rank == 2 or request.user.rank == 1 or request.user.is_superuser %} class="progress-status-cell {% if task.status == 1 %} task-completed {% else %} task-inprogress{% endif %}" data-toggle="modal"
                         data-target="#completeModal" data-title="{{ task.title }}"
                         data-task-status="{{ task.status }}" data-assigned="{{ task.assigned_to }}"
                         data-id="{{ task.id }}" data-username="{{ request.user.username }}"
-                        data-user-rank="{{ request.user.rank }}" {% else %} class="p-md-0" {% endif %}>
+                        data-user-rank="{{ request.user.rank }}" {% else %} class="" {% endif %}>
                         {% if task.status == 1 %} <i class="fas fa-check-circle"></i> {% else %} {{ task.get_status_display }} {% endif %}
                         </td>
                         <td id="task-assigned"><span class="assigned-rank">{{ task.assigned_to.get_rank_display }}</span><span class="assigned-username">{{ task.assigned_to }}</span></td>

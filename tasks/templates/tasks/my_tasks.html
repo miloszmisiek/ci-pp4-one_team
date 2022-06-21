@@ -18,7 +18,7 @@
                     <a id="edit-profile-anchor" href="{% url 'edit_profile' request.user.id %}">
                         <button type="button" class="btn btn-warning">Edit</button>
                     </a>
-                    <a id="delete-profile-anchor" class="confirm-delete" href="#">
+                    <a id="delete-profile-anchor" class="confirm-delete" href="{% url 'delete_profile' request.user.id %}">
                         <button type="button" class="btn btn-danger">Delete</button>
                     </a>
                 </div>
@@ -84,7 +84,7 @@
                     approval-styling {% endif %}
                     {% if task.status == 1 %} clr-green {% endif %}
                     {% if task.is_past_due.0 %}
-                    clr-red
+                    clr-red .font-weight-bold
                     {% endif %}
                     ">
                         <td>{{ forloop.counter }}</td>

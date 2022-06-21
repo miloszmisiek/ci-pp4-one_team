@@ -65,3 +65,6 @@ class Task(models.Model):
     def is_past_due(self):
         return (datetime.date.today() > self.end_date, (self.end_date - datetime.date.today()).days)
 
+    def updated_on_time(self):
+        return (datetime.date.today() - self.updated_on).days
+

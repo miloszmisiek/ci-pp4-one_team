@@ -75,7 +75,7 @@ img {
 }
 
 .mw-50 {
-    max-width: 50%!important;
+    max-width: 9em!important;
 }
 
 .bg-orange-pastel {
@@ -291,6 +291,34 @@ header {
 .profile-home-container h1 {
     font-family: var(--ff-primary);
     font-weight: 700;
+}
+
+.heading-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1.5em;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: var(--br);
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    max-width: 30rem;
+    text-align: center;
+    box-shadow: 0px 2px 13px 2px rgb(34 60 80 / 20%);
+}
+
+.fa-anchor {
+    font-size: 4rem;
+}
+
+.select-month {
+    font-size: 1.25rem;
+    box-shadow: 0px 2px 13px 2px rgb(34 60 80 / 20%);
+    background: none;
+    font-weight: 600;
+    border: 1px solid black;
 }
 
 /*------ Forms ------*/
@@ -538,6 +566,7 @@ table {
   tr:nth-of-type(odd) { 
     background: #eee; 
   }
+
   th { 
     background: #333; 
     color: white; 
@@ -638,7 +667,7 @@ footer {
 /*----------------------------*/
 /*------ Media Queries ------*/
 
-@media (max-width: 992px) {
+@media (max-width: 991px) {
     .contact-info {
         justify-content: center;
     }
@@ -646,11 +675,22 @@ footer {
     .home-container-right {
         margin-top: 5vh;
     }
+
+    /* .select-month {
+        margin-left: ;
+    } */
 }
 
 @media (min-width: 992px) {
     .contact-info-address p {
         max-width: 25vw;
+    }
+}
+
+@media (max-width: 870px) {
+    .task-forms {
+        background-color: transparent !important;
+        box-shadow: none !important;
     }
 }
 
@@ -678,6 +718,12 @@ footer {
     .nav-list li {
         margin: 0 auto !important;
         padding: 1rem 3rem;
+    }
+
+    .select-month,
+    .today-is {
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
@@ -759,6 +805,8 @@ footer {
 	table, thead, tbody, th, td, tr { 
 		display: block;
         margin: auto;
+        max-width: 85vw;
+        box-shadow: none;
     }
 	
 	thead tr { 
@@ -767,14 +815,19 @@ footer {
 		left: -9999px;
 	}
 	
-	tr { border: 1px solid #ccc; }
+	tr { 
+        border: 1px solid #ccc; 
+        margin-bottom: 2em;
+        box-shadow: 0px 2px 13px 2px rgb(34 60 80 / 20%);
+    }
+
 	
 	td { 
 		border: none;
 		border-bottom: 1px solid #eee; 
 		position: relative;
 		padding-left: 50%;
-        text-align: left; 
+        text-align: center; 
 	}
 	
 	td:before { 

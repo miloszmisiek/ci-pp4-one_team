@@ -6,10 +6,14 @@ from django.http import HttpResponseRedirect
 from .models import Task
 from .forms import AddTask
 from django.contrib.auth.decorators import user_passes_test
+from datetime import date, timedelta
 
 USER = get_user_model()
 ALL_USERS = USER.objects.all()
 MASTER_EXCLUDED = ALL_USERS.exclude(is_superuser=True)
+TODAY = date.today()
+YESTERDAY = TODAY - timedelta(days=1)
+CLEAR_UPDATED = TODAY - timedelta(days=2)
 
 
 def is_not_bosun(user):
@@ -19,14 +23,12 @@ def is_not_bosun(user):
 def profile_home(request):
     """A view to return the tasks home page"""
     tasks = Task.objects.all()
-    for task in tasks:
-        if task.is_past_due()[0]:
-            task.status = 2
+    tasks.filter(end_date=YESTERDAY).update(status=2)
+    tasks = tasks.exclude(updated_on=CLEAR_UPDATED, status=1)
 
     if request.GET and "months" in request.GET:
         months = request.GET["months"]
         tasks = tasks.filter(Q(created_on__month=months) | Q(end_date__month=months))
-
 
     tasks = (
         tasks.exclude(status=1)
@@ -43,6 +45,8 @@ def profile_home(request):
 def my_tasks(request):
     """A view to return the tasks home page"""
     tasks = Task.objects.all().filter(assigned_to=request.user)
+    tasks.filter(end_date=YESTERDAY).update(status=2)
+    tasks = tasks.exclude(updated_on=CLEAR_UPDATED, status=1)
 
     if request.GET and "months" in request.GET:
         months = request.GET["months"]

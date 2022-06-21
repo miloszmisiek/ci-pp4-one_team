@@ -2,16 +2,6 @@
 {% load static %}
 {% load crispy_forms_tags %}
 
-{% block extra_css %}
-<link rel="stylesheet" type="text/css" href="{% static 'admin/css/widgets.css' %}" />
-{% endblock %}
-
-{% block extra_js %}
-<script src="{% static 'admin/js/core.js' %}"></script>
-<script src="{% url 'jsi18n' %}"></script>
-{{ form.media }}
-{% endblock %}
-
 {% block content %}
 <div class="users-forms-container my-5 task-forms">
 <h1 class="text-shadow">Add Task</h1>
