@@ -116,6 +116,7 @@ def edit_task(request, task_id):
                 obj.save()
             else:
                 obj.save()
+            print(task.updated_on)
             return HttpResponseRedirect("/tasks/")
     else:
         form = (

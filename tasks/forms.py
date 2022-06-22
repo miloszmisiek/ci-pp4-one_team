@@ -29,5 +29,5 @@ class AddTask(forms.ModelForm):
         end_date = cleaned_data.get("end_date")
         if end_date < start_date:
             raise forms.ValidationError("End date should be greater than start date.")
-        if start_date < date.today():
-            raise forms.ValidationError("Start Date should be greater or equal than today's date.")
+        # if start_date < date.today():
+        #     raise forms.ValidationError("Start Date should be greater or equal than today's date.")
