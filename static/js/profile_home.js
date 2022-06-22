@@ -25,12 +25,26 @@ $('#exampleModal').on('show.bs.modal', function (event) {
     var userRank = button.data('userRank');
     var assigned = button.data('assigned');
     var username = button.data('username');
+    var startDate = button.data('startDate');
+    var endDate = button.data('endDate');
+    var duration = button.data('duration');
+    var createdOn = button.data('createdOn');
+    var updatedOn = button.data('updatedOn');
+    console.log(typeof(duration));
+
+    let dayDisplay = duration === 1 ? "day" : "days";
+
     var modal = $(this);
     modal.find('.description-buttons').addClass('d-flex').removeClass('d-none');
     modal.find('.modal-title').text(title);
     modal.find('.modal-body').text(description);
     modal.find('#edit-task-anchor').attr('href', `/tasks/edit/${taskId}`);
     modal.find('#delete-task-anchor').attr('href', `/tasks/delete/${taskId}`);
+    modal.find('#start-date-modal').text(startDate);
+    modal.find('#end-date-modal').text(endDate);
+    modal.find('#duration-modal').text(duration + " " + dayDisplay);
+    modal.find('#created-on-modal').text(createdOn);
+    modal.find('#updated-on-modal').text(updatedOn);
     if (userRank === 2 && !(assigned == username)) {
         modal.find('.description-buttons').removeClass('d-flex').addClass('d-none');
     }

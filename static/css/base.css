@@ -694,15 +694,16 @@ footer {
     }
 }
 
+@media (max-width: 832px) {
+    .menu-btn {
+        padding: 0.4em 1.4em 0.4em 1.4em;
+    }
+}
+
 @media (max-width: 815px) {
     .user-dropdown {
         background-color: var(--clr-gray-solid);
     }
-
-    .menu-btn {
-        padding: 0.4em 1.4em 0.4em 1.4em;
-    }
-
     .add-task-btn {
         margin: 2vh auto 0;
     }

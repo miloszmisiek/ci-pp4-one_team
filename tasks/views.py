@@ -16,15 +16,12 @@ YESTERDAY = TODAY - timedelta(days=1)
 CLEAR_UPDATED = TODAY - timedelta(days=2)
 
 
-def is_not_bosun(user):
-    return user.rank != 3
-
-
+@login_required(login_url="/accounts/login/")
 def profile_home(request):
     """A view to return the tasks home page"""
     tasks = Task.objects.all()
     tasks.filter(end_date=YESTERDAY).update(status=2)
-    tasks = tasks.exclude(updated_on=CLEAR_UPDATED, status=1)
+    # tasks = tasks.exclude(updated_on=CLEAR_UPDATED, status=1)
 
     if request.GET and "months" in request.GET:
         months = request.GET["months"]
@@ -66,7 +63,6 @@ def my_tasks(request):
 
 
 @login_required(login_url="/accounts/login/")
-@user_passes_test(is_not_bosun, login_url="tasks")
 def add_task(request):
     """A view to add tasks to database"""
     current_user = request.user
