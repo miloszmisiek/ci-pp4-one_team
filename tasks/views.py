@@ -20,8 +20,11 @@ CLEAR_UPDATED = TODAY - timedelta(days=2)
 def profile_home(request):
     """A view to return the tasks home page"""
     tasks = Task.objects.all()
-    tasks.filter(end_date=YESTERDAY).update(status=2)
-    # tasks = tasks.exclude(updated_on=CLEAR_UPDATED, status=1)
+
+    tasks.filter(end_date__lt=TODAY, status=0).update(status=2)
+    tasks.filter(end_date__gte=TODAY, status=2).update(status=0)
+
+    tasks = tasks.exclude(updated_on=CLEAR_UPDATED, status=1)
 
     if request.GET and "months" in request.GET:
         months = request.GET["months"]
