@@ -130,7 +130,7 @@ header {
     top: 175% !important;
     left: 47% !important;
     transform: translateX(-50%) !important;
-    background-color: var(--clr-gray-trasparent);
+    background: linear-gradient(to right, #868f96 0%, #596164 100%);
     padding: 1rem 2rem !important;
 }
 
@@ -155,8 +155,10 @@ header {
 }
 
 .bg-gray {
-    background-color: var(--clr-gray-trasparent);
+    background: linear-gradient(to right, #868f96 0%, #596164 100%);
+    box-shadow: 0px 2px 13px 2px rgb(34 60 80 / 20%);
 }
+
 
 .white-font {
     color: white;
