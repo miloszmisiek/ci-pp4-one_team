@@ -24,7 +24,6 @@ TASK_APPROVAL = (
     (2, 'N/R'),
 )
 
-
 class Task(models.Model):
     title = models.CharField(
         max_length=35,

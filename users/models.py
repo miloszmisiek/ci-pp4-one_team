@@ -11,7 +11,6 @@ class CustomUser(AbstractUser):
         (1, 'Senior Officer'),
         (2, 'Junior Officer'),
         (3, 'Bosun'),
-        (4, 'Potential User')
     ]
     RANK_STATUS = (
         (0, 'Approved'),

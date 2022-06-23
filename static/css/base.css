@@ -562,7 +562,11 @@ header {
     border-radius: 50%;
 }
 
-.fa-check-circle:hover {
+.complete-functionality {
+    cursor: pointer;
+}
+
+.complete-functionality:hover {
     color: #6c757d;
     border-radius: 50%;
 }
@@ -760,11 +764,23 @@ footer {
 
 @media (max-width: 870px) {
 
+    .users-forms-container,
     .task-forms {
         background-color: transparent !important;
         box-shadow: none !important;
     }
 
+    .custom-btn {
+        font-size: 1.5rem;
+    }
+
+    .forms-message,
+    .forms-top-message {
+        color: black;
+    }
+
+    .forms-container input,
+    .forms-container select,
     .task-forms input,
     .task-forms select,
     .task-forms textarea,
@@ -773,6 +789,14 @@ footer {
     .edit-profile-form textarea {
         border:none;
         box-shadow: 0px 2px 13px 2px rgb(34 60 80 / 20%);
+    }
+
+    .forms-container input::placeholder {
+        font-size: 1.5rem;
+    }
+
+    .selectwithdisabled::placeholder {
+        font-size: 1rem;
     }
 }
 

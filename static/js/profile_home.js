@@ -1,7 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
     let month = window.location.href.split('months=')[1];
     let options = document.querySelectorAll("option");
-
+    const n = new Date();
+    const y = n.getFullYear();
+    const m = n.toLocaleString('default', { month: 'long' });
+    const d = n.getDate();
+    
     for (let opt of options) {
         if (opt.value == month) {
             opt.selected = true;
@@ -10,81 +14,74 @@ document.addEventListener("DOMContentLoaded", () => {
             opt.selected = true;
         }
     }
+    
+    document.getElementById("date").innerHTML = d + " " + m + " " + y;
+    $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var title = button.data('title');
+        var description = button.data('description');
+        var taskId = button.data('id');
+        var userRank = button.data('userRank');
+        var assigned = button.data('assigned');
+        var username = button.data('username');
+        var startDate = button.data('startDate');
+        var endDate = button.data('endDate');
+        var duration = button.data('duration');
+        var createdOn = button.data('createdOn');
+        var updatedOn = button.data('updatedOn');
+    
+        let dayDisplay = duration === 1 ? "day" : "days";
+    
+        var modal = $(this);
+        modal.find('.description-buttons').addClass('d-flex').removeClass('d-none');
+        modal.find('.modal-title').text(title);
+        modal.find('.modal-body').text(description);
+        modal.find('#edit-task-anchor').attr('href', `/tasks/edit/${taskId}`);
+        modal.find('#delete-task-anchor').attr('href', `/tasks/delete/${taskId}`);
+        modal.find('#start-date-modal').text(startDate);
+        modal.find('#end-date-modal').text(endDate);
+        modal.find('#duration-modal').text(duration + " " + dayDisplay);
+        modal.find('#created-on-modal').text(createdOn);
+        modal.find('#updated-on-modal').text(updatedOn);
+        if (userRank === 2 && !(assigned == username)) {
+            modal.find('.description-buttons').removeClass('d-flex').addClass('d-none');
+        }
+    })
+    
+    $('#completeModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var title = button.data('title');
+        var taskId = button.data('id');
+        var userRank = button.data('userRank');
+        var assigned = button.data('assigned');
+        var username = button.data('username');
+        var taskStatus = button.data('taskStatus');
+        var changeStatus = taskStatus === 0 || taskStatus === 2 ? "Completed" : "Scheduled";
+        var modal = $(this);
+        modal.find('.modal-title').text(title);
+        modal.find('.modal-body').text(`Do you want to mark this task as ${changeStatus} ?`);
+        modal.find('#yes-anchor').attr('href', `/tasks/complete/${taskId}`);
+        modal.find('#no-anchor').attr('href', `/tasks/`);
+        console.log(userRank);
+    })
+    
+    $(document).on('click', '.confirm-delete', function () {
+        return confirm('Are you sure you want to delete this?');
+    })
 });
 
-$(document).on('click', '.approve-btn', function (event) {
-    var form = $('#approve-form');
-    var taskId = $(this).data('id');
-});
-
-$('#exampleModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget);
-    var title = button.data('title');
-    var description = button.data('description');
-    var taskId = button.data('id');
-    var userRank = button.data('userRank');
-    var assigned = button.data('assigned');
-    var username = button.data('username');
-    var startDate = button.data('startDate');
-    var endDate = button.data('endDate');
-    var duration = button.data('duration');
-    var createdOn = button.data('createdOn');
-    var updatedOn = button.data('updatedOn');
-
-    let dayDisplay = duration === 1 ? "day" : "days";
-
-    var modal = $(this);
-    modal.find('.description-buttons').addClass('d-flex').removeClass('d-none');
-    modal.find('.modal-title').text(title);
-    modal.find('.modal-body').text(description);
-    modal.find('#edit-task-anchor').attr('href', `/tasks/edit/${taskId}`);
-    modal.find('#delete-task-anchor').attr('href', `/tasks/delete/${taskId}`);
-    modal.find('#start-date-modal').text(startDate);
-    modal.find('#end-date-modal').text(endDate);
-    modal.find('#duration-modal').text(duration + " " + dayDisplay);
-    modal.find('#created-on-modal').text(createdOn);
-    modal.find('#updated-on-modal').text(updatedOn);
-    if (userRank === 2 && !(assigned == username)) {
-        modal.find('.description-buttons').removeClass('d-flex').addClass('d-none');
-    }
-})
-
-$('#completeModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget);
-    var title = button.data('title');
-    var taskId = button.data('id');
-    var userRank = button.data('userRank');
-    var assigned = button.data('assigned');
-    var username = button.data('username');
-    var taskStatus = button.data('taskStatus');
-    var changeStatus = taskStatus === 0 || taskStatus === 2 ? "Completed" : "Scheduled";
-    var modal = $(this);
-    // modal.find('.description-buttons').addClass('d-flex').removeClass('d-none');
-    modal.find('.modal-title').text(title);
-    modal.find('.modal-body').text(`Do you want to mark this task as ${changeStatus} ?`);
-    modal.find('#yes-anchor').attr('href', `/tasks/complete/${taskId}`);
-    modal.find('#no-anchor').attr('href', `/tasks/`);
-    console.log(userRank);
-    // if (userRank === 2 && assigned !== username) {
-    //     modal.find('.description-buttons').removeClass('d-flex').addClass('d-none');
-    // }
-})
-
-$(document).on('click', '.confirm-delete', function () {
-    return confirm('Are you sure you want to delete this?');
-})
-
-n = new Date();
-y = n.getFullYear();
-let m = n.toLocaleString('default', { month: 'long' });
-d = n.getDate();
-document.getElementById("date").innerHTML = d + " " + m + " " + y;
 
 function submit_form(id) {
-    console.log(typeof(id));
+    console.log(typeof (id));
     var form = document.getElementById(id);
     console.log(form);
     form.submit();
+}
+
+function convertDate(d) {
+    const months = { "January": 01, "February": 02, "March": 03, "April": 04, "May": 05, "June": 06, "July": 07, "August": 08, "September": 09, "October": 10, "November": 11, "December": 12 }
+    var p = d.split(" ");
+    return +(p[2] + "0" + months[p[1]] + p[0])
 }
 
 function sortTable(n) {
@@ -94,56 +91,48 @@ function sortTable(n) {
     let arrowDown = `<i class="fas fa-caret-down"></i>`;
     table = document.getElementById("home-table");
     switching = true;
-    // Set the sorting direction to ascending:
+
     dir = "asc";
-    /* Make a loop that will continue until
-    no switching has been done: */
+
     while (switching) {
-        // Start by saying: no switching is done:
         switching = false;
         rows = table.rows;
-        /* Loop through all table rows (except the
-        first, which contains table headers): */
+
         for (i = 1; i < (rows.length - 1); i++) {
-            // Start by saying there should be no switching:
             shouldSwitch = false;
-            /* Get the two elements you want to compare,
-            one from current row and one from the next: */
             x = rows[i].getElementsByTagName("TD")[n];
             y = rows[i + 1].getElementsByTagName("TD")[n];
-            /* Check if the two rows should switch place,
-            based on the direction, asc or desc: */
+
+            if (n === 5) {
+                x = convertDate(x.textContent.trim());
+                y = convertDate(y.textContent.trim());
+            }
+            else if (n === 0) {
+                x = parseInt(x.innerHTML);
+                y = parseInt(y.innerHTML);
+            }
+            else {
+                x = x.querySelector('i') && x.querySelector('i').classList.contains('fa-check-circle') ? "completed" : x = x.textContent.trim().toLowerCase();
+                y = y.querySelector('i') && y.querySelector('i').classList.contains('fa-check-circle') ? "completed" :  y = y.textContent.trim().toLowerCase();
+            }
+
             if (dir == "asc") {
-                if (Number(x.innerHTML) > Number(y.innerHTML)) {
-                    shouldSwitch = true;
-                    break;
-                } 
-                if (n !==  0 && x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                    // If so, mark as a switch and break the loop:
+                if (x > y) {
                     shouldSwitch = true;
                     break;
                 }
             } else if (dir == "desc") {
-                if (Number(x.innerHTML) < Number(y.innerHTML)) {
-                    shouldSwitch = true;
-                    break;
-                } 
-                if (n !==  0 && x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                if (x < y) {
                     shouldSwitch = true;
                     break;
                 }
             }
         }
         if (shouldSwitch) {
-            /* If a switch has been marked, make the switch
-            and mark that a switch has been done: */
             rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
             switching = true;
-            // Each time a switch is done, increase this count by 1:
             switchcount++;
         } else {
-            /* If no switching has been done AND the direction is "asc",
-            set the direction to "desc" and run the while loop again. */
             if (switchcount == 0 && dir == "asc") {
                 dir = "desc";
                 switching = true;

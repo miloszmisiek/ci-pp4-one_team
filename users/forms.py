@@ -24,8 +24,8 @@ class UserSignupForm(SignupForm):
 
     def __init__(self, *args, **kwargs):
         super(UserSignupForm, self).__init__(*args, **kwargs)
-        self.fields['email2'].widget.attrs['placeholder'] = 'Confirm your e-mail address'
-        self.fields['password2'].widget.attrs['placeholder'] = 'Confirm your password'
+        self.fields['email2'].widget.attrs['placeholder'] = 'Confirm e-mail'
+        self.fields['password2'].widget.attrs['placeholder'] = 'Confirm password'
 
     username = forms.CharField(
         max_length=50,

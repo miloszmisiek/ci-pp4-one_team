@@ -81,6 +81,9 @@ def add_task(request):
                 if obj.priority != 0:
                     obj.approval_status = 2
                     obj.save()
+            elif current_user.rank == 0:
+                obj.approval_status = 2
+                obj.save()
             else:
                 obj.save()
             return HttpResponseRedirect("/tasks/")
@@ -142,7 +145,7 @@ def edit_task(request, task_id):
 def approve_task(request, task_id):
     """A view to approve tasks in the database"""
     task = get_object_or_404(Task, id=task_id)
-    task.approval_status = 0
+    task.approval_status = 0 if task.approval_status == 1 else 1
     task.save()
     return redirect("tasks")
 
