@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-6 col-lg-4 p-2 mx-auto mt-4 h5">
+        <div class="col-12 col-md-6 col-lg-4 p-2 pl-md-4 pl-lg-2 mx-auto mt-4 h5">
             <form action="" method="get" id="my_form">
                 <select onchange="submit_form('my_form')" class="d-flex mx-lg-auto p-3 text-center select-month" name="months" id="months">
                     <option disabled>Select Month</option>
@@ -46,7 +46,7 @@
                 </select>
             </form>
         </div>
-        <div class="col-12 col-md-6 col-lg-4 p-2 h5 mx-auto mt-4">
+        <div class="col-12 col-md-6 col-lg-4 p-2 pr-md-4 pr-lg-2 h5 mx-auto mt-4">
             <div class="mw-50 w-100 ml-md-auto today-is"><strong>Today is:</strong>
                 <div id="date"></div>
             </div>
@@ -54,7 +54,7 @@
     </div>
     {% if user.rank is not 3 %}
     <div class="row text-right">
-        <div class="col-12 mx-auto col-lg-4 mt-4 ml-lg-auto mr-lg-0 text-center">
+        <div class="col-12 mx-auto col-lg-4 mt-4 ml-lg-auto mr-lg-0 px-md-4 px-lg-auto text-center">
             <div class="add-task-btn">
                 <a href="{% url 'add_task' %}">Add Task +</a>
             </div>
@@ -76,49 +76,10 @@
                         <th onclick="sortTable(6)">Approval</th>
                     </tr>
                 </thead>
-                <tbody>
-                    {% for task in tasks %}
-                    <tr class="{% if task.approval_status == 1 %} 
-                    approval-styling {% endif %}
-                    {% if task.status == 1 %} clr-green {% endif %}
-                    {% if task.status != 1 %}
-                    {% if task.is_past_due.0%}
-                    clr-red font-weight-600
-                    {% elif task.is_past_due.1 <= 2 %}
-                    clr-warning
-                    {% endif %}
-                    {% endif %}
-                    ">
-                        <td>{{ forloop.counter }}</td>
-                        <td>
-                        {% if task.assigned_to == request.user and request.user.rank == 2 and task.approval_status == 0 or request.user.rank == 1 and task.approval_status != 1 or request.user.is_superuser %}
-                            <button class="border-0 bg-transparent m-auto 
-                            {% if task.status == 0 and task.is_past_due.1 <= 2 %} 
-                            clr-warning tasks-titles p-1
-                            {% elif task.status == 1 %} p-0 
-                            {% elif task.status == 2 %} 
-                            clr-red font-weight-600 tasks-titles p-1
-                            {% else %} p-1 tasks-titles 
-                            {% endif %}" 
-                            data-toggle="modal" data-target="#completeModal" data-title="{{ task.title }}"
-                            data-task-status="{{ task.status }}" data-assigned="{{ task.assigned_to }}"
-                            data-id="{{ task.id }}" data-username="{{ request.user.username }}"
-                            data-user-rank="{{ request.user.rank }}">{% if task.status == 1 %} <i class="fas fa-check-circle clr-green border-0"></i> {% else %} {{ task.get_status_display }} {% endif %}</button>
-                        {% else %}
-                            {% if task.status == 1 %} <i class="fas fa-check-circle clr-green"></i> {% else %} {{ task.get_status_display }} {% endif %}
-                        {% endif %}
-                        </td>
-                        <td id="task-assigned"><span class="assigned-rank">{{ task.assigned_to.get_rank_display }}</span><span class="assigned-username">{{ task.assigned_to }}</span></td>
-                        <td>{{ task.get_priority_display }}</td>
-                        
-                        <td class="btn-title" data-toggle="modal"
-                        data-target="#exampleModal" data-title="{{ task.title }}"
-                        data-description="{{ task.description }}" data-assigned="{{ task.assigned_to }}"
-                        data-id="{{ task.id }}" data-username="{{ request.user.username }}"
-                        data-user-rank="{{ request.user.rank }}" data-created-on="{{ task.created_on | date:'d F Y' }}"
-                        data-updated-on="{{ task.updated_on | date:'d F Y' }}" data-start-date="{{ task.start_date | date:'d F Y' }}"
-                        data-end-date="{{ task.end_date | date:'d F Y' }}" data-duration="{{ task.duration }}">
-                        <button class="
+                    <tbody>
+                        {% for task in tasks %}
+                        <tr class="{% if task.approval_status == 1 %} 
+                        approval-styling {% endif %}
                         {% if task.status == 1 %} clr-green {% endif %}
                         {% if task.status != 1 %}
                         {% if task.is_past_due.0%}
@@ -127,34 +88,78 @@
                         clr-warning
                         {% endif %}
                         {% endif %}
-                        border-0 bg-transparent m-auto p-1 tasks-titles font-weight-600">{{ task.title }}</button>
-                        </td>
+                        ">
+                            <td>{{ forloop.counter }}</td>
+                            <td>
+                            {% if task.assigned_to == request.user and request.user.rank == 2 and task.approval_status == 0 or request.user.rank == 1 and task.approval_status != 1 or request.user.is_superuser %}
+                                <button class="border-0 bg-transparent m-auto 
+                                {% if task.status == 0 and task.is_past_due.1 <= 2 %} 
+                                clr-warning tasks-titles p-1
+                                {% elif task.status == 1 %} p-0 
+                                {% elif task.status == 2 %} 
+                                clr-red font-weight-600 tasks-titles p-1
+                                {% else %} p-1 tasks-titles 
+                                {% endif %}" 
+                                data-toggle="modal" data-target="#completeModal" data-title="{{ task.title }}"
+                                data-task-status="{{ task.status }}" data-assigned="{{ task.assigned_to }}"
+                                data-id="{{ task.id }}" data-username="{{ request.user.username }}"
+                                data-user-rank="{{ request.user.rank }}">{% if task.status == 1 %} <i class="fas fa-check-circle complete-functionality clr-green border-0"></i> {% else %} {{ task.get_status_display }} {% endif %}</button>
+                            {% else %}
+                                {% if task.status == 1 %} <i class="fas fa-check-circle clr-green"></i> {% else %} {{ task.get_status_display }} {% endif %}
+                            {% endif %}
+                            </td>
+                            <td id="task-assigned"><span class="assigned-rank">{{ task.assigned_to.get_rank_display }}</span><span class="assigned-username">{{ task.assigned_to }}</span></td>
+                            <td>{{ task.get_priority_display }}</td>
+                            
+                            <td class="btn-title" data-toggle="modal"
+                            data-target="#exampleModal" data-title="{{ task.title }}"
+                            data-description="{{ task.description }}" data-assigned="{{ task.assigned_to }}"
+                            data-id="{{ task.id }}" data-username="{{ request.user.username }}"
+                            data-user-rank="{{ request.user.rank }}" data-created-on="{{ task.created_on | date:'d F Y' }}"
+                            data-updated-on="{{ task.updated_on | date:'d F Y' }}" data-start-date="{{ task.start_date | date:'d F Y' }}"
+                            data-end-date="{{ task.end_date | date:'d F Y' }}" data-duration="{{ task.duration }}">
+                            <button class="
+                            {% if task.status == 1 %} clr-green {% endif %}
+                            {% if task.status != 1 %}
+                            {% if task.is_past_due.0%}
+                            clr-red font-weight-600
+                            {% elif task.is_past_due.1 <= 2 %}
+                            clr-warning
+                            {% endif %}
+                            {% endif %}
+                            border-0 bg-transparent m-auto p-1 tasks-titles font-weight-600">{{ task.title }}</button>
+                            </td>
 
-                        <td>{% if task.status != 1 %}{% if task.is_past_due.0 %}<i class="fas fa-exclamation pr-1"></i>{% elif task.is_past_due.1 <= 2 %} <i class="fas fa-exclamation-triangle clr-warning pr-1"></i> {% endif %}{% endif %} {{ task.end_date | date:"d F Y" }}</td>
-                        <td>
-                        {% if request.user.is_superuser or request.user.rank == 1 and task.priority != 0 %}
-                            {% if task.approval_status == 1 %}
-                                    <a href="{% url 'approve' task.id %}">
-                                        <button type="button" class="btn btn-success approve-btn" data-id="{{ task.id }}"
-                                            data-approval="{{ task.approval_status }}">Approve</button>
-                                    </a>
-                                    <input type="hidden" name="approve-request" />
+                            <td>{% if task.status != 1 %}{% if task.is_past_due.0 %}<i class="fas fa-exclamation pr-1"></i>{% elif task.is_past_due.1 <= 2 %} <i class="fas fa-exclamation-triangle clr-warning pr-1"></i> {% endif %}{% endif %} {{ task.end_date | date:"d F Y" }}</td>
+                            <td>
+                            {% if task.approval_status != 2 %}
+                                {% if request.user.is_superuser or request.user.rank == 1 and task.priority != 0 %}
+                                            <a href="{% url 'approve' task.id %}">
+                                                {% if task.approval_status == 1 %}
+                                                <button type="button" class="btn btn-success approve-btn" data-id="{{ task.id }}"
+                                                    data-approval="{{ task.approval_status }}">Approve</button>
+                                                {% else %} 
+                                                <button type="button" class="border-0 bg-transparent m-auto p-1 tasks-titles" data-id="{{ task.id }}"
+                                                    data-approval="{{ task.approval_status }}">{{ task.get_approval_status_display }}</button>
+                                                {% endif %}
+                                            </a>
+                                            <input type="hidden" name="approve-request" />
+                                {% else %}
+                                    {% if task.approval_status == 1 %} <i class="fas fa-clock"></i> {% endif %}
+                                    {{ task.get_approval_status_display }}
+                                {% endif %} 
                             {% else %}
                                 {{ task.get_approval_status_display }}
                             {% endif %}
-                        {% else %}
-                            {% if task.approval_status == 1 %} <i class="fas fa-clock"></i> {% endif %}
-                            {{ task.get_approval_status_display }}
-                        {% endif %}
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
             </table>
         </div>
     </div>
     <div class="row text-right clear-completed-row">
-        <div class="col-12 mx-auto col-sm-4 my-4 ml-sm-auto mr-sm-0 pr-0 text-center">
+        <div class="col-12 mx-auto col-sm-4 mb-5 mt-md-4 mt-lg-5 ml-sm-auto mr-sm-0 pr-0 pr-md-4 pr-lg-2 text-center">
             <form action="" method="post">
                 {% csrf_token %}
                 <button class="add-task-btn mr-sm-0 border-0" type="submit">Hide Completed</button>
