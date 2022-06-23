@@ -19,7 +19,7 @@
                 <i class="fas fa-anchor font-weight-bold pr-3 align-self-center"></i> <span class="align-self-center h2 m-auto">What's Next ?</span>
             </div>
         </div>
-        <div class="col-12 col-md-6 col-lg-4 p-2 mx-auto mt-4 h5">
+        <div class="col-12 col-md-6 col-lg-4 p-2 pl-md-4 pl-lg-2 mx-auto mt-4 h5">
             <form action="" method="get" id="my_form">
                 <select onchange="submit_form('my_form')" class="d-flex mx-lg-auto p-3 text-center select-month" name="months" id="months">
                     <option disabled>Select Month</option>
@@ -38,7 +38,7 @@
                 </select>
             </form>
         </div>
-        <div class="col-12 col-md-6 col-lg-4 p-2 h5 mx-auto mt-4">
+        <div class="col-12 col-md-6 col-lg-4 p-2 pr-md-4 pr-lg-2 h5 mx-auto mt-4">
             <div class="mw-50 w-100 ml-md-auto today-is"><strong>Today is:</strong>
                 <div id="date"></div>
             </div>
@@ -46,7 +46,7 @@
     </div>
     {% if user.rank is not 3 %}
     <div class="row text-right">
-        <div class="col-12 mx-auto col-lg-4 mt-4 ml-lg-auto mr-lg-0 text-center">
+        <div class="col-12 mx-auto col-lg-4 mt-4 ml-lg-auto mr-lg-0 px-md-4 px-lg-auto text-center">
             <div class="add-task-btn">
                 <a href="{% url 'add_task' %}">Add Task +</a>
             </div>
@@ -151,7 +151,7 @@
         </div>
     </div>
     <div class="row text-right clear-completed-row">
-        <div class="col-12 mx-auto col-sm-4 my-4 ml-sm-auto mr-sm-0 pr-0 text-center">
+        <div class="col-12 mx-auto col-sm-4 mb-5 mt-md-4 mt-lg-5 ml-sm-auto mr-sm-0 pr-0 pr-md-4 pr-lg-2 text-center">
             <form action="" method="post">
                 {% csrf_token %}
                 <button class="add-task-btn mr-sm-0 border-0" type="submit">Hide Completed</button>

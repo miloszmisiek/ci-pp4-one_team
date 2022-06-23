@@ -21,6 +21,7 @@ class AddTask(forms.ModelForm):
     def __init__(self, *args, **kwargs):
          self.assigned_to = kwargs.pop('assigned_to', None)
          super(AddTask, self).__init__(*args, **kwargs)
+         self.fields['assigned_to'].empty_label = None
          self.fields['assigned_to'].queryset = self.assigned_to
 
     def clean(self):

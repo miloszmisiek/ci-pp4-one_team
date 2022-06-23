@@ -98,8 +98,26 @@
     </header>
 
     {% if messages %}
-    <div class="message-container"></div>
+        <div class="container mt-2">
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    {% for message in messages %}
+                        {% if message.tags == "alert-success" %}
+                            <!-- all attribiutes here are standard bootstrap controls for alert messages -->
+                            <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
+                                {{ message | safe }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     {% endif %}
+    
+    <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 
     {% block page_header %}
     {% endblock %}
@@ -159,6 +177,14 @@
         </div>
 
     </footer>
+    <script>
+        setTimeout(function (){
+            let messages = document.getElementById("msg");
+            // standard bootstrap JavaScrip toolkit
+            let alert = new bootstrap.Alert(messages);
+            alert.close();
+        }, 5000);
+    </script>
 
 </body>
 

@@ -591,6 +591,34 @@ header {
     color: #393333;
 }
 
+.edit-profile-buttons a {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+}
+
+#myBtn {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: var(--clr-magenta); /* Set a background color */
+    color: white; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 15px; /* Some padding */
+    border-radius: 10px; /* Rounded corners */
+    font-size: 18px; /* Increase font size */
+    -webkit-box-shadow: 0px 2px 13px 2px rgb(34 60 80 / 20%);
+    -moz-box-shadow: 0px 2px 13px 2px rgba(34, 60, 80, 0.2);
+    box-shadow: 0px 2px 13px 2px rgb(34 60 80 / 20%);
+  }
+  
+  #myBtn:hover {
+    background-color: var(--clr-gray-solid); /* Add a dark-grey background on hover */
+  }
+
 /*------ Tasks ------*/
 
 table {
@@ -770,13 +798,13 @@ footer {
         box-shadow: none !important;
     }
 
-    .custom-btn {
-        font-size: 1.5rem;
-    }
-
     .forms-message,
     .forms-top-message {
         color: black;
+    }
+
+    .forms-top-message {
+        text-align: justify;
     }
 
     .forms-container input,
@@ -791,12 +819,12 @@ footer {
         box-shadow: 0px 2px 13px 2px rgb(34 60 80 / 20%);
     }
 
-    .forms-container input::placeholder {
-        font-size: 1.5rem;
+    .selectwithdisabled:invalid {
+        font-size: 1.2rem;
     }
 
-    .selectwithdisabled::placeholder {
-        font-size: 1rem;
+    .forms-container input::placeholder {
+        font-size: 1.2rem;
     }
 }
 
@@ -864,6 +892,10 @@ footer {
 
     .menu-btn {
         padding: 0.4em 1em 0.4em 1em;
+    }
+
+    .custom-btn {
+        font-size: 1.5rem;
     }
 
 }

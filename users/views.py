@@ -1,8 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from .models import CustomUser
 from .forms import EditProfileForm
+from allauth.account.views import PasswordChangeView
+from django.urls import reverse
 
 @login_required(login_url="/accounts/login/")
 def edit_profile(request, user_id):
@@ -36,3 +39,12 @@ def delete_profile(request, user_id):
     user = get_object_or_404(CustomUser, id=user_id)
     user.delete()
     return redirect("home")
+
+class CustomPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
+    print("Custom view")
+
+    def get_success_url(self):
+        print("Getting here in successfull url")
+        success_url = reverse('edit_profile',
+                              kwargs={'user_id': self.request.user.id})
+        return success_url

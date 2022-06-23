@@ -1,5 +1,5 @@
 """Forms for users app"""
-from allauth.account.forms import SignupForm
+from allauth.account.forms import SignupForm, ResetPasswordKeyForm
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import CustomUser
@@ -11,7 +11,6 @@ RANNK_CHOICES = (
         (1, 'Senior Officer'),
         (2, 'Junior Officer'),
         (3, 'Bosun'),
-        (4, 'Potential User')
 )
 class CustomUserCreationForm(UserCreationForm):
     """Custom user creation form for admin panel"""
@@ -67,6 +66,11 @@ class EditProfileForm(forms.ModelForm):
             'first_name',
             'last_name',
             'email',
-            'phone',
             'rank',
         )
+
+class MyCustomResetPasswordKeyForm(ResetPasswordKeyForm):
+
+    def __init__(self, *args, **kwargs):
+        super(MyCustomResetPasswordKeyForm, self).__init__(*args, **kwargs)
+        self.fields['password2'].widget.attrs['placeholder'] = 'Repeat New Password'
