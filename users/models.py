@@ -31,7 +31,7 @@ class CustomUser(AbstractUser):
     )
     first_name = models.CharField(max_length=30, blank=False, null=False)
     last_name = models.CharField(max_length=30, blank=False, null=False)
-    rank = models.IntegerField(choices=ROLES, default=4)
+    rank = models.IntegerField(choices=ROLES, blank=False, null=False)
 
     def get_rank_choices(self):
         """Return rank choices."""
