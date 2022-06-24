@@ -57,33 +57,63 @@ class TestForms(TestCase):
             form.fields['password2'].widget.attrs['placeholder'],
             'Confirm password'
         )
-
-        self.assertEqual(
-            form.fields['rank'].widget.attrs['placeholder'],
-            'Select Your Rank'
-        )
-        
-        # self.assertEqual(
-        #     form.fields['rank'].widget,
-        #     {'label': 'Select Your Rank', 'disabled': True}
-        # )
     
-    # def test_user_signup_form_invalid_email(self):
-    #     """Test the simple signup form with invalid data."""
-    #     form = UserSignupForm(
-    #         data={
-    #             'username': 'username',
-    #             'email': 'username',
-    #             'password1': 'passwor34Rd',
-    #             'password2': 'passwor34Rd',
-    #             'first_name': 'first_name',
-    #             'last_name': 'last_name',
-    #             'phone': '456987786',
-    #             'role': CustomUser.ROLES[5][0]
-    #         }
-    #     )
-    #     self.assertFalse(form.is_valid())
-    #     self.assertEquals(len(form.errors), 1)
+    def test_user_signup_form_invalid_email(self):
+        """Test the simple signup form with invalid data."""
+        form = UserSignupForm(
+            data={
+                'username': 'username',
+                'email': 'mail.com',
+                'email2': 'username@mail.com',
+                'password1': 'passwor34Rd',
+                'password2': 'passwor34Rd',
+                'first_name': 'first_name',
+                'last_name': 'last_name',
+                'rank': CustomUser.ROLES[1][0]
+            })
+        self.assertFalse(form.is_valid())
+        self.assertIn('email', form.errors.keys())
+        self.assertEqual(form.errors['email'][0], 'Enter a valid email address.')
+
+    def test_user_signup_form_username_is_required(self):
+        """Test the simple signup form with invalid data."""
+        form = UserSignupForm(
+            data={
+                'username': '',
+                'email': 'username@mail.com',
+                'email2': 'username@mail.com',
+                'password1': 'passwor34Rd',
+                'password2': 'passwor34Rd',
+                'first_name': 'first_name',
+                'last_name': 'last_name',
+                'rank': CustomUser.ROLES[1][0]
+            })
+        self.assertFalse(form.is_valid())
+        self.assertEquals(len(form.errors), 1)
+        self.assertIn('username', form.errors.keys())
+        self.assertEqual(form.errors['username'][0], 'This field is required.')
+
+
+    def test_user_signup_form_emails_no_match(self):
+        form = UserSignupForm(
+            data={
+                'username': 'username',
+                'email': 'username@mail.com',
+                'email2': 'username2@mail.com',
+                'password1': 'passwor34Rd',
+                'password2': 'passwor34Rd',
+                'first_name': 'first_name',
+                'last_name': 'last_name',
+                'rank': CustomUser.ROLES[1][0]
+            })
+        self.assertFalse(form.is_valid())
+        self.assertEquals(len(form.errors), 1)
+        self.assertIn('email2', form.errors.keys())
+        self.assertEqual(form.errors['email2'][0], 'You must type the same email each time.')
+    
+
+
+
 
     # def test_user_signup_form_invalid_password(self):
     #     """Test the simple signup form with invalid data."""

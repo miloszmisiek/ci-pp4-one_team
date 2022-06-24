@@ -26,6 +26,7 @@
 6. SelectWithDisabled widget comes from [djangosnippets](https://djangosnippets.org/snippets/2453/)
 7. Favicon generated using [favicon.cc](https://www.favicon.cc/)
 8. Scroll on top button comes from [W3Schools](https://www.w3schools.com/howto/howto_js_scroll_to_top.asp)
+9. Header, footer and dropdown background was copied from [SheCodes](https://gradients.shecodes.io/gradients/825).
 
 ## Acknowledgments
 1. My girlfriend for being my biggest supporter throught the entire time!
