@@ -41,10 +41,8 @@ def delete_profile(request, user_id):
     return redirect("home")
 
 class CustomPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
-    print("Custom view")
 
     def get_success_url(self):
-        print("Getting here in successfull url")
         success_url = reverse('edit_profile',
                               kwargs={'user_id': self.request.user.id})
         return success_url

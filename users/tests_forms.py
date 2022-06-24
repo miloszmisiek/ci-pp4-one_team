@@ -110,6 +110,57 @@ class TestForms(TestCase):
         self.assertEquals(len(form.errors), 1)
         self.assertIn('email2', form.errors.keys())
         self.assertEqual(form.errors['email2'][0], 'You must type the same email each time.')
+
+    def test_user_signup_form_passwords_no_match(self):
+        form = UserSignupForm(
+            data={
+                'username': 'username',
+                'email': 'username@mail.com',
+                'email2': 'username@mail.com',
+                'password1': 'passwor34Rd333',
+                'password2': 'passwor34Rd',
+                'first_name': 'first_name',
+                'last_name': 'last_name',
+                'rank': CustomUser.ROLES[1][0]
+            })
+        self.assertFalse(form.is_valid())
+        self.assertEquals(len(form.errors), 1)
+        self.assertIn('password2', form.errors.keys())
+        self.assertEqual(form.errors['password2'][0], 'You must type the same password each time.')
+
+    def test_user_signup_form_passwords_no_match(self):
+        form = UserSignupForm(
+            data={
+                'username': 'username',
+                'email': 'username@mail.com',
+                'email2': 'username@mail.com',
+                'password1': 'passwor34Rd333',
+                'password2': 'passwor34Rd',
+                'first_name': 'first_name',
+                'last_name': 'last_name',
+                'rank': CustomUser.ROLES[1][0]
+            })
+        self.assertFalse(form.is_valid())
+        self.assertEquals(len(form.errors), 1)
+        self.assertIn('password2', form.errors.keys())
+        self.assertEqual(form.errors['password2'][0], 'You must type the same password each time.')
+
+    def test_user_signup_form_passwords_no_match(self):
+        form = UserSignupForm(
+            data={
+                'username': 'username',
+                'email': 'username@mail.com',
+                'email2': 'username@mail.com',
+                'password1': 'passwor34Rd',
+                'password2': 'passwor34Rd',
+                'first_name': 'first_name',
+                'last_name': 'last_name',
+                'rank': CustomUser.ROLES[1][0]
+            })
+        self.assertFalse(form.is_valid())
+        self.assertEquals(len(form.errors), 1)
+        self.assertIn('password2', form.errors.keys())
+        self.assertEqual(form.errors['password2'][0], 'You must type the same password each time.')
     
 
 
