@@ -5,15 +5,13 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import CustomUser
 from .widgets import SelectWithDisabled
 
-RANNK_CHOICES = (
-        ('', {'label': 'Select Your Rank', 'disabled': True}),
-        (0, 'Master'),
-        (1, 'Senior Officer'),
-        (2, 'Junior Officer'),
-        (3, 'Bosun'),
-)
+SELECT_YOUR_RANK = [
+        ('', {'label': 'Select Your Rank', 'disabled': True})]
 class CustomUserCreationForm(UserCreationForm):
     """Custom user creation form for admin panel"""
+    def __init__(self, *args, **kwargs):
+        super(CustomUserCreationForm, self).__init__(*args, **kwargs)
+        self.fields['rank'].empty_label = None
     class Meta:
         model = CustomUser
         fields = "__all__"
@@ -44,7 +42,7 @@ class UserSignupForm(SignupForm):
 
     rank = forms.ChoiceField(
         label='Rank',
-        choices= RANNK_CHOICES,  widget=SelectWithDisabled())
+        choices= SELECT_YOUR_RANK + CustomUser.ROLES,  widget=SelectWithDisabled())
     
     def save(self, request):
         print(self.cleaned_data)

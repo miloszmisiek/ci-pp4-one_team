@@ -157,6 +157,10 @@ def complete_task(request, task_id):
     task.save()
     return redirect("tasks")
 
+# def toggle_completed_tasks(request):
+#     """A view to complete tasks in the database"""
+#     tasks = 
+
 @login_required(login_url="/accounts/login/")
 def delete_task(request, task_id):
     """A view to delete tasks from database"""
