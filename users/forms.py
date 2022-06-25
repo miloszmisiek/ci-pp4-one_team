@@ -9,9 +9,6 @@ SELECT_YOUR_RANK = [
         ('', {'label': 'Select Your Rank', 'disabled': True})]
 class CustomUserCreationForm(UserCreationForm):
     """Custom user creation form for admin panel"""
-    def __init__(self, *args, **kwargs):
-        super(CustomUserCreationForm, self).__init__(*args, **kwargs)
-        self.fields['rank'].empty_label = None
     class Meta:
         model = CustomUser
         fields = "__all__"
