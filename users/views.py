@@ -40,7 +40,11 @@ def delete_profile(request, user_id):
     current_user = request.user
 
     user = get_object_or_404(CustomUser, id=user_id)
-    user.delete()
+    if current_user.id == user.id:
+        user.delete()
+    else:
+       return render(request, "users/no_permission.html") 
+    
     return redirect("home")
 
 class CustomPasswordChangeView(LoginRequiredMixin, PasswordChangeView):

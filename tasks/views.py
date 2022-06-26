@@ -41,6 +41,7 @@ def profile_home(request):
     }
     return render(request, "tasks/profile_home.html", context)
 
+
 @login_required(login_url="/accounts/login/")
 def my_tasks(request):
     """A view to return the tasks home page"""
@@ -51,7 +52,6 @@ def my_tasks(request):
     if request.GET and "months" in request.GET:
         months = request.GET["months"]
         tasks = tasks.filter(Q(created_on__month=months) | Q(end_date__month=months))
-
 
     tasks = (
         tasks.exclude(status=1)
@@ -69,40 +69,41 @@ def my_tasks(request):
 def add_task(request):
     """A view to add tasks to database"""
     current_user = request.user
-
-    if request.method == "POST":
-        form = AddTask(request.POST, assigned_to=ALL_USERS)
-        if form.is_valid():
-            obj = form.save(commit=False)
-            if current_user.rank == 2:
-                obj.assigned_to = current_user
-                obj.save()
-            elif current_user.rank == 1:
-                if obj.priority != 0:
+    if current_user.rank == 3:
+        return render(request, "users/no_permission.html")
+    else:
+        if request.method == "POST":
+            form = AddTask(request.POST, assigned_to=ALL_USERS)
+            if form.is_valid():
+                obj = form.save(commit=False)
+                if current_user.rank == 2:
+                    obj.assigned_to = current_user
+                    obj.save()
+                elif current_user.rank == 1:
+                    obj.approval_status = 2 if obj.priority != 0 else 1
+                    obj.save()    
+                elif current_user.rank == 0:
                     obj.approval_status = 2
                     obj.save()
-            elif current_user.rank == 0:
-                obj.approval_status = 2
-                obj.save()
-            else:
-                obj.save()
-            return HttpResponseRedirect("/tasks/")
-    else:
-        form = (
-            AddTask(
-                assigned_to=MASTER_EXCLUDED, initial={"assigned_to": current_user.id}
+                else:
+                    obj.save()
+                return HttpResponseRedirect("/tasks/")
+        else:
+            form = (
+                AddTask(
+                    assigned_to=MASTER_EXCLUDED, initial={"assigned_to": current_user.id}
+                )
+                if not current_user.is_superuser
+                else AddTask(
+                    assigned_to=ALL_USERS, initial={"assigned_to": current_user.id}
+                )
             )
-            if not current_user.is_superuser
-            else AddTask(
-                assigned_to=ALL_USERS, initial={"assigned_to": current_user.id}
-            )
-        )
 
-        form.fields["assigned_to"].disabled = True if current_user.rank == 2 else False
+            form.fields["assigned_to"].disabled = True if current_user.rank == 2 else False
 
-    context = {"form": form}
+            context = {"form": form}
 
-    return render(request, "tasks/add_task.html", context)
+            return render(request, "tasks/add_task.html", context)
 
 
 @login_required(login_url="/accounts/login/")
@@ -110,31 +111,41 @@ def edit_task(request, task_id):
     """A view to edit tasks in database"""
     task = get_object_or_404(Task, id=task_id)
     current_user = request.user
-    if request.method == "POST":
-        form = AddTask(request.POST, assigned_to=ALL_USERS, instance=task)
-        if form.is_valid():
-            obj = form.save(commit=False)
-            if current_user.rank == 2:
-                obj.assigned_to = current_user
-                obj.save()
-            elif current_user.rank == 1:
-                obj.approval_status = 2 if obj.priority != 0 else 1
-                obj.save()
-            else:
-                obj.save()
-            print(task.updated_on)
-            return HttpResponseRedirect("/tasks/")
+    if (
+        current_user.rank == 3
+        or current_user.rank == 2
+        and task.assigned_to != current_user
+        or not current_user.is_superuser
+        and task.assigned_to == 0
+    ):
+        return render(request, "users/no_permission.html")
     else:
-        form = (
-            AddTask(assigned_to=MASTER_EXCLUDED, instance=task)
-            if not current_user.is_superuser
-            else AddTask(
-                assigned_to=ALL_USERS, initial={"assigned_to": current_user.id}
+        if request.method == "POST":
+            form = AddTask(request.POST, assigned_to=ALL_USERS, instance=task)
+            if form.is_valid():
+                obj = form.save(commit=False)
+                if current_user.rank == 2:
+                    obj.assigned_to = current_user
+                    obj.save()
+                elif current_user.rank == 1:
+                    obj.approval_status = 2 if obj.priority != 0 else 1
+                    obj.save()
+                else:
+                    obj.save()
+                print(task.updated_on)
+                return HttpResponseRedirect("/tasks/")
+        else:
+            form = (
+                AddTask(assigned_to=MASTER_EXCLUDED, instance=task)
+                if not current_user.is_superuser
+                else AddTask(
+                    assigned_to=ALL_USERS, initial={"assigned_to": current_user.id}
+                )
             )
-        )
 
-        form.fields["assigned_to"].disabled = True if current_user.rank == 2 else False
-
+            form.fields["assigned_to"].disabled = (
+                True if current_user.rank == 2 else False
+            )
     context = {
         "form": form,
     }
@@ -145,25 +156,61 @@ def edit_task(request, task_id):
 def approve_task(request, task_id):
     """A view to approve tasks in the database"""
     task = get_object_or_404(Task, id=task_id)
-    task.approval_status = 0 if task.approval_status == 1 else 1
-    task.save()
-    return redirect("tasks")
+    current_user = request.user
+    if (
+        current_user.rank == 3
+        or current_user.rank == 2
+        or current_user.rank == 1
+        and task.priority == 0
+        and task.assigned_to == 0
+        and not current_user.is_superuser
+    ):
+        return render(request, "users/no_permission.html")
+    else:
+        task.approval_status = 0 if task.approval_status == 1 else 1
+        task.save()
+        return redirect("tasks")
+
 
 @login_required(login_url="/accounts/login/")
 def complete_task(request, task_id):
     """A view to complete tasks in the database"""
     task = get_object_or_404(Task, id=task_id)
-    task.status = 1 if task.status == 0 or task.status == 2 else 0
-    task.save()
-    return redirect("tasks")
+    current_user = request.user
+    if (
+        current_user.rank == 3
+        or current_user.rank == 2
+        and task.assigned_to != current_user
+        or task.approval_status == 1
+        or task.assigned_to == 0
+        and not current_user.is_superuser
+    ):
+        return render(request, "users/no_permission.html")
+    else:
+        task.status = 1 if task.status == 0 or task.status == 2 else 0
+        task.save()
+        return redirect("tasks")
+
 
 # def toggle_completed_tasks(request):
 #     """A view to complete tasks in the database"""
-#     tasks = 
+#     tasks =
+
 
 @login_required(login_url="/accounts/login/")
 def delete_task(request, task_id):
     """A view to delete tasks from database"""
     task = get_object_or_404(Task, id=task_id)
-    task.delete()
-    return redirect("tasks")
+    current_user = request.user
+    if (
+        current_user.rank == 3
+        or current_user.rank == 2
+        and task.assigned_to != current_user
+        or task.approval_status == 1
+        or task.assigned_to == 0 
+        and not current_user.is_superuser
+    ):
+        return render(request, "users/no_permission.html")
+    else:
+        task.delete()
+        return redirect("tasks")
