@@ -13,18 +13,21 @@ def edit_profile(request, user_id):
 
     user = get_object_or_404(CustomUser, id=user_id)
     
-    if request.method == "POST":
-        form = EditProfileForm(request.POST, instance=user)
-        if form.is_valid():
-            obj = form.save(commit=False)
-            if obj.rank != current_user.rank:
-                obj.is_active = False
+    if current_user.id == user.id:
+        if request.method == "POST":
+            form = EditProfileForm(request.POST, instance=user)
+            if form.is_valid():
+                obj = form.save(commit=False)
+                if obj.rank != current_user.rank:
+                    obj.is_active = False
+                    obj.save()
+                    return HttpResponseRedirect("/accounts/inactive/")
                 obj.save()
-                return HttpResponseRedirect("/accounts/inactive/")
-            obj.save()
-            return HttpResponseRedirect("/tasks/my_tasks/")
+                return HttpResponseRedirect("/tasks/my_tasks/")
+        else:
+            form = EditProfileForm(instance=user)
     else:
-        form = EditProfileForm(instance=user)
+        return render(request, "users/no_permission.html")
 
     context = {
         "form": form,
