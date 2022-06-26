@@ -7,13 +7,14 @@ from .forms import EditProfileForm
 from allauth.account.views import PasswordChangeView
 from django.urls import reverse
 
+
 @login_required(login_url="/accounts/login/")
 def edit_profile(request, user_id):
     current_user = request.user
 
     user = get_object_or_404(CustomUser, id=user_id)
-    
-    if current_user.id == user.id:
+
+    if current_user.id == user.id or current_user.is_superuser:
         if request.method == "POST":
             form = EditProfileForm(request.POST, instance=user)
             if form.is_valid():
@@ -34,22 +35,20 @@ def edit_profile(request, user_id):
     }
     return render(request, "users/edit_profile.html", context)
 
+
 @login_required(login_url="/accounts/login/")
 def delete_profile(request, user_id):
     """A view to delete user from database"""
     current_user = request.user
-
     user = get_object_or_404(CustomUser, id=user_id)
-    if current_user.id == user.id:
+    if current_user.id == user.id or current_user.is_superuser:
         user.delete()
+        return redirect("home")
     else:
-       return render(request, "users/no_permission.html") 
-    
-    return redirect("home")
+        return render(request, "users/no_permission.html")
+
 
 class CustomPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
-
     def get_success_url(self):
-        success_url = reverse('edit_profile',
-                              kwargs={'user_id': self.request.user.id})
+        success_url = reverse("edit_profile", kwargs={"user_id": self.request.user.id})
         return success_url
