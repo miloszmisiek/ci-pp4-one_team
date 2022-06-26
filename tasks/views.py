@@ -84,7 +84,6 @@ def add_task(request):
                     obj.save()    
                 elif current_user.rank == 0:
                     obj.approval_status = 2
-                    obj.save()
                 else:
                     obj.save()
                 return HttpResponseRedirect("/tasks/")
@@ -132,7 +131,6 @@ def edit_task(request, task_id):
                     obj.save()
                 else:
                     obj.save()
-                print(task.updated_on)
                 return HttpResponseRedirect("/tasks/")
         else:
             form = (
@@ -190,11 +188,6 @@ def complete_task(request, task_id):
         task.status = 1 if task.status == 0 or task.status == 2 else 0
         task.save()
         return redirect("tasks")
-
-
-# def toggle_completed_tasks(request):
-#     """A view to complete tasks in the database"""
-#     tasks =
 
 
 @login_required(login_url="/accounts/login/")
