@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import Task, TASK_APPROVAL, TASK_PRIORITY, TASK_STATUS
+from ..models import Task, TASK_APPROVAL, TASK_PRIORITY, TASK_STATUS
 from users.models import CustomUser
 import datetime
 
@@ -33,7 +33,7 @@ class TestModels(TestCase):
         self.assertEquals(self.test_task.status, TASK_STATUS[0][0])
 
     def test_priority_default_to_low(self):
-        """Test default status value."""
+        """Test default priority value."""
         self.assertEquals(self.test_task.priority, TASK_PRIORITY[2][0])
 
     def test_approval_status_default_to_waiting(self):
@@ -41,7 +41,7 @@ class TestModels(TestCase):
         self.assertEquals(self.test_task.approval_status, TASK_APPROVAL[1][0])
 
     def test_start_date_default_to_today(self):
-        """Test default approval status value."""
+        """Test default start date is set to present date."""
         self.assertEquals(self.test_task.start_date, datetime.date.today)
 
     def test_duration(self):
