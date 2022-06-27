@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .models import CustomUser
+from ..models import CustomUser
 
 class TestModels(TestCase):
     """Test the models for the users app."""

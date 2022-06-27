@@ -24,17 +24,15 @@ def profile_home(request):
     tasks.filter(end_date__lt=TODAY, status=0).update(status=2)
     tasks.filter(end_date__gte=TODAY, status=2).update(status=0)
 
-    tasks = tasks.exclude(updated_on=CLEAR_UPDATED, status=1)
+    tasks = tasks.exclude(Q(updated_on=CLEAR_UPDATED) | Q(status=1))
 
     if request.GET and "months" in request.GET:
         months = request.GET["months"]
         tasks = tasks.filter(Q(created_on__month=months) | Q(end_date__month=months))
 
-    tasks = (
-        tasks.exclude(status=1)
-        if request.POST and "clear-completed" in request.POST
-        else tasks
-    )
+    if request.POST and "hide-completed" in request.POST:
+            tasks = tasks.exclude(status=1)
+
 
     context = {
         "tasks": tasks,
@@ -46,8 +44,10 @@ def profile_home(request):
 def my_tasks(request):
     """A view to return the tasks home page"""
     tasks = Task.objects.all().filter(assigned_to=request.user)
-    tasks.filter(end_date=YESTERDAY).update(status=2)
-    tasks = tasks.exclude(updated_on=CLEAR_UPDATED, status=1)
+    tasks.filter(end_date__lt=TODAY, status=0).update(status=2)
+    tasks.filter(end_date__gte=TODAY, status=2).update(status=0)
+    
+    tasks = tasks.exclude(Q(updated_on=CLEAR_UPDATED) | Q(status=1))
 
     if request.GET and "months" in request.GET:
         months = request.GET["months"]
@@ -87,6 +87,8 @@ def add_task(request):
                 else:
                     obj.save()
                 return HttpResponseRedirect("/tasks/")
+            # else:
+            #     return render(request, "tasks/add_task.html", {"form": form})
         else:
             form = (
                 AddTask(
@@ -160,7 +162,7 @@ def approve_task(request, task_id):
         or current_user.rank == 2
         or current_user.rank == 1
         and task.priority == 0
-        and task.assigned_to == 0
+        or task.assigned_to.rank == 0
         and not current_user.is_superuser
     ):
         return render(request, "users/no_permission.html")
@@ -180,7 +182,7 @@ def complete_task(request, task_id):
         or current_user.rank == 2
         and task.assigned_to != current_user
         or task.approval_status == 1
-        or task.assigned_to == 0
+        or task.assigned_to.rank == 0
         and not current_user.is_superuser
     ):
         return render(request, "users/no_permission.html")
@@ -200,7 +202,7 @@ def delete_task(request, task_id):
         or current_user.rank == 2
         and task.assigned_to != current_user
         or task.approval_status == 1
-        or task.assigned_to == 0 
+        or task.assigned_to.rank == 0 
         and not current_user.is_superuser
     ):
         return render(request, "users/no_permission.html")
