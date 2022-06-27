@@ -10,10 +10,6 @@ class CustomUser(AbstractUser):
         (2, 'Junior Officer'),
         (3, 'Bosun'),
     ]
-    RANK_STATUS = (
-        (0, 'Approved'),
-        (1, 'Denied'),
-        )
 
     username = models.CharField(
         max_length=50, blank=False,
@@ -29,10 +25,6 @@ class CustomUser(AbstractUser):
     first_name = models.CharField(max_length=30, blank=False, null=False)
     last_name = models.CharField(max_length=30, blank=False, null=False)
     rank = models.IntegerField(choices=ROLES, blank=False, null=False, default=3)
-
-    def get_rank_choices(self):
-        """Return rank choices."""
-        return dict(self.ROLES)[self.rank]
 
     def __str__(self):
         """Return string representation of user."""

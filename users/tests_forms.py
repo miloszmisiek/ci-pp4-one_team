@@ -10,6 +10,8 @@ from .models import CustomUser
 
 
 class TestForms(TestCase):
+    """Test the models for the users app."""
+
 
     def test_custom_user_creation_form_metafields_explicit(self):
         """Test the custom user creation form - fields match the model."""
@@ -614,7 +616,7 @@ class TestForms(TestCase):
         self.assertEqual(form.errors['last_name'][0], 'This field is required.')
 
     def test_my_custom_reset_password_form_password2_placeholder(self):
-        """Test the my custin reset password form - password2 placeholder renders properly to user."""
+        """Test the my custom reset password form - password2 placeholder renders properly to user."""
         form = MyCustomResetPasswordKeyForm(
             data={
                 'password1':'passwo34rd',
