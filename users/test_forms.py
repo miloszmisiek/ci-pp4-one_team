@@ -1,12 +1,12 @@
 from django.test import TestCase
-from ..forms import (
+from .forms import (
     CustomUserCreationForm,
     UserSignupForm,
     EditProfileForm,
     MyCustomResetPasswordKeyForm,
     SELECT_YOUR_RANK
     )
-from ..models import CustomUser
+from .models import CustomUser
 
 
 class TestForms(TestCase):

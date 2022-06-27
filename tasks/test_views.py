@@ -1,9 +1,9 @@
 from django.test import TestCase
 from django.test.client import Client
 from users.models import CustomUser
-from ..models import Task, TASK_APPROVAL, TASK_PRIORITY, TASK_STATUS
-from ..forms import AddTask
-from ..views import USER, ALL_USERS, MASTER_EXCLUDED
+from .models import Task, TASK_APPROVAL, TASK_PRIORITY, TASK_STATUS
+from .forms import AddTask
+from .views import USER, ALL_USERS, MASTER_EXCLUDED
 from datetime import date, timedelta
 
 TODAY = date.today()

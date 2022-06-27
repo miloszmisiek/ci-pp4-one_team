@@ -12,6 +12,7 @@ whitenoise = "*"
 django-allauth = "==0.41.0"
 django-crispy-forms = "*"
 django-session-security = "*"
+coverage = "*"
 
 [dev-packages]
 autopep8 = "*"

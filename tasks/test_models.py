@@ -1,5 +1,5 @@
 from django.test import TestCase
-from ..models import Task, TASK_APPROVAL, TASK_PRIORITY, TASK_STATUS
+from .models import Task, TASK_APPROVAL, TASK_PRIORITY, TASK_STATUS
 from users.models import CustomUser
 import datetime
 
