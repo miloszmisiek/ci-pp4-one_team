@@ -1,17 +1,39 @@
 
-
-# OneTeam
+  # OneTeam
   ## **Contents**
-  - [Important Notes](#important-notes)
-  - [Tools](#tools)
-  - [Credits](#credits)
-  - [Acknowledgments](#acknowledgments)
+  - **[About](#about)**
+  - **[User Experience Design](#user-experience-design)**
+    - [Strategy](#strategy)
+    - [Target Audience](#target-audience)
+    - [User Stories](#user-stories)
+  - **[Technologies Used](#technologies-used)**
+  - **[Features](#features)**
+    - [User Rights](#user-rights)
+    - [Tasks Home page](#tasks-home-page)
+  - **[Design](#design)**
+    - [Color Scheme](#color-scheme)
+    - [Typography](#typography)
+    - [Wireframes](#wireframes)
+  - **[Flowcharts](#flowcharts)**
+  - **[Information Architecture](#information-architecture)**
+    - [Database](#database)
+    - [Entity-Relationship Diagram](#entity-relationship-diagram)
+    - [Data Modeling](#data-modeling)
+  - [Change Rank Procedure With Use Of Admin Panel](#change-rank-procedure-with-use-of-admin-panel)
+  - **[Tools](#tools)**
+- **[Testing](#testing)**
+- **[Deployment](#deployment)**
+  - [Using Heroku to deploy the project](#using-heroku-to-deploy-the-project)
+  - [Fork a repository](#fork-a-repository)
+  - [Clone a repository](#clone-a-repository)
+- **[Credits](#credits)**
+- **[Acknowledgments](#acknowledgments)**
 
 
 ## About
-[OneTeam app](#) is a ship's crew task manager. The goal of the app is to help ship's staff to manage their tasks, schedule jobs and keep track of necessary activities onboard vessels. It is aim to increase productivity along workers.
+[OneTeam app](https://ci-pp4-one--team.herokuapp.com/) is a ship's crew task manager. The goal of the app is to help ship's staff to manage their tasks, schedule jobs and keep track of necessary activities onboard vessels. It is aim to increase productivity along workers.
 
-Live site can be found [here](#).
+Live site can be found [here](https://ci-pp4-one--team.herokuapp.com/).
 
 ## User Experience Design
 ### Strategy
@@ -123,6 +145,7 @@ OneTeam is build with following components:
 - user's dashboard page
 - no permission page
 
+[Back to contents](#contents)
 ### User Rights
 | Feature     | Master  | Senior Officer    | Junior Officer | Bosun |
 | ------------- | ------------- | ------------- | ---------- | ------------- |
@@ -148,7 +171,7 @@ OneTeam is build with following components:
 
 **Navbar**
 
-![Navbar Photo](#)
+![Navbar Photo](documentation/features/navbar.png)
 
 Navbar is structured with:
 - **Logo** to the left (redirects to home page)
@@ -165,9 +188,11 @@ Navbar is structured with:
 
 Simplistic design without many features to focus user's on major componenets for the app.
 
+[Back to contents](#contents)
+
 **Footer**
 
-![Footer Photo](#)
+![Footer Photo](documentation/features/footer.png)
 
 Footer is structured with:
 - **Logo** to the left (not-redirect to home page)
@@ -176,23 +201,27 @@ Footer is structured with:
 
 Footer was designed to contain neccessery contact information related to the app and to be easily identified.
 
+[Back to contents](#contents)
+
 **Landing page**
 
-![Landing Page Photo](#)
+![Landing Page Photo](documentation/features/landing-page.png)
 
 Landing page is structured with:
 - **Hero** section containing the logo, main goal of the app and **Get Started** button which redirect to registration site
 - **Mission** section with marine theme photos and short goals desriptions 
 - **Final word** section to encourge users for registration with repeated **Get Started** button
 
+[Back to contents](#contents)
+
 **Sign Up page (registration)**
 
-![Sign Up Photo](#)
+![Sign Up Photo](documentation/features/sign-up.png)
 
 Sign Up form is based on all-auth package template with custom styling.
 
 All fields are required to create account.
-e
+
 Sign up page is structured with:
 - **Head title** with **sign in** link and instructions
 - **Email address** field
@@ -205,10 +234,11 @@ Sign up page is structured with:
 - **Confirm Password** field
 - **Sign Up** button which submits the form if form is valid
 
+[Back to contents](#contents)
 
 **Sign In page (login)**
 
-![Sign In Photo](#)
+![Sign In Photo](documentation/features/sign-in.png)
 
 Sign In form is based on all-auth package template with custom styling.
 
@@ -221,9 +251,11 @@ Sign In page is structured with:
 - **Forgot Password** link which redirects to **Password Reset** page
 - **Sign In** button which submits the form and redirects user to tasks home page
 
+[Back to contents](#contents)
+
 **Sing Out page (logout)**
 
-![Sign Out Photo](#)
+![Sign Out Photo](documentation/features/sign-out.png)
 
 Sign Out form is based on all-auth package template with custom styling.
 
@@ -231,9 +263,11 @@ Sign Out page is structured with:
 - **Confirmation** message for user if his request is valid (defensive programming)
 - **Sign Out** button which submits the form and redirects user to landing page
 
+[Back to contents](#contents)
+
 **Password Reset page**
 
-![Reset Password Photo](#)
+![Reset Password Photo](documentation/features/password-reset.png)
 
 Password Reset form is based on all-auth package template with custom styling.
 
@@ -242,10 +276,10 @@ Password Reset page is structured with:
 - **Email address** field to type in user's email address used for registration in order to sent the link to reset the password
 - **Reset Password** button which submits the form and redirects user password reset completed page
 
-
+[Back to contents](#contents)
 ### Tasks Home page 
 
-![Tasks Home page Photo](#)
+![Tasks Home page Photo](documentation/features/tasks-home.png)
 
 Tasks Home page is structured with:
 - **Hello** message for user which reflects on user's first name and rank.
@@ -263,33 +297,37 @@ Tasks Home page is structured with:
     - The program sets tasks to Overdue automatically after the *End Date* of the task exceeds present date. Status can be changed with user click event on the table cell with certain limitations (see [User Rights](#user-rights)).
     - When user is permitted to change status, click event opens modal with message to the user to change task status accordingly to present state.
   
-      ![Status Modal Photo](#)
+      ![Status Modal Photo](documentation/features/status-modal.png)
 
   - **Owner** column represents who is assigned to a task by the Rank.
     - When hovered over user can see the username of assigned person.
   
-      ![Owner Hover Photo](#)
+      ![Owner Hover Photo](documentation/features/owner-hover.png)
 
   - **Priority** text represention of task priority: High, Medium or Low. 
   - **Title** represents task's title. When clicked it opens a modal with *Task Details*.
     - *Task Details* modal contains detailed information including all the dates related to the task and gives user ability to **Edit Task** or **Delete Task** if allowed (see [User Rights](#user-rights)).
     
-      ![Details Modal Photo](#)
+      ![Details Modal Photo](documentation/features/task-details-modal.png)
 
   - **End Date** column represents the date specified by task creator to complete the task. It's default for table sorting when home page is rendered. **Overdue** tasks are highlithed with Font Awesome exclamation icon to get user's attention. Tasks close to reaching *End Date* (2 days in advance) are highlighted with Font Awesome triangle exclamation icon.
 
-    ![End Date Icons Photo](#)
+    ![End Date Icons Photo](documentation/features/end-date-icons.png)
   
   - **Approval** column represents the task approval set by task's creator: Approved, Waiting for approval and N/R (Not Required). Users with appropriate permission can approve task if required (see [User Rights](#user-rights)). If task can be approved the green button is rendered to Approve the task. If users would like to change it's status backwards (Waiting for approval) they can do it by clicking on the cell (with required [User Rights](#user-rights))).
+
+    ![Approval Button Photo](documentation/features/approval-button.png)
+
     - **N/R** appoval status is set automatically for all tasks created by Master or for Priority Medium or Low tasks created by Chief Mate.
     - All **Priority High** tasks must be approved only by **Master**
 
-    ![Approval Button Photo](#)
+
+[Back to contents](#contents)
 
 **Hide Completed** button section - gives user ability to remove temporarly tasks marked as Completed.
   - *Note*: the app automatically filters tasks which are Completed and have not been updated for 2 days.
 
-  ![Hide Completed Button Photo](#)
+  ![Hide Completed Button Photo](documentation/features/hide-completed.png)
 <br>
 <br>
 
@@ -300,29 +338,32 @@ All users has almost identical page layout. The elements that change are:
 - **Status Modal** - visible only for users with appropriate rights (see [User Rights](#user-rights))
 - **Edit Task** and **Delete Task** buttons in **Details Modal** - visible only for users with appropriate rights (see [User Rights](#user-rights))
 
-
+[Back to contents](#contents)
 
 **My Profile/Dashboard**
+
+![Profile Dashboard Photo](documentation/features/profile-dashboard.png)
+
 Every user has access to his private dashboard which consits of:
 - **Dashboard** message for the current user
 - **Selections** section:
   - *Account* subsection - gives user ability to edit and delete his account.
-
-    ![Account Subsection Photo](#)
-
     - Edit Button redirects to Edit Profile page
     - Delete Button allows users to permanently delete their accounts - user must confirm his choice in browsers built-in confirm box.
       
-      ![Delete Message Photo](#)
+      ![Delete Message Photo](documentation/features/delete-defensive.png)
   
   - *Select Month* menu (same as [Tasks Home Page](#tasks-home-page))
   - *Today is* message (same as [Tasks Home Page](#tasks-home-page))
+
 - **Add Task** button (same as [Tasks Home Page](#tasks-home-page))
 
 - **My Profile Tasks Page**
   The functionality is excatly same as in [Tasks Home Table](#tasks-table). The difference is that here users can see only tasks which are assigned specifically to their user.
 
 **Hide Completed** button section - (same as [Tasks Home Page](#tasks-home-page)) 
+
+[Back to contents](#contents)
 
 <br>
 
@@ -335,7 +376,7 @@ Every user has access to his private dashboard which consits of:
 - *End Date* - date field to select or type the date to finish the job, field required to submit the form
 
 
-![Add Task Page Photo](#)
+![Add Task Page Photo](documentation/features/add-task-form.png)
   
   *Notes*:
   - End Date cannot be set before the Start Date.
@@ -343,9 +384,11 @@ Every user has access to his private dashboard which consits of:
   - All fields are validated for correct input.
 
 
+[Back to contents](#contents)
+
 **Edit Task** layout is exactly same as **Add Task** page. The form is prefilled with task that users choose to edit.
 
-![Edit Task Page Photo](#)
+![Edit Task Page Photo](documentation/features/edit-task-form.png)
 
 
 **Edit Profile** page renders custom Edit Task form which contains and allows users to edit following data:
@@ -356,19 +399,21 @@ Every user has access to his private dashboard which consits of:
 - *Change Password* link - redirects to **Change Password** page
 - *Save* button - redirects back to **My Profile** page
 
-  ![Edit Profile Page Photo](#)
+  ![Edit Profile Page Photo](documentation/features/edit-profile-form.png)
 
   *Notes*:
   - Every Rank update must be approved by Master - when user decides to update his rank and submit the form his account will be set to inactive and only Master (admin) can activated his account again from admin panel. This is to brought to avoid any disaproved rank changes.
   - Before user submits the form he must confirm his decision in browser's confirmation box.
 
-      ![Confirm Choice Box Photo](#)
+      ![Confirm Choice Box Photo](documentation/features/edit-profile-submit-defensive.png)
 
   - Below Rank selection field messege on the yellow background warns the user of the rank change consequences.
 
+[Back to contents](#contents)
+
 **Change Password page**
 
-![Reset Change Photo](#)
+![Reset Change Photo](documentation/features/change-password.png)
 
 Password Change form is based on all-auth package template with custom styling. All fields are validated for correct entries.
 
@@ -378,24 +423,28 @@ Password Change page is structured with:
 - **New Password (again)** - users must confirm their New Password, both must match to proceed with submittion
 - **Change Password** button - submits the form and redirects user to **Edit Profile** page on successful completion
 
-
+[Back to contents](#contents)
 ## Design
 The main theme of the application is designed to be tonned, thus it gives a great contrast with elements of brighter colors requiring attention. The principle of the design is to bring minimalistic approach to the page.
 
+[Back to contents](#contents)
 ### Color Scheme
 The color scheme is based on the pastel colors with use of bold colors to bring users attention.
 
 ![Color Scheme Photo](#)
 
-
+[Back to contents](#contents)
 ### Typography
 Primary font used for the application is Inter. Logo and big headings use Karla font. Together they give great contrast, but also transition smoothly between one another. All fonts come from [Google Fonts](https://fonts.google.com/).
 
+[Back to contents](#contents)
+
 ### Wireframes
- Wireframes used in design process can be found [here](#). The deployed version of the site is not the exact representation of the wireframes due to time management or technical issues.
+ Wireframes used in design process can be found [here](documentation/wireframes/one-team-wireframes.pdf). The deployed version of the site is not the exact representation of the wireframes due to time management or technical issues.
+
+ [Back to contents](#contents)
 
  ---
-
  ## Flowcharts
  During design process the flowcharts helped to visualize the different user roles and respective functionality. The deployed version of the site might differ from the planned flowcharts due to time management or technical issues. Flowcharts can be found below:
  - [Master](#)
@@ -403,6 +452,7 @@ Primary font used for the application is Inter. Logo and big headings use Karla 
  - [Junior Officer](#)
  - [Bosun](#)
 
+[Back to contents](#contents)
 
 ---
 ## Information Architecture
@@ -478,16 +528,9 @@ TASK_APPROVAL = (
 )
 ```
 
-
-
-
+[Back to contents](#contents)
 
 ## Change Rank Procedure With Use Of Admin Panel
-
-## Important Notes
-- Master is assigning the rank and confirming an account
-- While user awaits his rank selection and profile approval he can see a site layout, but no tasks are displayed
-- After user is confirmed his profile page will display accordingly to his rank
 
 ## Tools
 - gunicorn
@@ -505,6 +548,8 @@ TASK_APPROVAL = (
 
 # Testing
 Various test results are presented in separate [TESTING](TESTING.md) file.
+
+[Back to contents](#contents)
 
 # Deployment
 ## Using Heroku to deploy the project
@@ -536,20 +581,34 @@ This project was deployed using [Heroku](https://dashboard.heroku.com/) using th
 ![Heroku Conifg Vars](docs/readme-files/heroku-3.png)
 
 7. Copy the value of *DATABASE_URL* and paste it into your `.env` file in your workspace together with your secret key.
+   - This application uses [Gmail](https://www.google.com/intl/pl/gmail/about/) as an email SMTP server. This requires adding following variables to the project's `settings.py` file:
+      - `EMAIL_USE_TLS = True`
+      - `EMAIL_PORT = 587`
+      - `EMAIL_HOST = 'smtp.gmail.com'`
+      - `EMAIL_HOST_USER = 'your_account@gmail.com' `
+      - `EMAIL_HOST_PASSWORD = 'yourGmailPassword'`
+  
+    - For **Heroku** deployment add folowing values to *Config Vars*:
+      - `EMAIL_HOST_USER = 'your_account@gmail.com' `
+      - `EMAIL_HOST_PASSWORD = 'yourGmailPassword'`
 
-![Heroku Buildpacks](docs/readme-files/heroku-4.png)
+  ![Heroku Config Vars](docs/readme-files/heroku-4.png)
 
-8. Click on the *Deploy* tab.
-9. In the *Deploy* page in the *Deployment Method* select GitHub.
-10. After a successful connection to GitHub locate your repository and add it to Heroku.
+8. Set `DEBUG = False` in `settings.py`.
+9. Commit and push your changes to GitHub.
+10. Click on the *Deploy* tab.
+11. In the *Deploy* page in the *Deployment Method* select GitHub.
+12.  After a successful connection to GitHub locate your repository and add it to Heroku.
 
-![Heroku GitHub](docs/readme-files/heroku-5.png)
+  ![Heroku GitHub](docs/readme-files/heroku-5.png)
 
-11. In the *Manual Deploy* section confirm *main* branch is selected and click *Deploy Branch*
+13. In the *Manual Deploy* section confirm *main* branch is selected and click *Deploy Branch*
+14. For Final Deployment confirm `DEBUG = False` in `settings.py` and delete `DISABLE_COLLECTSTATIC` from *Config Vars* in **Heroku**.
+15. Commit and push changes to GitHub.
 
 ![Heroku Deploy](docs/readme-files/heroku-6.png)
 
-The live link can be found here - [Budget Manager](https://personal-budget-manager.herokuapp.com/).
+[Back to contents](#contents)
 
 ## Fork a repository
 A fork is a copy of a repository. Forking a repository allows you to freely experiment with changes without affecting the original project. The steps are as follows:
@@ -574,6 +633,7 @@ In GitHub, you have the option to create a local copy (clone) of your repository
 
 ![GitHub Terminal](docs/readme-files/github-terminal.png)
 
+[Back to contents](#contents)
 
 ## Credits
 1. Models are based on project [Issue Tracker](https://github.com/IuliiaKonovalova/issue_tracker) created by my good friends [Juliia Konovalova](https://github.com/IuliiaKonovalova) and [Aleksei Konovalov](https://github.com/lexach91).
@@ -586,6 +646,12 @@ In GitHub, you have the option to create a local copy (clone) of your repository
 8. Scroll on top button comes from [W3Schools](https://www.w3schools.com/howto/howto_js_scroll_to_top.asp)
 9. Header, footer and dropdown background was copied from [SheCodes](https://gradients.shecodes.io/gradients/825).
 
+[Back to contents](#contents)
+
 ## Acknowledgments
 1. My girlfriend for being my biggest supporter throught the entire time!
 2. A very big thanks to my friends [Juliia Konovalova](https://github.com/IuliiaKonovalova) and [Aleksei Konovalov](https://github.com/lexach91) for all the help, guidance and sharing their experience with me. You guys are the best!
+
+[Back to contents](#contents)
+
+Copyright @ Milosz Misiek 2022

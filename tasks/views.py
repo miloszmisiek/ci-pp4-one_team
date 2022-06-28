@@ -85,6 +85,7 @@ def add_task(request):
                     obj.save()    
                 elif current_user.rank == 0:
                     obj.approval_status = 2
+                    obj.save()
                 else:
                     obj.save()
                 return HttpResponseRedirect("/tasks/")
@@ -137,10 +138,10 @@ def edit_task(request, task_id):
                 return HttpResponseRedirect("/tasks/")
         else:
             form = (
-                AddTask(assigned_to=MASTER_EXCLUDED, instance=task)
+                AddTask(assigned_to=MASTER_EXCLUDED, instance=task, initial={"assigned_to": current_user.id})
                 if not current_user.is_superuser
                 else AddTask(
-                    assigned_to=ALL_USERS, initial={"assigned_to": current_user.id}
+                    assigned_to=ALL_USERS, instance=task, initial={"assigned_to": current_user.id}
                 )
             )
 
