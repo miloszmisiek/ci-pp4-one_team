@@ -7,6 +7,7 @@ from .models import Task
 from .forms import AddTask
 from django.contrib.auth.decorators import user_passes_test
 from datetime import date, timedelta
+from users.models import CustomUser
 
 USER = get_user_model()
 ALL_USERS = USER.objects.all()
@@ -19,7 +20,7 @@ CLEAR_UPDATED = TODAY - timedelta(days=2)
 @login_required(login_url="/accounts/login/")
 def profile_home(request):
     """A view to return the tasks home page"""
-    tasks = Task.objects.all()
+    tasks = Task.objects.all().filter(assigned_to__is_active=True)
 
     tasks.filter(end_date__lt=TODAY, status=0).update(status=2)
     tasks.filter(end_date__gte=TODAY, status=2).update(status=0)

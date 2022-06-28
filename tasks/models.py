@@ -34,13 +34,13 @@ class Task(models.Model):
     status = models.IntegerField(choices=TASK_STATUS, default=0)
     created_by = models.ForeignKey(
         CustomUser,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         related_name='task_creator',
         null=True
         )
     assigned_to = models.ForeignKey(
         CustomUser,
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         blank=True,
         null=True,
         related_name='task_owner'
