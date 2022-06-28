@@ -598,6 +598,12 @@ header {
     margin-top: 1rem;
 }
 
+.edit-profile-rank-warning{
+    border-radius: var(--br);
+    font-size: 0.8rem;
+    max-width: fit-content;
+}
+
 #myBtn {
     display: none; /* Hidden by default */
     position: fixed; /* Fixed/sticky position */
@@ -620,6 +626,8 @@ header {
   #myBtn:hover {
     background-color: var(--clr-gray-solid); /* Add a dark-grey background on hover */
   }
+
+
 
 /*------ Tasks ------*/
 

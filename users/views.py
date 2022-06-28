@@ -20,7 +20,6 @@ def edit_profile(request, user_id):
             if form.is_valid():
                 obj = form.save(commit=False)
                 if obj.rank != current_user.rank:
-                    obj.rank = current_user.rank
                     obj.is_active = False
                     obj.save()
                     return HttpResponseRedirect("/accounts/inactive/")

@@ -1,4 +1,5 @@
-{% extends "account/base.html" %}
+{% extends "base.html" %}
+{% load static %}
 {% load crispy_forms_tags %}
 
 {% block content %}
@@ -7,10 +8,19 @@
   <form class="signup forms-container edit-profile-form" method="post">
     {% csrf_token %}
     {{ form|crispy }}
+    <p class="edit-profile-rank-warning p-2 text-center bg-warning mx-auto font-weight-600"><em>Any change to your rank will set your account inactive. Consult this with your supervisor first!</em></p>
     <div class="login-submit-container edit-profile-buttons">
       <a href="{% url 'account_change_password' %}">Change Password</a>
       <button class="custom-btn" type="submit">Save</button>
     </div>
   </form>
 </div>
+{% endblock %}
+
+{% block postloadjs %}
+<script>
+    $(document).on('click', '.custom-btn', function () {
+        return confirm('Are you sure you want to submit your changes?');
+    })
+</script>
 {% endblock %}
