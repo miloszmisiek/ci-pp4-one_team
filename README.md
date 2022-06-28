@@ -140,7 +140,7 @@ OneTeam is build with following components:
 | add task page     | Y | Y| Y | N| 
 | assigned users for task     | Y | Y| Y | N|
 | approve tasks     | Y | Y (Priority Medium and Low) | N| N|
-| complete tasks | Y | Y | Y (only assigned to user) | N|
+| change tasks status | Y | Y | Y (only assigned to user) | N|
 | delete tasks *(except status Waiting for approval)* | Y | Y | Y (only assigned to user) | N|
 | edit task page                   |Y | Y| Y | N|
 | user's dashboard page               |Y | Y| Y | Y|
@@ -243,7 +243,9 @@ Password Reset page is structured with:
 - **Reset Password** button which submits the form and redirects user password reset completed page
 
 
-**Tasks Home page**
+### Tasks Home page 
+
+![Tasks Home page Photo](#)
 
 Tasks Home page is structured with:
 - **Hello** message for user which reflects on user's first name and rank.
@@ -253,21 +255,234 @@ Tasks Home page is structured with:
     - Tasks with Start Date matching the selection
     - Tasks with End Date matching the selection
   - *Today is* message that informs user what is today's date
-- **Add Task** button which redirects to add task page
-- **Tasks Table** 
+- **Add Task** button which redirects to add task page.
+- ### Tasks Table 
+  All users have an overview of all valid tasks on the home page. Users can sort the tasks by columns - header click event triggers sorting function. Table is seperated by following columns:
+  - **ID** - this id **IS NOT** the primary key of the model Task. It is a forloop counter which represents all the tasks rendered in the templated with *End Date* ascending order as default.
+  - **Status** column which identifies tasks status Scheduled, Completed - represented with font awesome icon, or Overdue.
+    - The program sets tasks to Overdue automatically after the *End Date* of the task exceeds present date. Status can be changed with user click event on the table cell with certain limitations (see [User Rights](#user-rights)).
+    - When user is permitted to change status, click event opens modal with message to the user to change task status accordingly to present state.
+  
+      ![Status Modal Photo](#)
 
+  - **Owner** column represents who is assigned to a task by the Rank.
+    - When hovered over user can see the username of assigned person.
+  
+      ![Owner Hover Photo](#)
+
+  - **Priority** text represention of task priority: High, Medium or Low. 
+  - **Title** represents task's title. When clicked it opens a modal with *Task Details*.
+    - *Task Details* modal contains detailed information including all the dates related to the task and gives user ability to **Edit Task** or **Delete Task** if allowed (see [User Rights](#user-rights)).
+    
+      ![Details Modal Photo](#)
+
+  - **End Date** column represents the date specified by task creator to complete the task. It's default for table sorting when home page is rendered. **Overdue** tasks are highlithed with Font Awesome exclamation icon to get user's attention. Tasks close to reaching *End Date* (2 days in advance) are highlighted with Font Awesome triangle exclamation icon.
+
+    ![End Date Icons Photo](#)
+  
+  - **Approval** column represents the task approval set by task's creator: Approved, Waiting for approval and N/R (Not Required). Users with appropriate permission can approve task if required (see [User Rights](#user-rights)). If task can be approved the green button is rendered to Approve the task. If users would like to change it's status backwards (Waiting for approval) they can do it by clicking on the cell (with required [User Rights](#user-rights))).
+    - **N/R** appoval status is set automatically for all tasks created by Master or for Priority Medium or Low tasks created by Chief Mate.
+    - All **Priority High** tasks must be approved only by **Master**
+
+    ![Approval Button Photo](#)
+
+**Hide Completed** button section - gives user ability to remove temporarly tasks marked as Completed.
+  - *Note*: the app automatically filters tasks which are Completed and have not been updated for 2 days.
+
+  ![Hide Completed Button Photo](#)
+<br>
+<br>
 
 All users has almost identical page layout. The elements that change are:
-- **Hello** section - updates user name and rank
+- **Hello** section - updates with current user name and rank
 - **Add Task** button - not visible for user with rank of *Bosun*
+- **Approve** button - visible only for users with appropriate rights (see [User Rights](#user-rights))
+- **Status Modal** - visible only for users with appropriate rights (see [User Rights](#user-rights))
+- **Edit Task** and **Delete Task** buttons in **Details Modal** - visible only for users with appropriate rights (see [User Rights](#user-rights))
+
+
+
+**My Profile/Dashboard**
+Every user has access to his private dashboard which consits of:
+- **Dashboard** message for the current user
+- **Selections** section:
+  - *Account* subsection - gives user ability to edit and delete his account.
+
+    ![Account Subsection Photo](#)
+
+    - Edit Button redirects to Edit Profile page
+    - Delete Button allows users to permanently delete their accounts - user must confirm his choice in browsers built-in confirm box.
+      
+      ![Delete Message Photo](#)
+  
+  - *Select Month* menu (same as [Tasks Home Page](#tasks-home-page))
+  - *Today is* message (same as [Tasks Home Page](#tasks-home-page))
+- **Add Task** button (same as [Tasks Home Page](#tasks-home-page))
+
+- **My Profile Tasks Page**
+  The functionality is excatly same as in [Tasks Home Table](#tasks-table). The difference is that here users can see only tasks which are assigned specifically to their user.
+
+**Hide Completed** button section - (same as [Tasks Home Page](#tasks-home-page)) 
+
+<br>
+
+**Add Task** page renders custom Add Task form which contains:
+- *Title* - default value is "Untitled Task", field required to submit the form
+- *Description* - users can right their comments on what has to be done, job specification or any other relevant information
+- *Assigned to* - dropdown list of avaialable users with default value set to current user, field required to submit the form
+- *Priority* - dropdown list with priority selection. Default value is set to Low, field required to submit the form.
+- *Start Date* - date field to select or type the date to start the job, field required to submit the form
+- *End Date* - date field to select or type the date to finish the job, field required to submit the form
+
+
+![Add Task Page Photo](#)
+  
+  *Notes*:
+  - End Date cannot be set before the Start Date.
+  - Users are alowed to set Start Date and End Date with past dates for jobs that happend and must be documented.
+  - All fields are validated for correct input.
+
+
+**Edit Task** layout is exactly same as **Add Task** page. The form is prefilled with task that users choose to edit.
+
+![Edit Task Page Photo](#)
+
+
+**Edit Profile** page renders custom Edit Task form which contains and allows users to edit following data:
+- *First Name* field
+- *Last Name* field
+- *Email* field
+- *Rank* selection field
+- *Change Password* link - redirects to **Change Password** page
+- *Save* button - redirects back to **My Profile** page
+
+  ![Edit Profile Page Photo](#)
+
+  *Notes*:
+  - Every Rank update must be approved by Master - when user decides to update his rank and submit the form his account will be set to inactive and only Master (admin) can activated his account again from admin panel. This is to brought to avoid any disaproved rank changes.
+  - Before user submits the form he must confirm his decision in browser's confirmation box.
+
+      ![Confirm Choice Box Photo](#)
+
+  - Below Rank selection field messege on the yellow background warns the user of the rank change consequences.
+
+**Change Password page**
+
+![Reset Change Photo](#)
+
+Password Change form is based on all-auth package template with custom styling. All fields are validated for correct entries.
+
+Password Change page is structured with:
+- **Current Password** field - users must type in their current password
+- **New Password** field
+- **New Password (again)** - users must confirm their New Password, both must match to proceed with submittion
+- **Change Password** button - submits the form and redirects user to **Edit Profile** page on successful completion
+
+
+## Design
+The main theme of the application is designed to be tonned, thus it gives a great contrast with elements of brighter colors requiring attention. The principle of the design is to bring minimalistic approach to the page.
+
+### Color Scheme
+The color scheme is based on the pastel colors with use of bold colors to bring users attention.
+
+![Color Scheme Photo](#)
+
+
+### Typography
+Primary font used for the application is Inter. Logo and big headings use Karla font. Together they give great contrast, but also transition smoothly between one another. All fonts come from [Google Fonts](https://fonts.google.com/).
+
+### Wireframes
+ Wireframes used in design process can be found [here](#). The deployed version of the site is not the exact representation of the wireframes due to time management or technical issues.
+
+ ---
+
+ ## Flowcharts
+ During design process the flowcharts helped to visualize the different user roles and respective functionality. The deployed version of the site might differ from the planned flowcharts due to time management or technical issues. Flowcharts can be found below:
+ - [Master](#)
+ - [Senior Officer](#)
+ - [Junior Officer](#)
+ - [Bosun](#)
+
+
+---
+## Information Architecture
+### Database
+- The deployed version of the application uses PostgreSQL as a database.
+- SQLite was used for django automated unittests.
+
+### Entity-Relationship Diagram
+ - The ERD was created using [draw.io](draw.io).
+ - The ERD can be found [here](). 
+
+### Data Modeling
+1. **CustomUser**
+  
+  Created as a subclass of django AbstractUser.
+
+   Name          | Database Key  | Field Type    | Validation |
+| ------------- | ------------- | ------------- | ---------- |
+| Username      | username      | CharField     |  max_length=50, blank=False, null=True, unique=True    |
+| Email         | email         | EmailField    | max_length=50, unique=True, blank=False, null=False    |
+| First Name    | first_name    | CharField     | max_length=30, blank=False, null=False    |
+| Last Name     | last_name     | CharField     | max_length=30, blank=False, null=False    |
+| Rank          | rank         | IntegerField  | choices=ROLES, blank=False, null=False, default=3    |
+
+```Python
+    # Roles to assign to users
+    ROLES = [
+        (0, 'Master'),
+        (1, 'Senior Officer'),
+        (2, 'Junior Officer'),
+        (3, 'Bosun'),
+    ]
+```
+
+2. **Task**
+
+  Designed as a custom model inheriting from django models.Model. This model is a core data structure for the application and is used to organize tasks created by users.
+  
+   Name          | Database Key  | Field Type    | Validation |
+| ------------- | ------------- | ------------- | ---------- |
+| Title      | title      | CharField     |  max_length=35, blank=False, default='Untitled Task    |
+| Description         | email         | TextField    | max_length=300, blank=True    |
+| Status    | status    | IntegerField     | choices=TASK_STATUS, default=0    |
+| Created By     | created_by     | ForeignKey     | CustomUser, on_delete=models.CASCADE, related_name='task_creator', null=True    |
+| Assigned To          | assigned_to         | ForeignKey  | CustomUser, on_delete=models.CASCADE, blank=True, null=True, related_name='task_owner'    |
+| Priority          | priority         | IntegerField  | cchoices=TASK_PRIORITY, default=2    |
+| Approval Status          | approval_status         | IntegerField  | choices=TASK_APPROVAL, default=1    |
+| Created On          | created_on         | DateField  | cauto_now_add=True    |
+| Updated On          | updated_on         | DateField  | auto_now=True    |
+| Start Date         | start_date         | DateField  | default=datetime.date.today    |
+| End Date         | end_date         | DateField  | null=True    |
+
+
+```Python
+# task model variables
+
+TASK_STATUS = (
+    (0, 'Scheduled'),
+    (1, 'Completed'),
+    (2, 'Overdue'),
+)
+
+TASK_PRIORITY = (
+    (0, 'High'),
+    (1, 'Medium'),
+    (2, 'Low'),
+)
+
+TASK_APPROVAL = (
+    (0, 'Approved'),
+    (1, 'Waiting For Approval'),
+    (2, 'N/R'),
+)
+```
 
 
 
 
 
-
-
-
+## Change Rank Procedure With Use Of Admin Panel
 
 ## Important Notes
 - Master is assigning the rank and confirming an account
@@ -288,9 +503,81 @@ All users has almost identical page layout. The elements that change are:
 - [django-crispy-forms](https://django-crispy-forms.readthedocs.io/en/latest/index.html) - rendering form elements
 - [django-session-security](https://django-session-security.readthedocs.io/en/master/index.html) - handling automatic logout after inactivity and browser close
 
+# Testing
+Various test results are presented in separate [TESTING](TESTING.md) file.
+
+# Deployment
+## Using Heroku to deploy the project
+- Setup of the local workspace:
+  - This project was developed with use of [pipenv](https://pypi.org/project/pipenv/) to handle all dependencies
+  - Managing a `requirements.txt` file can be problematic, so Pipenv uses the upcoming `Pipfile` and `Pipfile.lock` instead, which is superior for basic use cases.
+  - Create a `Procfile` in the local workspace and type in `web: gunicorn <name app>.wsgi:application` inside the file.
+  - Commit and push to GitHub
+
+This project was deployed using [Heroku](https://dashboard.heroku.com/) using the following steps:
+
+1. Click on *New* in the top-right corner and then *Create New App*.
+
+![Heroku New App](docs/readme-files/heroku-1.png)
+
+2. On the next page give the app the unique name.
+3. Choose a region (the USA or Europe).
+4. Click *Create app*.
+
+![Heroku Unique Name](docs/readme-files/heroku-2.png)
+
+5. Go to *Resources* tab and search for postresql. Select *Hobby dev - Free* and click on the provision button to add it to the project
+
+![Heroku Postgresql Resources](docs/readme-files/heroku-3.png)
+
+6. On the next page click on *Settings* tab.
+7. In the Settings page open *Config Vars* and add following:
+
+![Heroku Conifg Vars](docs/readme-files/heroku-3.png)
+
+7. Copy the value of *DATABASE_URL* and paste it into your `.env` file in your workspace together with your secret key.
+
+![Heroku Buildpacks](docs/readme-files/heroku-4.png)
+
+8. Click on the *Deploy* tab.
+9. In the *Deploy* page in the *Deployment Method* select GitHub.
+10. After a successful connection to GitHub locate your repository and add it to Heroku.
+
+![Heroku GitHub](docs/readme-files/heroku-5.png)
+
+11. In the *Manual Deploy* section confirm *main* branch is selected and click *Deploy Branch*
+
+![Heroku Deploy](docs/readme-files/heroku-6.png)
+
+The live link can be found here - [Budget Manager](https://personal-budget-manager.herokuapp.com/).
+
+## Fork a repository
+A fork is a copy of a repository. Forking a repository allows you to freely experiment with changes without affecting the original project. The steps are as follows:
+1. On GitHub.com navigate to the repository page.
+2. In the top-right corner of the page, click **Fork**.
+
+![GitHub Fork](docs/readme-files/github-fork.png)
+
+You can fork a repository to create a copy of the repository and make changes without affecting the upstream repository.
+## Clone a repository
+In GitHub, you have the option to create a local copy (clone) of your repository on your device hard drive. The steps are as follows:
+1. On GitHub.com navigate to the repository page.
+2. Locate the *Code* tab and click on it.
+3. In the expanded window, click the two squares icon to copy the HTTPS link of the repository.
+
+![GitHub Clone](docs/readme-files/github-clone.png)
+
+4. On your computer, open **Terminal**.
+5. Navigate to the directory of choice.
+6. Type **git clone** and paste the copied link of the repository.
+7. Press **Enter** and the local clone of the repository will be created in the selected directory.
+
+![GitHub Terminal](docs/readme-files/github-terminal.png)
+
+
 ## Credits
 1. Models are based on project [Issue Tracker](https://github.com/IuliiaKonovalova/issue_tracker) created by my good friends [Juliia Konovalova](https://github.com/IuliiaKonovalova) and [Aleksei Konovalov](https://github.com/lexach91).
-2. Views are based on project [Cool School](https://github.com/IuliiaKonovalova/school_app) by [Juliia Konovalova](https://github.com/IuliiaKonovalova).
+2. Inspiration for selected views and README file comes from project [Cool School](https://github.com/IuliiaKonovalova/school_app) by [Juliia Konovalova](https://github.com/IuliiaKonovalova).
 3. Fixed bug with static files directory from [Stack Overflow](https://stackoverflow.com/questions/67698211/getting-get-static-css-base-css-http-1-1-404-1795-error-for-static-files)
 4. Tables styling come from [css-tricks.com](https://css-tricks.com/responsive-data-tables/)
 5. Sorting function used in tables comes from [W3Schools](https://www.w3schools.com/howto/howto_js_sort_table.asp)
