@@ -42,7 +42,7 @@ class TestModels(TestCase):
 
     def test_start_date_default_to_today(self):
         """Test default start date is set to present date."""
-        self.assertEquals(self.test_task.start_date, datetime.date.today)
+        self.assertEquals(self.test_task.start_date, datetime.date.today())
 
     def test_duration(self):
         """Test duration method"""
