@@ -532,7 +532,13 @@ TASK_APPROVAL = (
 [Back to contents](#contents)
 
 ## Change Rank Procedure With Use Of Admin Panel
+When new users create their accounts or when exisiting users edit their profiles with new ranks, the profile will be deactivated and Master (or other admin) will have to set he account back to active using Django admin panel.
+1. Open admin panel by typing `https://ci-pp4-one--team.herokuapp.com/admin` in your broweser's URL bar.
+2. Type in your admin login and password and press `Log in` button.
 
+    ![Admin Login](documentation/admin/admin-login.png)
+
+3. 
 # Testing
 Various test results are presented in separate [TESTING](TESTING.md) file.
 

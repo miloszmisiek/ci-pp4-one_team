@@ -77,6 +77,7 @@ def add_task(request):
             form = AddTask(request.POST, assigned_to=ALL_USERS)
             if form.is_valid():
                 obj = form.save(commit=False)
+                obj.created_by = current_user
                 if current_user.rank == 2:
                     obj.assigned_to = current_user
                     obj.save()
