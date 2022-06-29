@@ -41,10 +41,10 @@ This app is design to server ship's staff. The app is meant to intuitive and of 
 
 ### Target Audience
 OneTeam is developed for ship's members.
-- Master: ship's master is meant to be admin of the app and have full control over the workflow. He has access to admin panel where he has overall responsibility over people and tasks.
-- Senior Officer: the head of Deck Department, second in command of the vessel, he has rights to schedule jobs for crew with certain limitations.
-- Junior Officer: under direct command of Senior Officer. They can manege their tasks to keep track of their Division of Labour.
-- Bosun: the most senior among ratings (regular workers). He can use the app to have an overview of what is planned to do and brief ordinary seamen of what mangament has planned to do.
+- **Master:** ship's master is meant to be admin of the app and have full control over the workflow. He has access to admin panel where he has overall responsibility over people and tasks.
+- **Senior Officer:** the head of Deck Department, second in command of the vessel, he has rights to schedule jobs for crew with certain limitations.
+- **Junior Officer:** under direct command of Senior Officer. They can manege their tasks to keep track of their Division of Labour.
+- **Bosun:** the most senior among ratings (regular workers). He can use the app to have an overview of what is planned to do and brief ordinary seamen of what mangament has planned to do.
 
 ### User Stories
 
@@ -95,13 +95,14 @@ OneTeam is developed for ship's members.
 ---
 ## Technologies Used
 - ### Languages
-    + [Python 3.8.5](https://www.python.org/downloads/release/python-385/): the primary language used to develop the server-side of the website.
+    + [Python 3.9.12](https://www.python.org/downloads/release/python-3912/): the primary language used to develop the server-side of the website.
     + [JS](https://www.javascript.com/): the primary language used to develop interactive components of the website.
     + [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML): the markup language used to create the website.
     + [CSS](https://developer.mozilla.org/en-US/docs/Web/css): the styling language used to style the website.
 - ### Frameworks and libraries:
     + [Django](https://www.djangoproject.com/): python framework used to create all the logic.
     + [jQuery](https://jquery.com/): was used to control click events and sending AJAX requests.
+    + [Bootstrap](https://getbootstrap.com/): was used as a supprotive toolkit for front-end styling.
 - ### Databases:
     + [SQLite](https://www.sqlite.org/): was used as a development database.
     + [PostgreSQL](https://www.postgresql.org/): the database used to store all the data.
@@ -123,6 +124,9 @@ OneTeam is developed for ship's members.
     + [W3C CSS validator](https://jigsaw.w3.org/css-validator/): was used to validate CSS code for the website.
     + [JShint](https://jshint.com/): was used to validate JS code for the website.
     + [PEP8](https://pep8.org/): was used to validate Python code for the website.
+    + [Django-session-security](https://django-session-security.readthedocs.io/en/master/index.html): was used to handlw automatic logout after inactivity and browser close
+    + [Coolorc.co](https://coolors.co/): was used to choose pallete colors for website
+    + [CSSgradient.io](https://cssgradient.io/): was used for genertating background gradients
 
 [Back to contents](#contents)
 
@@ -426,8 +430,6 @@ Password Change page is structured with:
 [Back to contents](#contents)
 ## Design
 The main theme of the application is designed to be tonned, thus it gives a great contrast with elements of brighter colors requiring attention. The principle of the design is to bring minimalistic approach to the page.
-
-[Back to contents](#contents)
 ### Color Scheme
 The color scheme is based on the pastel colors with use of bold colors to bring users attention.
 
@@ -447,9 +449,9 @@ Primary font used for the application is Inter. Logo and big headings use Karla 
  ---
  ## Flowcharts
  During design process the flowcharts helped to visualize the different user roles and respective functionality. The deployed version of the site might differ from the planned flowcharts due to time management or technical issues. Flowcharts can be found below:
- - [Master](#)
- - [Senior Officer](#)
- - [Junior Officer](#)
+ - [Master](documentation/flowcharts/master.png)
+ - [Senior Officer](documentation/flowcharts/chief-mate.png)
+ - [Junior Officer](documentation/flowcharts/junior-officer.png)
  - [Bosun](#)
 
 [Back to contents](#contents)
@@ -462,7 +464,7 @@ Primary font used for the application is Inter. Logo and big headings use Karla 
 
 ### Entity-Relationship Diagram
  - The ERD was created using [draw.io](draw.io).
- - The ERD can be found [here](). 
+ - The ERD can be found [here](documentation/data-modeling/oneteam-erd.pdf). 
 
 ### Data Modeling
 1. **CustomUser**
@@ -531,20 +533,6 @@ TASK_APPROVAL = (
 [Back to contents](#contents)
 
 ## Change Rank Procedure With Use Of Admin Panel
-
-## Tools
-- gunicorn
-- allauth
-- psycopg2
-- dj_database_url
-- whitenoise
-- draw.io
-- bootstrap v. 4.4
-- [Bootstrap Icons](https://icons.getbootstrap.com/) - chevron logo
-- [coolorc.co](https://coolors.co/) - choosing pallete colors for website
-- [cssgradient.io](https://cssgradient.io/) - for genertating background gradients
-- [django-crispy-forms](https://django-crispy-forms.readthedocs.io/en/latest/index.html) - rendering form elements
-- [django-session-security](https://django-session-security.readthedocs.io/en/master/index.html) - handling automatic logout after inactivity and browser close
 
 # Testing
 Various test results are presented in separate [TESTING](TESTING.md) file.
@@ -651,6 +639,7 @@ In GitHub, you have the option to create a local copy (clone) of your repository
 ## Acknowledgments
 1. My girlfriend for being my biggest supporter throught the entire time!
 2. A very big thanks to my friends [Juliia Konovalova](https://github.com/IuliiaKonovalova) and [Aleksei Konovalov](https://github.com/lexach91) for all the help, guidance and sharing their experience with me. You guys are the best!
+3. My mentor [Samantha Dartnall](https://www.linkedin.com/in/samantha-dartnall/) for guidance and support on the project. 
 
 [Back to contents](#contents)
 
