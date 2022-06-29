@@ -20,7 +20,6 @@
     - [Entity-Relationship Diagram](#entity-relationship-diagram)
     - [Data Modeling](#data-modeling)
   - [Change Rank Procedure With Use Of Admin Panel](#change-rank-procedure-with-use-of-admin-panel)
-  - **[Tools](#tools)**
 - **[Testing](#testing)**
 - **[Deployment](#deployment)**
   - [Using Heroku to deploy the project](#using-heroku-to-deploy-the-project)
