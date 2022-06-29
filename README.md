@@ -1,32 +1,32 @@
 
   # OneTeam
   ## **Contents**
-  - **[About](#about)**
-  - **[User Experience Design](#user-experience-design)**
+  - [**About**](#about)
+  - [**User Experience Design**](#user-experience-design)
     - [Strategy](#strategy)
     - [Target Audience](#target-audience)
     - [User Stories](#user-stories)
-  - **[Technologies Used](#technologies-used)**
-  - **[Features](#features)**
+  - [**Technologies Used**](#technologies-used)
+  - [**Features**](#features)
     - [User Rights](#user-rights)
     - [Tasks Home page](#tasks-home-page)
-  - **[Design](#design)**
+    - [Change Rank Procedure With Use Of Admin Panel](#change-rank-procedure-with-use-of-admin-panel)
+  - [**Design**](#design)
     - [Color Scheme](#color-scheme)
     - [Typography](#typography)
     - [Wireframes](#wireframes)
-  - **[Flowcharts](#flowcharts)**
-  - **[Information Architecture](#information-architecture)**
+  - [**Flowcharts**](#flowcharts)
+  - [**Information Architecture**](#information-architecture)
     - [Database](#database)
     - [Entity-Relationship Diagram](#entity-relationship-diagram)
     - [Data Modeling](#data-modeling)
-  - [Change Rank Procedure With Use Of Admin Panel](#change-rank-procedure-with-use-of-admin-panel)
-- **[Testing](#testing)**
-- **[Deployment](#deployment)**
+- [**Testing**](#testing)
+- [**Deployment**](#deployment)
   - [Using Heroku to deploy the project](#using-heroku-to-deploy-the-project)
   - [Fork a repository](#fork-a-repository)
   - [Clone a repository](#clone-a-repository)
-- **[Credits](#credits)**
-- **[Acknowledgments](#acknowledgments)**
+- [**Credits**](#credits)
+- [**Acknowledgments**](#acknowledgments)
 
 
 ## About
@@ -160,11 +160,11 @@ OneTeam is build with following components:
 | delete profile         | Y | Y |Y | Y | 
 | delete other memebers         | Y (admin panel) | N |N | N |
 | change password page        | Y | Y | Y | Y | 
-| account inactive page                | Y | Y | Y | Y |
+| change rank = account inactive                | N | Y | Y | Y |
 | confirm email page       | Y | Y | Y | Y |
 | reset password page     | Y  | Y | Y | Y |
 | add task page     | Y | Y| Y | N| 
-| assigned users for task     | Y | Y| Y | N|
+| assign users for task     | Y | Y (except Master| N | N|
 | approve tasks     | Y | Y (Priority Medium and Low) | N| N|
 | change tasks status | Y | Y | Y (only assigned to user) | N|
 | delete tasks *(except status Waiting for approval)* | Y | Y | Y (only assigned to user) | N|
@@ -414,6 +414,24 @@ Every user has access to his private dashboard which consits of:
 
 [Back to contents](#contents)
 
+### Change Rank Procedure With Use Of Admin Panel
+When new users create their accounts or when exisiting users edit their profiles with new ranks, the profile will be deactivated and Master (or other admin) will have to set he account back to active using Django admin panel.
+1. Open admin panel by typing `https://ci-pp4-one--team.herokuapp.com/admin` in your broweser's URL bar.
+2. Type in your admin login and password and press `Log in` button.
+
+    ![Admin Login](documentation/admin/admin-login.png)
+
+3. Navigate to **Custom users** section.
+
+    ![Admin Tasks Section](documentation/admin/admin-custom-users.png)
+4. Locate the user with **Active** field represented with a red cross.
+5. Select the user by clicking on the select field next to his **First Name**.
+6. Navigate to **Action** bar, select *Activate user account* and click `Go`.
+7. User **Active** status should be represented with a green check mark.
+
+    ![Admin Activate User](documentation/admin/custom-users-table.png)
+
+
 **Change Password page**
 
 ![Reset Change Photo](documentation/features/change-password.png)
@@ -531,18 +549,11 @@ TASK_APPROVAL = (
 
 [Back to contents](#contents)
 
-## Change Rank Procedure With Use Of Admin Panel
-When new users create their accounts or when exisiting users edit their profiles with new ranks, the profile will be deactivated and Master (or other admin) will have to set he account back to active using Django admin panel.
-1. Open admin panel by typing `https://ci-pp4-one--team.herokuapp.com/admin` in your broweser's URL bar.
-2. Type in your admin login and password and press `Log in` button.
-
-    ![Admin Login](documentation/admin/admin-login.png)
-
-3. 
 # Testing
 Various test results are presented in separate [TESTING](TESTING.md) file.
 
 [Back to contents](#contents)
+
 
 # Deployment
 ## Using Heroku to deploy the project
@@ -556,22 +567,22 @@ This project was deployed using [Heroku](https://dashboard.heroku.com/) using th
 
 1. Click on *New* in the top-right corner and then *Create New App*.
 
-![Heroku New App](docs/readme-files/heroku-1.png)
+![Heroku New App](documentation/deployment/heroku-1.png)
 
 2. On the next page give the app the unique name.
 3. Choose a region (the USA or Europe).
 4. Click *Create app*.
 
-![Heroku Unique Name](docs/readme-files/heroku-2.png)
+![Heroku Unique Name](documentation/deployment/heroku-2.png)
 
 5. Go to *Resources* tab and search for postresql. Select *Hobby dev - Free* and click on the provision button to add it to the project
 
-![Heroku Postgresql Resources](docs/readme-files/heroku-3.png)
+![Heroku Postgresql Resources](documentation/deployment/heroku-3.png)
 
 6. On the next page click on *Settings* tab.
 7. In the Settings page open *Config Vars* and add following:
 
-![Heroku Conifg Vars](docs/readme-files/heroku-3.png)
+![Heroku Conifg Vars](documentation/deployment/heroku-4.png)
 
 7. Copy the value of *DATABASE_URL* and paste it into your `.env` file in your workspace together with your secret key.
    - This application uses [Gmail](https://www.google.com/intl/pl/gmail/about/) as an email SMTP server. This requires adding following variables to the project's `settings.py` file:
@@ -585,21 +596,19 @@ This project was deployed using [Heroku](https://dashboard.heroku.com/) using th
       - `EMAIL_HOST_USER = 'your_account@gmail.com' `
       - `EMAIL_HOST_PASSWORD = 'yourGmailPassword'`
 
-  ![Heroku Config Vars](docs/readme-files/heroku-4.png)
-
 8. Set `DEBUG = False` in `settings.py`.
 9. Commit and push your changes to GitHub.
 10. Click on the *Deploy* tab.
 11. In the *Deploy* page in the *Deployment Method* select GitHub.
 12.  After a successful connection to GitHub locate your repository and add it to Heroku.
 
-  ![Heroku GitHub](docs/readme-files/heroku-5.png)
+  ![Heroku GitHub](documentation/deployment/heroku-5.png)
 
 13. In the *Manual Deploy* section confirm *main* branch is selected and click *Deploy Branch*
 14. For Final Deployment confirm `DEBUG = False` in `settings.py` and delete `DISABLE_COLLECTSTATIC` from *Config Vars* in **Heroku**.
 15. Commit and push changes to GitHub.
 
-![Heroku Deploy](docs/readme-files/heroku-6.png)
+![Heroku Deploy](documentation/deployment/heroku-6.png)
 
 [Back to contents](#contents)
 
@@ -608,7 +617,7 @@ A fork is a copy of a repository. Forking a repository allows you to freely expe
 1. On GitHub.com navigate to the repository page.
 2. In the top-right corner of the page, click **Fork**.
 
-![GitHub Fork](docs/readme-files/github-fork.png)
+![GitHub Fork](documentation/deployment/github-fork.png)
 
 You can fork a repository to create a copy of the repository and make changes without affecting the upstream repository.
 ## Clone a repository
@@ -617,14 +626,12 @@ In GitHub, you have the option to create a local copy (clone) of your repository
 2. Locate the *Code* tab and click on it.
 3. In the expanded window, click the two squares icon to copy the HTTPS link of the repository.
 
-![GitHub Clone](docs/readme-files/github-clone.png)
+![GitHub Clone](documentation/deployment/github-clone.png)
 
 4. On your computer, open **Terminal**.
 5. Navigate to the directory of choice.
 6. Type **git clone** and paste the copied link of the repository.
 7. Press **Enter** and the local clone of the repository will be created in the selected directory.
-
-![GitHub Terminal](docs/readme-files/github-terminal.png)
 
 [Back to contents](#contents)
 

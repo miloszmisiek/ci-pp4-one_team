@@ -25,15 +25,14 @@ def profile_home(request):
     tasks.filter(end_date__lt=TODAY, status=0).update(status=2)
     tasks.filter(end_date__gte=TODAY, status=2).update(status=0)
 
-    tasks = tasks.exclude(Q(updated_on=CLEAR_UPDATED) | Q(status=1))
+    tasks = tasks.exclude(Q(updated_on__lte=CLEAR_UPDATED) & Q(status=1))
 
     if request.GET and "months" in request.GET:
         months = request.GET["months"]
         tasks = tasks.filter(Q(created_on__month=months) | Q(end_date__month=months))
 
     if request.POST and "hide-completed" in request.POST:
-            tasks = tasks.exclude(status=1)
-
+        tasks = tasks.exclude(status=1)
 
     context = {
         "tasks": tasks,
@@ -47,7 +46,7 @@ def my_tasks(request):
     tasks = Task.objects.all().filter(assigned_to=request.user)
     tasks.filter(end_date__lt=TODAY, status=0).update(status=2)
     tasks.filter(end_date__gte=TODAY, status=2).update(status=0)
-    
+
     tasks = tasks.exclude(Q(updated_on=CLEAR_UPDATED) | Q(status=1))
 
     if request.GET and "months" in request.GET:
@@ -83,27 +82,28 @@ def add_task(request):
                     obj.save()
                 elif current_user.rank == 1:
                     obj.approval_status = 2 if obj.priority != 0 else 1
-                    obj.save()    
+                    obj.save()
                 elif current_user.rank == 0:
                     obj.approval_status = 2
                     obj.save()
                 else:
                     obj.save()
                 return HttpResponseRedirect("/tasks/")
-            # else:
-            #     return render(request, "tasks/add_task.html", {"form": form})
         else:
-            form = (
-                AddTask(
-                    assigned_to=MASTER_EXCLUDED, initial={"assigned_to": current_user.id}
-                )
-                if not current_user.is_superuser
-                else AddTask(
+            if current_user.is_superuser:
+                form = AddTask(
                     assigned_to=ALL_USERS, initial={"assigned_to": current_user.id}
                 )
-            )
-
-            form.fields["assigned_to"].disabled = True if current_user.rank == 2 else False
+            elif current_user.rank == 2:
+                form = AddTask(
+                    assigned_to=ALL_USERS.filter(id=request.user.id),
+                    initial={"assigned_to": current_user.id},
+                )
+            else:
+                form = AddTask(
+                    assigned_to=MASTER_EXCLUDED,
+                    initial={"assigned_to": current_user.id},
+                )
 
             context = {"form": form}
 
@@ -119,8 +119,8 @@ def edit_task(request, task_id):
         current_user.rank == 3
         or current_user.rank == 2
         and task.assigned_to != current_user
-        or not current_user.is_superuser
-        and task.assigned_to == 0
+        or task.assigned_to.rank == 0
+        and not current_user.is_superuser
     ):
         return render(request, "users/no_permission.html")
     else:
@@ -138,17 +138,24 @@ def edit_task(request, task_id):
                     obj.save()
                 return HttpResponseRedirect("/tasks/")
         else:
-            form = (
-                AddTask(assigned_to=MASTER_EXCLUDED, instance=task, initial={"assigned_to": current_user.id})
-                if not current_user.is_superuser
-                else AddTask(
-                    assigned_to=ALL_USERS, instance=task, initial={"assigned_to": current_user.id}
+            if current_user.is_superuser:
+                form = AddTask(
+                    assigned_to=ALL_USERS,
+                    instance=task,
+                    initial={"assigned_to": current_user.id},
                 )
-            )
-
-            form.fields["assigned_to"].disabled = (
-                True if current_user.rank == 2 else False
-            )
+            elif current_user.rank == 2:
+                form = AddTask(
+                    assigned_to=ALL_USERS.filter(id=request.user.id),
+                    instance=task,
+                    initial={"assigned_to": current_user.id},
+                )
+            else:
+                form = AddTask(
+                    assigned_to=MASTER_EXCLUDED,
+                    instance=task,
+                    initial={"assigned_to": current_user.id},
+                )
     context = {
         "form": form,
     }
@@ -205,7 +212,8 @@ def delete_task(request, task_id):
         or current_user.rank == 2
         and task.assigned_to != current_user
         or task.approval_status == 1
-        or task.assigned_to.rank == 0 
+        and not current_user.is_superuser
+        or task.assigned_to.rank == 0
         and not current_user.is_superuser
     ):
         return render(request, "users/no_permission.html")

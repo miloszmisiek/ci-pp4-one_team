@@ -21,5 +21,9 @@ class CustomUserAdmin(UserAdmin):
     )
 
     list_display = ('first_name', 'last_name', 'rank', 'is_active')
+    actions = ['activate_user_account']
+
+    def activate_user_account(self, request, queryset):
+        queryset.update(is_active=True)
 
 admin.site.register(CustomUser, CustomUserAdmin)

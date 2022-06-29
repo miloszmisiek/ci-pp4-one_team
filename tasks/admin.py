@@ -6,7 +6,7 @@ from .models import Task
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ('title', 'status', 'approval_status', 'created_by', 'priority', 'assigned_to', 'created_on', 'end_date' )
+    list_display = ('title', 'status', 'approval_status', 'created_by', 'priority', 'assigned_to', 'created_on', 'updated_on', 'start_date', 'end_date' )
     list_filter = ('status', 'end_date')
     actions = ['approve_tasks']
 

@@ -19,12 +19,13 @@ def edit_profile(request, user_id):
             form = EditProfileForm(request.POST, instance=user)
             if form.is_valid():
                 obj = form.save(commit=False)
-                if obj.rank != current_user.rank:
+                if obj.rank != current_user.rank and not current_user.is_superuser:
                     obj.is_active = False
                     obj.save()
                     return HttpResponseRedirect("/accounts/inactive/")
-                obj.save()
-                return HttpResponseRedirect("/tasks/my_tasks/")
+                else:
+                    obj.save()
+                    return HttpResponseRedirect("/tasks/my_tasks/")
         else:
             form = EditProfileForm(instance=user)
     else:
