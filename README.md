@@ -468,7 +468,7 @@ The primary font used for the application is Inter. Logo and big headings use Ka
  - [Master](documentation/flowcharts/master.png)
  - [Senior Officer](documentation/flowcharts/chief-mate.png)
  - [Junior Officer](documentation/flowcharts/junior-officer.png)
- - [Bosun](#)
+ - [Bosun](documentation/flowcharts/bosun-flowchart.png)
 
 [Back to contents](#contents)
 
