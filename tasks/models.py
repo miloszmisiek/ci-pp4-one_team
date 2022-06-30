@@ -3,9 +3,6 @@ from users.models import CustomUser
 import datetime
 
 DEFAULT_TASK_ID = 1
-
-# task model variables
-
 TASK_STATUS = (
     (0, "Scheduled"),
     (1, "Completed"),

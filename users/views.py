@@ -12,9 +12,7 @@ from django.urls import reverse
 def edit_profile(request, user_id):
     """A view to edit user's profile"""
     current_user = request.user
-
     user = get_object_or_404(CustomUser, id=user_id)
-
     if current_user.id == user.id or current_user.is_superuser:
         if request.method == "POST":
             form = EditProfileForm(request.POST, instance=user)
@@ -31,7 +29,6 @@ def edit_profile(request, user_id):
             form = EditProfileForm(instance=user)
     else:
         return render(request, "users/no_permission.html")
-
     context = {
         "form": form,
     }
@@ -52,6 +49,7 @@ def delete_profile(request, user_id):
 
 class CustomPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
     """A view to change success url for change password redirect"""
+
     def get_success_url(self):
         success_url = reverse("edit_profile", kwargs={"user_id": self.request.user.id})
         return success_url

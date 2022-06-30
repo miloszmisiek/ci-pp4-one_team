@@ -40,9 +40,7 @@ class TestForms(TestCase):
             },
         )
         self.assertTrue(form.is_valid())
-
         self.assertEquals(len(form.errors), 0)
-
         self.assertEqual(
             form.Meta.fields,
             [
@@ -54,7 +52,6 @@ class TestForms(TestCase):
                 "end_date",
             ],
         )
-
         self.assertEquals(form.fields["assigned_to"].empty_label, None)
 
     def test_add_task_form_assigned_to_not_passed_in_form(self):
@@ -72,7 +69,6 @@ class TestForms(TestCase):
             },
         )
         self.assertFalse(form.is_valid())
-
         self.assertEquals(len(form.errors), 1)
 
     def test_add_task_form_start_date_accepts_only_date_values(self):
@@ -134,7 +130,6 @@ class TestForms(TestCase):
                 "end_date": "2022-09-20",
             },
         )
-
         self.assertFalse(form.is_valid())
         self.assertEquals(len(form.errors), 1)
         self.assertIn("title", form.errors.keys())
@@ -154,7 +149,6 @@ class TestForms(TestCase):
                 "end_date": "2022-09-20",
             },
         )
-
         self.assertTrue(form.is_valid())
         self.assertEquals(len(form.errors), 0)
 
@@ -172,7 +166,6 @@ class TestForms(TestCase):
                 "end_date": "2022-09-20",
             },
         )
-
         self.assertFalse(form.is_valid())
         self.assertEquals(len(form.errors), 1)
         self.assertIn("assigned_to", form.errors.keys())
@@ -195,7 +188,6 @@ class TestForms(TestCase):
                 "end_date": "2022-09-20",
             },
         )
-
         self.assertFalse(form.is_valid())
         self.assertEquals(len(form.errors), 1)
         self.assertIn("priority", form.errors.keys())
@@ -215,7 +207,6 @@ class TestForms(TestCase):
                 "end_date": "2022-09-20",
             },
         )
-
         with self.assertRaises(
             TypeError
         ):  # for clean method called when AddTask instance created
@@ -238,7 +229,6 @@ class TestForms(TestCase):
                 "end_date": "",
             },
         )
-
         with self.assertRaises(
             TypeError
         ):  # for clean method called when AddTask instance created

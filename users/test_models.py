@@ -4,7 +4,6 @@ from .models import CustomUser
 
 class TestModels(TestCase):
     """Test the models for the users app."""
-
     def setUp(self):
         """Set up the test"""
         self.default_rank_user = CustomUser.objects.create_user(
@@ -14,7 +13,6 @@ class TestModels(TestCase):
             first_name="default",
             last_name="default",
         )
-
     def test_rank_default_to_bosun(self):
         """Test default rank value."""
         self.assertTrue(self.default_rank_user.rank, 3)

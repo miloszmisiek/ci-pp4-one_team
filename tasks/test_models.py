@@ -10,17 +10,16 @@ class TestModels(TestCase):
     def setUp(self):
         """Set up the test"""
         self.user_senior = CustomUser.objects.create_user(
-            username='senior',
-            email='senior@gmail.com',
-            password='senior',
-            first_name='senior',
-            last_name='senior',
+            username="senior",
+            email="senior@gmail.com",
+            password="senior",
+            first_name="senior",
+            last_name="senior",
             rank=CustomUser.ROLES[1][0],
         )
-
         self.test_task = Task.objects.create(
-            title='default',
-            description='default@gmail.com',
+            title="default",
+            description="default@gmail.com",
             created_by=self.user_senior,
             assigned_to=self.user_senior,
             created_on=datetime.date(2022, 6, 10),
@@ -50,12 +49,24 @@ class TestModels(TestCase):
 
     def test_duration(self):
         """Test duration method"""
-        self.assertEqual(self.test_task.duration(), (self.test_task.end_date - self.test_task.start_date).days)
+        self.assertEqual(
+            self.test_task.duration(),
+            (self.test_task.end_date - self.test_task.start_date).days,
+        )
 
     def test_is_past_due(self):
         """Test is past due method"""
-        self.assertEqual(self.test_task.is_past_due(), (datetime.date.today() > self.test_task.end_date, (self.test_task.end_date - datetime.date.today()).days))
+        self.assertEqual(
+            self.test_task.is_past_due(),
+            (
+                datetime.date.today() > self.test_task.end_date,
+                (self.test_task.end_date - datetime.date.today()).days,
+            ),
+        )
 
     def test_updated_on_time(self):
         """Test is updated on time method"""
-        self.assertEqual(self.test_task.updated_on_time(), (datetime.date.today() - self.test_task.updated_on).days)
+        self.assertEqual(
+            self.test_task.updated_on_time(),
+            (datetime.date.today() - self.test_task.updated_on).days,
+        )
