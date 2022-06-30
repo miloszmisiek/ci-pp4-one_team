@@ -127,7 +127,14 @@ Where automated unit testing was not completed or where extra testing was requir
 | 7           | Senior edit form and submits with Priority High | Redirects to Tasks Home page, a new task is added with approval status Waiting for approval | Y |      |
 | 8           | Master opens Edit Task page | Form is rendered, assigned to the field has all users available including Master | Y |      |
 | 9           | Master edit form and submits with any Priority | Redirects to Tasks Home page, a new task is added with approval status N/R (Not Required) | Y |      |
-
+| **Back on the Top Button**     |                        |                  |      |             |
+| 1           | User clicks Back on the top button | The page is scrolled up to the top | Y |      |
+| **Messages Timeout**     |                        |                  |      |             |
+| 1           | User submits a valid request | Green message apears on top of the page. Automatically disapears after 5 seconds. | Y |      |
+| **Automatic Logout**     |                        |                  |      |             |
+| 1           | User does not shows signs of activity in the app page | After 9 minutes the modal with warning appears, user have 40 seconds to move a mouse cursor or type in the app page. | Y |      |
+| 2           | User does not shows signs of activity in the app page after 9 min and 40 sec | Automatic logout and redriection to the Sign In page | Y |      |
+| 2           | User moves a mouse or types in the app page | Timer reset and modal disapeares | Y |      |
 
 [Back to contents](#contents)
 
