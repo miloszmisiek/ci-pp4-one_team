@@ -10,6 +10,7 @@ from django.urls import reverse
 
 @login_required(login_url="/accounts/login/")
 def edit_profile(request, user_id):
+    """A view to edit user's profile"""
     current_user = request.user
 
     user = get_object_or_404(CustomUser, id=user_id)

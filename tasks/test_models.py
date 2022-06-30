@@ -3,6 +3,7 @@ from .models import Task, TASK_APPROVAL, TASK_PRIORITY, TASK_STATUS
 from users.models import CustomUser
 import datetime
 
+
 class TestModels(TestCase):
     """Test the models for the users app."""
 
@@ -27,6 +28,9 @@ class TestModels(TestCase):
             end_date=datetime.date(2022, 6, 30),
         )
 
+    def test_string_representation_of_task(self):
+        """Test string representation of task."""
+        self.assertEqual(str(self.test_task), self.test_task.title)
 
     def test_approval_status_default_to_scheduled(self):
         """Test default status value."""

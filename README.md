@@ -30,20 +30,20 @@
 
 
 ## About
-[OneTeam app](https://ci-pp4-one--team.herokuapp.com/) is a ship's crew task manager. The goal of the app is to help ship's staff to manage their tasks, schedule jobs and keep track of necessary activities onboard vessels. It is aim to increase productivity along workers.
+[OneTeam app](https://ci-pp4-one--team.herokuapp.com/) is a ship's crew task manager. The goal of the app is to help ship's staff to manage their tasks, schedule jobs and keep track of necessary activities onboard vessels. It aims to increase productivity along with workers.
 
-Live site can be found [here](https://ci-pp4-one--team.herokuapp.com/).
+The live site can be found [here](https://ci-pp4-one--team.herokuapp.com/).
 
 ## User Experience Design
 ### Strategy
-This app is design to server ship's staff. The app is meant to intuitive and of simple design. It is achived by use of simple interface with tonned colors.
+This app is designed to serve the ship's staff. The app is meant to be intuitive and of simple design. It is achieved by the use of a simple interface with toned colours.
 
 ### Target Audience
-OneTeam is developed for ship's members.
-- **Master:** ship's master is meant to be admin of the app and have full control over the workflow. He has access to admin panel where he has overall responsibility over people and tasks.
-- **Senior Officer:** the head of Deck Department, second in command of the vessel, he has rights to schedule jobs for crew with certain limitations.
-- **Junior Officer:** under direct command of Senior Officer. They can manege their tasks to keep track of their Division of Labour.
-- **Bosun:** the most senior among ratings (regular workers). He can use the app to have an overview of what is planned to do and brief ordinary seamen of what mangament has planned to do.
+OneTeam is developed for ship members.
+- **Master:** ship's master is meant to be the admin of the app and have full control over the workflow. He has access to the admin panel where he has overall responsibility for people and tasks.
+- **Senior Officer:** the head of the Deck Department, second in command of the vessel, has the right to schedule jobs for crew with certain limitations.
+- **Junior Officer:** under the direct command of Senior Officer. They can manage their tasks to keep track of their Division of Labour.
+- **Bosun:** the most senior among ratings (regular workers). He can use the app to have an overview of what is planned to do and brief ordinary seamen about what management has planned to do.
 
 ### User Stories
 
@@ -56,19 +56,19 @@ OneTeam is developed for ship's members.
 **Senior Officer Goals**
 | Issue ID    | User Story |
 |-------------|-------------|
-|[#6](https://github.com/miloszmisiek/ci-pp4-one_team/issues/6)|As a Senior Officer, I can approve priority 2 and 3 tasks for Junior Officers so that I can control workload for Junior Officers|
-|[#26](https://github.com/miloszmisiek/ci-pp4-one_team/issues/26)|As a Senior Officer I can add tasks with Priority Low and Medium without Approval so that Master does not need to approve all tasks which are of lower importance|
+|[#6](https://github.com/miloszmisiek/ci-pp4-one_team/issues/6)|As a Senior Officer, I can approve priority 2 and 3 tasks for Junior Officers so that I can control the workload for Junior Officers|
+|[#26](https://github.com/miloszmisiek/ci-pp4-one_team/issues/26)|As a Senior Officer I can add tasks with Priority Low and Medium without Approval so that the Master does not need to approve all tasks which are of lower importance|
 
 **User Goals**
 | Issue ID    | User Story |
 |-------------|-------------|
 |[#1](https://github.com/miloszmisiek/ci-pp4-one_team/issues/1)|As a user I can explore home page information so that I know what the idea behind the app is|
 |[#2](https://github.com/miloszmisiek/ci-pp4-one_team/issues/2)|As a user I can explore site functionality so that I will use its full potential |
-|[#14](https://github.com/miloszmisiek/ci-pp4-one_team/issues/14)|As a user I can see tasks period so that I know how to manage my time effectively|
+|[#14](https://github.com/miloszmisiek/ci-pp4-one_team/issues/14)|As a user I can see the tasks period so that I know how to manage my time effectively|
 |[#15](https://github.com/miloszmisiek/ci-pp4-one_team/issues/15)|As a user I can filter tasks for a specific month so that I can plan my work in a long-term|
 |[#16](https://github.com/miloszmisiek/ci-pp4-one_team/issues/16)|As a user I can see task priority so that I know which tasks are of higher importance|
 |[#17](https://github.com/miloszmisiek/ci-pp4-one_team/issues/17)|As a user I can see essential and clear tasks data so that I have quick access to necessary task information|
-|[#18](https://github.com/miloszmisiek/ci-pp4-one_team/issues/18)|As a user I can see today's date so that **I can plan which tasks are closer to their deadlines **|
+|[#18](https://github.com/miloszmisiek/ci-pp4-one_team/issues/18)|As a user, I can see today's date so that **I can plan which tasks are closer to their deadlines **|
 |[#19](https://github.com/miloszmisiek/ci-pp4-one_team/issues/19)|As a user I can reset my password so that my password is restored when I forgot it or in case of a security breach|
 |[#20](https://github.com/miloszmisiek/ci-pp4-one_team/issues/20)|As a user I can edit my account so that I can update my personal data if required|
 |[#21](https://github.com/miloszmisiek/ci-pp4-one_team/issues/21)|As a user I can delete my account so that I can remove my profile from the app database|
@@ -132,19 +132,19 @@ OneTeam is developed for ship's members.
 ---
 ## Features
 
-OneTeam is build with following components:
+OneTeam is built with the following components:
 - landing page (home page for logout users)
-- tasks home page (logged in users)
+- tasks home page (logged-in users)
 - login page
 - registration page
 - logout page
-- edit profile page
-- change password page
+- edit the profile page
+- change the password page
 - account inactive page
-- confirm email page
-- reset password page
+- confirm the email page
+- reset the password page
 - add task page
-- edit task page
+- edit the task page
 - user's dashboard page
 - no permission page
 
@@ -158,7 +158,7 @@ OneTeam is build with following components:
 | logout page                 | Y | Y | Y | Y | 
 | edit profile page           | Y | Y | Y | Y | 
 | delete profile         | Y | Y |Y | Y | 
-| delete other memebers         | Y (admin panel) | N |N | N |
+| delete other members         | Y (admin panel) | N |N | N |
 | change password page        | Y | Y | Y | Y | 
 | change rank = account inactive                | N | Y | Y | Y |
 | confirm email page       | Y | Y | Y | Y |
@@ -166,8 +166,8 @@ OneTeam is build with following components:
 | add task page     | Y | Y| Y | N| 
 | assign users for task     | Y | Y (except Master| N | N|
 | approve tasks     | Y | Y (Priority Medium and Low) | N| N|
-| change tasks status | Y | Y | Y (only assigned to user) | N|
-| delete tasks *(except status Waiting for approval)* | Y | Y | Y (only assigned to user) | N|
+| change tasks status | Y | Y | Y (only assigned to a user) | N|
+| delete tasks *(except status Waiting for approval)* | Y | Y | Y (only assigned to a user) | N|
 | edit task page                   |Y | Y| Y | N|
 | user's dashboard page               |Y | Y| Y | Y|
 | no permission page              |N | Y| Y | Y|
@@ -189,7 +189,7 @@ Navbar is structured with:
   - My profile link (user's dashboard)
   - Logout link
 
-Simplistic design without many features to focus user's on major componenets for the app.
+Simplistic design without many features to focus the user's on major components of the app.
 
 [Back to contents](#contents)
 
@@ -198,11 +198,11 @@ Simplistic design without many features to focus user's on major componenets for
 ![Footer Photo](documentation/features/footer.png)
 
 Footer is structured with:
-- **Logo** to the left (not-redirect to home page)
+- **Logo** to the left (not-redirect to the home page)
 - **Contact** information to the OneTeam owners (dummy data at the moment)
 - **Copyright** section for the creator with links
 
-Footer was designed to contain neccessery contact information related to the app and to be easily identified.
+Footer was designed to contain necessary contact information related to the app and to be easily identified.
 
 [Back to contents](#contents)
 
@@ -210,10 +210,10 @@ Footer was designed to contain neccessery contact information related to the app
 
 ![Landing Page Photo](documentation/features/landing-page.png)
 
-Landing page is structured with:
-- **Hero** section containing the logo, main goal of the app and **Get Started** button which redirect to registration site
-- **Mission** section with marine theme photos and short goals desriptions 
-- **Final word** section to encourge users for registration with repeated **Get Started** button
+The landing page is structured with:
+- **Hero** section contains the logo, the main goal of the app and the **Get Started** button which redirects to the registration site
+- **Mission** section with marine theme photos and a short goal description 
+- **Final word** section to encourage users to register with the repeated **Get Started** button
 
 [Back to contents](#contents)
 
@@ -221,9 +221,9 @@ Landing page is structured with:
 
 ![Sign Up Photo](documentation/features/sign-up.png)
 
-Sign Up form is based on all-auth package template with custom styling.
+Sign Up form is based on an all-auth package template with custom styling.
 
-All fields are required to create account.
+All fields are required to create an account.
 
 Sign up page is structured with:
 - **Head title** with **sign in** link and instructions
@@ -232,10 +232,10 @@ Sign up page is structured with:
 - **Username** field (must be unique)
 - **First Name** field
 - **Last Name** field
-- **Select Your Rank** field *(Note: default is Bosun for model convienience, but users cannot leave blank field, they must select one rank)*
+- **Select Your Rank** field *(Note: default is Bosun for model convenience, but users cannot leave a blank field, they must select one rank)*
 - **Password** field
 - **Confirm Password** field
-- **Sign Up** button which submits the form if form is valid
+- **Sign Up** button which submits the form if a form is valid
 
 [Back to contents](#contents)
 
@@ -243,16 +243,16 @@ Sign up page is structured with:
 
 ![Sign In Photo](documentation/features/sign-in.png)
 
-Sign In form is based on all-auth package template with custom styling.
+Sign In form is based on an all-auth package template with custom styling.
 
 Sign In page is structured with:
 - **Head title** with **sign up** link and instructions
-- **Email or Username** field - users can user both to login
+- **Email or Username** field - users can use both to log in
 - **Confirm email** field
 - **Password** field
-- **Remember Me** checkbox which controls the life time of the session - allows users to remain logged in on browser close
-- **Forgot Password** link which redirects to **Password Reset** page
-- **Sign In** button which submits the form and redirects user to tasks home page
+- **Remember Me** checkbox which controls the lifetime of the session - allows users to remain logged in on browser close
+- **Forgot Password** link redirects to the **Password Reset** page
+- **Sign In** button submits the form and redirects the user to the tasks home page
 
 [Back to contents](#contents)
 
@@ -260,11 +260,11 @@ Sign In page is structured with:
 
 ![Sign Out Photo](documentation/features/sign-out.png)
 
-Sign Out form is based on all-auth package template with custom styling.
+Sign Out form is based on an all-auth package template with custom styling.
 
 Sign Out page is structured with:
 - **Confirmation** message for user if his request is valid (defensive programming)
-- **Sign Out** button which submits the form and redirects user to landing page
+- **Sign Out** button which submits the form and redirects the user to a landing page
 
 [Back to contents](#contents)
 
@@ -272,12 +272,12 @@ Sign Out page is structured with:
 
 ![Reset Password Photo](documentation/features/password-reset.png)
 
-Password Reset form is based on all-auth package template with custom styling.
+Password Reset form is based on an all-auth package template with custom styling.
 
 Password Reset page is structured with:
-- **Description** message for user how to procced with request
-- **Email address** field to type in user's email address used for registration in order to sent the link to reset the password
-- **Reset Password** button which submits the form and redirects user password reset completed page
+- **Description** message for the user on how to proceed with the request
+- **Email address** field to type in the user's email address used for registration in order to send the link to reset the password
+- **Reset Password** button which submits the form and redirects the user password reset completed page
 
 [Back to contents](#contents)
 ### Tasks Home page 
@@ -285,49 +285,49 @@ Password Reset page is structured with:
 ![Tasks Home page Photo](documentation/features/tasks-home.png)
 
 Tasks Home page is structured with:
-- **Hello** message for user which reflects on user's first name and rank.
+- **Hello** message for the user which reflects on the user's first name and rank.
 - **Selections** section:
-  - *What's Next* message with anchor icon to reflect on what is purpose of this page - show users what are valid tasks onboard the ship
-  - *Select Month* menu - user can choose the month and the app will render tasks releted to the month selected with two options:
+  - *What's Next* message with anchor icon to reflect on what is the purpose of this page - show users what are valid tasks onboard the ship
+  - *Select Month* menu - user can choose the month and the app will render tasks related to the month selected with two options:
     - Tasks with Start Date matching the selection
     - Tasks with End Date matching the selection
-  - *Today is* message that informs user what is today's date
+  - *Today is* message that informs the user what is today's date
 - **Add Task** button which redirects to add task page.
 - ### Tasks Table 
-  All users have an overview of all valid tasks on the home page. Users can sort the tasks by columns - header click event triggers sorting function. Table is seperated by following columns:
-  - **ID** - this id **IS NOT** the primary key of the model Task. It is a forloop counter which represents all the tasks rendered in the templated with *End Date* ascending order as default.
+  All users have an overview of all valid tasks on the home page. Users can sort the tasks by columns - the header click event triggers the sorting function. The table is separated by the following columns:
+  - **ID** - this id **IS NOT** the primary key of the model Task. It is a for loop counter which represents all the tasks rendered in the templated with *End Date* ascending order as default.
   - **Status** column which identifies tasks status Scheduled, Completed - represented with font awesome icon, or Overdue.
-    - The program sets tasks to Overdue automatically after the *End Date* of the task exceeds present date. Status can be changed with user click event on the table cell with certain limitations (see [User Rights](#user-rights)).
-    - When user is permitted to change status, click event opens modal with message to the user to change task status accordingly to present state.
+    - The program sets tasks to Overdue automatically after the *End Date* of the task exceeds the present date. Status can be changed with a user click event on the table cell with certain limitations (see [User Rights](#user-rights)).
+    - When a user is permitted to change status, click event opens modal with a message to the user to change task status accordingly to the present state.
   
       ![Status Modal Photo](documentation/features/status-modal.png)
 
   - **Owner** column represents who is assigned to a task by the Rank.
-    - When hovered over user can see the username of assigned person.
+    - When hovered over user can see the username of the assigned person.
   
       ![Owner Hover Photo](documentation/features/owner-hover.png)
 
-  - **Priority** text represention of task priority: High, Medium or Low. 
-  - **Title** represents task's title. When clicked it opens a modal with *Task Details*.
-    - *Task Details* modal contains detailed information including all the dates related to the task and gives user ability to **Edit Task** or **Delete Task** if allowed (see [User Rights](#user-rights)).
+  - **Priority** text representation of task priority: High, Medium or Low. 
+  - **Title** represents the task's title. When clicked it opens a modal with *Task Details*.
+    - *Task Details* modal contains detailed information including all the dates related to the task and gives the user ability to **Edit Task** or **Delete Task** if allowed (see [User Rights](#user-rights)).
     
       ![Details Modal Photo](documentation/features/task-details-modal.png)
 
-  - **End Date** column represents the date specified by task creator to complete the task. It's default for table sorting when home page is rendered. **Overdue** tasks are highlithed with Font Awesome exclamation icon to get user's attention. Tasks close to reaching *End Date* (2 days in advance) are highlighted with Font Awesome triangle exclamation icon.
+  - **End Date** column represents the date specified by the task creator to complete the task. It's the default for table sorting when the home page is rendered. **Overdue** tasks are highlighted with Font Awesome exclamation icon to get the user's attention. Tasks close to reaching *End Date* (2 days in advance) are highlighted with Font Awesome triangle exclamation icon.
 
     ![End Date Icons Photo](documentation/features/end-date-icons.png)
   
-  - **Approval** column represents the task approval set by task's creator: Approved, Waiting for approval and N/R (Not Required). Users with appropriate permission can approve task if required (see [User Rights](#user-rights)). If task can be approved the green button is rendered to Approve the task. If users would like to change it's status backwards (Waiting for approval) they can do it by clicking on the cell (with required [User Rights](#user-rights))).
+  - **Approval** column represents the task approval set by the task's creator: Approved, Waiting for approval and N/R (Not Required). Users with appropriate permission can approve tasks if required (see [User Rights](#user-rights)). If the task can be approved the green button is rendered to Approve the task. If users would like to change its status backwards (Waiting for approval) they can do it by clicking on the cell (with required [User Rights](#user-rights))).
 
     ![Approval Button Photo](documentation/features/approval-button.png)
 
-    - **N/R** appoval status is set automatically for all tasks created by Master or for Priority Medium or Low tasks created by Chief Mate.
+    - **N/R** approval status is set automatically for all tasks created by Master or for Priority Medium or Low tasks created by Chief Mate.
     - All **Priority High** tasks must be approved only by **Master**
 
 
 [Back to contents](#contents)
 
-**Hide Completed** button section - gives user ability to remove temporarly tasks marked as Completed.
+**Hide Completed** button section - gives the user the ability to remove temporarily tasks marked as Completed.
   - *Note*: the app automatically filters tasks which are Completed and have not been updated for 2 days.
 
   ![Hide Completed Button Photo](documentation/features/hide-completed.png)
@@ -347,12 +347,12 @@ All users has almost identical page layout. The elements that change are:
 
 ![Profile Dashboard Photo](documentation/features/profile-dashboard.png)
 
-Every user has access to his private dashboard which consits of:
+Every user has access to his private dashboard which consists of:
 - **Dashboard** message for the current user
 - **Selections** section:
-  - *Account* subsection - gives user ability to edit and delete his account.
-    - Edit Button redirects to Edit Profile page
-    - Delete Button allows users to permanently delete their accounts - user must confirm his choice in browsers built-in confirm box.
+  - *Account* subsection - gives the user ability to edit and delete his account.
+    - Edit Button redirects to the Edit Profile page
+    - Delete Button allows users to permanently delete their accounts - the user must confirm his choice in the browser's built-in confirm box.
       
       ![Delete Message Photo](documentation/features/delete-defensive.png)
   
@@ -362,7 +362,7 @@ Every user has access to his private dashboard which consits of:
 - **Add Task** button (same as [Tasks Home Page](#tasks-home-page))
 
 - **My Profile Tasks Page**
-  The functionality is excatly same as in [Tasks Home Table](#tasks-table). The difference is that here users can see only tasks which are assigned specifically to their user.
+  The functionality is exactly the same as in [Tasks Home Table](#tasks-table). The difference is that here users can see only tasks which are assigned specifically to their user.
 
 **Hide Completed** button section - (same as [Tasks Home Page](#tasks-home-page)) 
 
@@ -371,62 +371,62 @@ Every user has access to his private dashboard which consits of:
 <br>
 
 **Add Task** page renders custom Add Task form which contains:
-- *Title* - default value is "Untitled Task", field required to submit the form
-- *Description* - users can right their comments on what has to be done, job specification or any other relevant information
-- *Assigned to* - dropdown list of avaialable users with default value set to current user, field required to submit the form
-- *Priority* - dropdown list with priority selection. Default value is set to Low, field required to submit the form.
-- *Start Date* - date field to select or type the date to start the job, field required to submit the form
-- *End Date* - date field to select or type the date to finish the job, field required to submit the form
+- *Title* - default value is "Untitled Task", the field required to submit the form
+- *Description* - users can write their comments on what has to be done, job specifications or any other relevant information
+- *Assigned to* - dropdown list of available users with the default value set to the current user, the field required to submit the form
+- *Priority* - dropdown list with priority selection. The default value is set to Low, the field required to submit the form.
+- *Start Date* - date field to select or type the date to start the job, the field required to submit the form
+- *End Date* - date field to select or type the date to finish the job, the field required to submit the form
 
 
 ![Add Task Page Photo](documentation/features/add-task-form.png)
   
   *Notes*:
-  - End Date cannot be set before the Start Date.
-  - Users are alowed to set Start Date and End Date with past dates for jobs that happend and must be documented.
+  - The end date cannot be set before the Start Date.
+  - Users are allowed to set Start Date and End Date with past dates for jobs that happened and must be documented.
   - All fields are validated for correct input.
 
 
 [Back to contents](#contents)
 
-**Edit Task** layout is exactly same as **Add Task** page. The form is prefilled with task that users choose to edit.
+**Edit Task** layout is exactly the same as the **Add Task** page. The form is prefilled with a task that users choose to edit.
 
 ![Edit Task Page Photo](documentation/features/edit-task-form.png)
 
 
-**Edit Profile** page renders custom Edit Task form which contains and allows users to edit following data:
+**Edit Profile** page renders a custom Edit Task form which contains and allows users to edit the following data:
 - *First Name* field
 - *Last Name* field
 - *Email* field
 - *Rank* selection field
 - *Change Password* link - redirects to **Change Password** page
-- *Save* button - redirects back to **My Profile** page
+- *Save* button - redirects back to the **My Profile** page
 
   ![Edit Profile Page Photo](documentation/features/edit-profile-form.png)
 
   *Notes*:
-  - Every Rank update must be approved by Master - when user decides to update his rank and submit the form his account will be set to inactive and only Master (admin) can activated his account again from admin panel. This is to brought to avoid any disaproved rank changes.
-  - Before user submits the form he must confirm his decision in browser's confirmation box.
+  - Every Rank update must be approved by the Master - when the user decides to update his rank and submit the form his account will be set to inactive and only the Master (admin) can activate his account again from the admin panel. This is to brought to avoid any disapproved rank changes.
+  - Before the user submits the form he must confirm his decision in the browser's confirmation box.
 
       ![Confirm Choice Box Photo](documentation/features/edit-profile-submit-defensive.png)
 
-  - Below Rank selection field messege on the yellow background warns the user of the rank change consequences.
+  - Below the Rank selection field message on the yellow background warns the user of the rank change consequences.
 
 [Back to contents](#contents)
 
 ### Change Rank Procedure With Use Of Admin Panel
-When new users create their accounts or when exisiting users edit their profiles with new ranks, the profile will be deactivated and Master (or other admin) will have to set he account back to active using Django admin panel.
-1. Open admin panel by typing `https://ci-pp4-one--team.herokuapp.com/admin` in your broweser's URL bar.
-2. Type in your admin login and password and press `Log in` button.
+When new users create their accounts or when existing users edit their profiles with new ranks, the profile will be deactivated and the Master (or other admin) will have to set the account back to active using the Django admin panel.
+1. Open the admin panel by typing `https://ci-pp4-one--team.herokuapp.com/admin` in your browser's URL bar.
+2. Type in your admin login and password and press the `Login` button.
 
     ![Admin Login](documentation/admin/admin-login.png)
 
-3. Navigate to **Custom users** section.
+3. Navigate to the **Custom users** section.
 
     ![Admin Tasks Section](documentation/admin/admin-custom-users.png)
-4. Locate the user with **Active** field represented with a red cross.
+4. Locate the user with the **Active** field represented with a red cross.
 5. Select the user by clicking on the select field next to his **First Name**.
-6. Navigate to **Action** bar, select *Activate user account* and click `Go`.
+6. Navigate to the **Action** bar, select *Activate user account* and click `Go`.
 7. User **Active** status should be represented with a green check mark.
 
     ![Admin Activate User](documentation/admin/custom-users-table.png)
@@ -436,36 +436,34 @@ When new users create their accounts or when exisiting users edit their profiles
 
 ![Reset Change Photo](documentation/features/change-password.png)
 
-Password Change form is based on all-auth package template with custom styling. All fields are validated for correct entries.
+Password Change form is based on an all-auth package template with custom styling. All fields are validated for correct entries.
 
 Password Change page is structured with:
 - **Current Password** field - users must type in their current password
 - **New Password** field
-- **New Password (again)** - users must confirm their New Password, both must match to proceed with submittion
-- **Change Password** button - submits the form and redirects user to **Edit Profile** page on successful completion
+- **New Password (again)** - users must confirm their New Password, both must match to proceed with submission
+- **Change Password** button - submits the form and redirects the user to the **Edit Profile** page on successful completion
 
 [Back to contents](#contents)
 ## Design
-The main theme of the application is designed to be tonned, thus it gives a great contrast with elements of brighter colors requiring attention. The principle of the design is to bring minimalistic approach to the page.
+The main theme of the application is designed to be toned, thus it gives a great contrast with elements of brighter colours requiring attention. The principle of the design is to bring a minimalistic approach to the page.
 ### Color Scheme
-The color scheme is based on the pastel colors with use of bold colors to bring users attention.
-
-![Color Scheme Photo](#)
+The colour scheme is based on pastel colours with the use of bold colours to bring the user's attention.
 
 [Back to contents](#contents)
 ### Typography
-Primary font used for the application is Inter. Logo and big headings use Karla font. Together they give great contrast, but also transition smoothly between one another. All fonts come from [Google Fonts](https://fonts.google.com/).
+The primary font used for the application is Inter. Logo and big headings use Karla font. Together they give great contrast but also transition smoothly between one another. All fonts come from [Google Fonts](https://fonts.google.com/).
 
 [Back to contents](#contents)
 
 ### Wireframes
- Wireframes used in design process can be found [here](documentation/wireframes/one-team-wireframes.pdf). The deployed version of the site is not the exact representation of the wireframes due to time management or technical issues.
+ Wireframes used in the design process can be found [here](documentation/wireframes/one-team-wireframes.pdf). The deployed version of the site is not the exact representation of the wireframes due to time management or technical issues.
 
  [Back to contents](#contents)
 
  ---
  ## Flowcharts
- During design process the flowcharts helped to visualize the different user roles and respective functionality. The deployed version of the site might differ from the planned flowcharts due to time management or technical issues. Flowcharts can be found below:
+ During the design process, the flowcharts helped to visualize the different user roles and respective functionality. The deployed version of the site might differ from the planned flowcharts due to time management or technical issues. Flowcharts can be found below:
  - [Master](documentation/flowcharts/master.png)
  - [Senior Officer](documentation/flowcharts/chief-mate.png)
  - [Junior Officer](documentation/flowcharts/junior-officer.png)
@@ -477,7 +475,7 @@ Primary font used for the application is Inter. Logo and big headings use Karla 
 ## Information Architecture
 ### Database
 - The deployed version of the application uses PostgreSQL as a database.
-- SQLite was used for django automated unittests.
+- SQLite was used for Django automated unit tests.
 
 ### Entity-Relationship Diagram
  - The ERD was created using [draw.io](draw.io).
@@ -486,7 +484,7 @@ Primary font used for the application is Inter. Logo and big headings use Karla 
 ### Data Modeling
 1. **CustomUser**
   
-  Created as a subclass of django AbstractUser.
+  Created as a subclass of Django AbstractUser.
 
    Name          | Database Key  | Field Type    | Validation |
 | ------------- | ------------- | ------------- | ---------- |
@@ -508,7 +506,7 @@ Primary font used for the application is Inter. Logo and big headings use Karla 
 
 2. **Task**
 
-  Designed as a custom model inheriting from django models.Model. This model is a core data structure for the application and is used to organize tasks created by users.
+  Designed as a custom model inheriting from Django models.Model. This model is a core data structure for the application and is used to organize tasks created by users.
   
    Name          | Database Key  | Field Type    | Validation |
 | ------------- | ------------- | ------------- | ---------- |
@@ -550,7 +548,7 @@ TASK_APPROVAL = (
 [Back to contents](#contents)
 
 # Testing
-Various test results are presented in separate [TESTING](TESTING.md) file.
+Various test results are presented in separate [TESTING](TESTING.md) files.
 
 [Back to contents](#contents)
 
@@ -558,7 +556,7 @@ Various test results are presented in separate [TESTING](TESTING.md) file.
 # Deployment
 ## Using Heroku to deploy the project
 - Setup of the local workspace:
-  - This project was developed with use of [pipenv](https://pypi.org/project/pipenv/) to handle all dependencies
+  - This project was developed with the use of [pipenv](https://pypi.org/project/pipenv/) to handle all dependencies
   - Managing a `requirements.txt` file can be problematic, so Pipenv uses the upcoming `Pipfile` and `Pipfile.lock` instead, which is superior for basic use cases.
   - Create a `Procfile` in the local workspace and type in `web: gunicorn <name app>.wsgi:application` inside the file.
   - Commit and push to GitHub
@@ -575,12 +573,12 @@ This project was deployed using [Heroku](https://dashboard.heroku.com/) using th
 
 ![Heroku Unique Name](documentation/deployment/heroku-2.png)
 
-5. Go to *Resources* tab and search for postresql. Select *Hobby dev - Free* and click on the provision button to add it to the project
+5. Go to the *Resources* tab and search for PostgreSQL. Select *Hobby dev - Free* and click on the provision button to add it to the project
 
 ![Heroku Postgresql Resources](documentation/deployment/heroku-3.png)
 
-6. On the next page click on *Settings* tab.
-7. In the Settings page open *Config Vars* and add following:
+6. On the next page click on the *Settings* tab.
+7. In the Settings page open *Config Vars* and add the following:
 
 ![Heroku Conifg Vars](documentation/deployment/heroku-4.png)
 
@@ -604,7 +602,7 @@ This project was deployed using [Heroku](https://dashboard.heroku.com/) using th
 
   ![Heroku GitHub](documentation/deployment/heroku-5.png)
 
-13. In the *Manual Deploy* section confirm *main* branch is selected and click *Deploy Branch*
+13. In the *Manual Deploy* section confirm that *main* branch is selected and click *Deploy Branch*
 14. For Final Deployment confirm `DEBUG = False` in `settings.py` and delete `DISABLE_COLLECTSTATIC` from *Config Vars* in **Heroku**.
 15. Commit and push changes to GitHub.
 
@@ -621,7 +619,7 @@ A fork is a copy of a repository. Forking a repository allows you to freely expe
 
 You can fork a repository to create a copy of the repository and make changes without affecting the upstream repository.
 ## Clone a repository
-In GitHub, you have the option to create a local copy (clone) of your repository on your device hard drive. The steps are as follows:
+In GitHub, you have the option to create a local copy (clone) of your repository on your device's hard drive. The steps are as follows:
 1. On GitHub.com navigate to the repository page.
 2. Locate the *Code* tab and click on it.
 3. In the expanded window, click the two squares icon to copy the HTTPS link of the repository.
@@ -636,20 +634,20 @@ In GitHub, you have the option to create a local copy (clone) of your repository
 [Back to contents](#contents)
 
 ## Credits
-1. Models are based on project [Issue Tracker](https://github.com/IuliiaKonovalova/issue_tracker) created by my good friends [Juliia Konovalova](https://github.com/IuliiaKonovalova) and [Aleksei Konovalov](https://github.com/lexach91).
-2. Inspiration for selected views and README file comes from project [Cool School](https://github.com/IuliiaKonovalova/school_app) by [Juliia Konovalova](https://github.com/IuliiaKonovalova).
+1. Models are based on the project [Issue Tracker](https://github.com/IuliiaKonovalova/issue_tracker) created by my good friends [Juliia Konovalova](https://github.com/IuliiaKonovalova) and [Aleksei Konovalov](https://github.com/lexach91).
+2. Inspiration for selected views and README file comes from the project [Cool School](https://github.com/IuliiaKonovalova/school_app) by [Juliia Konovalova](https://github.com/IuliiaKonovalova).
 3. Fixed bug with static files directory from [Stack Overflow](https://stackoverflow.com/questions/67698211/getting-get-static-css-base-css-http-1-1-404-1795-error-for-static-files)
-4. Tables styling come from [css-tricks.com](https://css-tricks.com/responsive-data-tables/)
+4. Tables styling comes from [css-tricks.com](https://css-tricks.com/responsive-data-tables/)
 5. Sorting function used in tables comes from [W3Schools](https://www.w3schools.com/howto/howto_js_sort_table.asp)
 6. SelectWithDisabled widget comes from [djangosnippets](https://djangosnippets.org/snippets/2453/)
 7. Favicon generated using [favicon.cc](https://www.favicon.cc/)
-8. Scroll on top button comes from [W3Schools](https://www.w3schools.com/howto/howto_js_scroll_to_top.asp)
+8. Scroll on the top button comes from [W3Schools](https://www.w3schools.com/howto/howto_js_scroll_to_top.asp)
 9. Header, footer and dropdown background was copied from [SheCodes](https://gradients.shecodes.io/gradients/825).
 
 [Back to contents](#contents)
 
 ## Acknowledgments
-1. My girlfriend for being my biggest supporter throught the entire time!
+1. My girlfriend for being my biggest supporter throughout the entire time!
 2. A very big thanks to my friends [Juliia Konovalova](https://github.com/IuliiaKonovalova) and [Aleksei Konovalov](https://github.com/lexach91) for all the help, guidance and sharing their experience with me. You guys are the best!
 3. My mentor [Samantha Dartnall](https://www.linkedin.com/in/samantha-dartnall/) for guidance and support on the project. 
 

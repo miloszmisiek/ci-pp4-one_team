@@ -20,12 +20,16 @@ CLEAR_UPDATED = TODAY - timedelta(days=2)
 @login_required(login_url="/accounts/login/")
 def profile_home(request):
     """A view to return the tasks home page"""
-    tasks = Task.objects.all().filter(assigned_to__is_active=True)
+    tasks = (
+        Task.objects.all()
+        .filter(assigned_to__is_active=True)
+        .exclude(Q(updated_on__lte=CLEAR_UPDATED) & Q(status=1))
+    )
 
     tasks.filter(end_date__lt=TODAY, status=0).update(status=2)
     tasks.filter(end_date__gte=TODAY, status=2).update(status=0)
 
-    tasks = tasks.exclude(Q(updated_on__lte=CLEAR_UPDATED) & Q(status=1))
+    # tasks = tasks.exclude(Q(updated_on__lte=CLEAR_UPDATED) & Q(status=1))
 
     if request.GET and "months" in request.GET:
         months = request.GET["months"]
@@ -47,7 +51,7 @@ def my_tasks(request):
     tasks.filter(end_date__lt=TODAY, status=0).update(status=2)
     tasks.filter(end_date__gte=TODAY, status=2).update(status=0)
 
-    tasks = tasks.exclude(Q(updated_on=CLEAR_UPDATED) | Q(status=1))
+    tasks = tasks.exclude(Q(updated_on__lte=CLEAR_UPDATED) & Q(status=1))
 
     if request.GET and "months" in request.GET:
         months = request.GET["months"]
@@ -79,15 +83,11 @@ def add_task(request):
                 obj.created_by = current_user
                 if current_user.rank == 2:
                     obj.assigned_to = current_user
-                    obj.save()
-                elif current_user.rank == 1:
+                if current_user.rank == 1:
                     obj.approval_status = 2 if obj.priority != 0 else 1
-                    obj.save()
-                elif current_user.rank == 0:
+                if current_user.rank == 0:
                     obj.approval_status = 2
-                    obj.save()
-                else:
-                    obj.save()
+                obj.save()
                 return HttpResponseRedirect("/tasks/")
         else:
             if current_user.is_superuser:
@@ -129,13 +129,14 @@ def edit_task(request, task_id):
             if form.is_valid():
                 obj = form.save(commit=False)
                 if current_user.rank == 2:
+                    if obj.approval_status == 2:
+                        obj.approval_status = 1
                     obj.assigned_to = current_user
-                    obj.save()
-                elif current_user.rank == 1:
+                if current_user.rank == 1:
                     obj.approval_status = 2 if obj.priority != 0 else 1
-                    obj.save()
-                else:
-                    obj.save()
+                if current_user.is_superuser:
+                    obj.approval_status = 2
+                obj.save()
                 return HttpResponseRedirect("/tasks/")
         else:
             if current_user.is_superuser:

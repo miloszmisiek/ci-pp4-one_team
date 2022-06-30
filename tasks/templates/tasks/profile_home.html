@@ -26,8 +26,8 @@
         </div>
         <!-- Month Selection -->
         <div class="col-12 col-md-6 col-lg-4 p-2 pl-md-4 pl-lg-2 mx-auto mt-4 h5">
-            <form action="" method="get" id="my_form">
-                <select onchange="submit_form('my_form')" class="d-flex mx-lg-auto p-3 text-center select-month text-dark" name="months" id="months">
+            <form method="get" id="my_form">
+                <select class="d-flex mx-lg-auto p-3 text-center select-month text-dark" name="months" id="months">
                     <option disabled>Select Month</option>
                     <option value='1'>Janaury</option>
                     <option value='2'>February</option>
@@ -43,8 +43,8 @@
                     <option value='12'>December</option>
                 </select>
             </form>
-        <!-- Today's Date -->
         </div>
+        <!-- Today Is -->
         <div class="col-12 col-md-6 col-lg-4 p-2 pr-md-4 pr-lg-2 h5 mx-auto mt-4">
             <div class="mw-50 w-100 ml-md-auto today-is"><strong>Today is:</strong>
                 <div id="date"></div>
@@ -68,14 +68,14 @@
                 <!-- Headings -->
                 <thead>
                     <tr class="table-head">
-                        <th onclick="sortTable(0)">ID</th>
-                        <th onclick="sortTable(1)">Status</th>
-                        <th onclick="sortTable(2)">Owner</th>
-                        <th onclick="sortTable(3)">Priority</th>
-                        <th onclick="sortTable(4)">Title</th>
-                        <th onclick="sortTable(5)" id="end-date">
+                        <th >ID</th>
+                        <th >Status</th>
+                        <th >Owner</th>
+                        <th >Priority</th>
+                        <th >Title</th>
+                        <th  id="end-date">
                             End Date <i class="fas fa-caret-up"></i></th>
-                        <th onclick="sortTable(6)">Approval</th>
+                        <th >Approval</th>
                     </tr>
                 </thead>
                 <!-- Table Body -->
@@ -132,7 +132,7 @@
                             {% endif %}
                             </td>
                             <!-- Owner -->
-                            <td id="task-assigned">
+                            <td class="task-assigned">
                                 <span class="assigned-rank">{{ task.assigned_to.get_rank_display }}</span>
                                 <span class="assigned-username">{{ task.assigned_to }}</span>
                             </td>
@@ -221,7 +221,7 @@
     <!-- Hide Completed -->
     <div class="row text-right clear-completed-row">
         <div class="col-12 mx-auto col-sm-4 mb-5 mt-md-4 mt-lg-5 ml-sm-auto mr-sm-0 pr-0 pr-md-4 pr-lg-2 text-center">
-            <form action="" method="post">
+            <form method="post">
                 {% csrf_token %}
                 <button class="add-task-btn mr-sm-0 border-0" type="submit">
                     Hide Completed
@@ -236,7 +236,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <span class="modal-title h5" id="exampleModalLabel"></span>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -280,15 +280,11 @@
                 </div>
                 {% if user.rank != 3 %}
                     <div class="description-buttons d-flex justify-content-around p-2">
-                        <a id="edit-task-anchor" href="#">
-                            <button type="button" class="btn btn-warning">
+                        <a class="btn btn-warning" id="edit-task-anchor" href="#">
                                 Edit Task
-                            </button>
                         </a>
-                        <a id="delete-task-anchor" class="confirm-delete" href="">
-                            <button type="button" class="btn btn-danger">
+                        <a class="btn btn-danger confirm-delete" id="delete-task-anchor" href="">
                                 Delete Task
-                            </button>
                         </a>
                     </div>
                 {% endif %}
@@ -300,18 +296,18 @@
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="completeModalLabel"></h5>
+                    <span class="modal-title h5" id="completeModalLabel"></span>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body text-center"></div>
                 <div class="description-buttons d-flex justify-content-around p-2">
-                    <a id="yes-anchor" href="#">
-                        <button type="button" class="btn btn-success">Yes</button>
+                    <a class="btn btn-success" id="yes-anchor" href="#">
+                        Yes
                     </a>
-                    <a id="no-anchor" href="">
-                        <button type="button" class="btn btn-danger">No</button>
+                    <a class="btn btn-danger" id="no-anchor" href="">
+                        No
                     </a>
                 </div>
             </div>
@@ -322,5 +318,5 @@
 {% endblock %}
 
 {% block postloadjs %}
-<script src="{% static 'js/profile_home.js' %}"></script>
+<script src="{% static 'js/base.js' %}"></script>
 {% endblock%}

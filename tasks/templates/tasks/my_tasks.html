@@ -23,23 +23,19 @@
                     Account
                 </h3>
                 <div class="profile-buttons w-100 py-1 d-flex justify-content-around align-items-center">
-                    <a id="edit-profile-anchor" href="{% url 'edit_profile' request.user.id %}">
-                        <button type="button" class="btn btn-warning">
+                    <a class="btn btn-warning" id="edit-profile-anchor" href="{% url 'edit_profile' request.user.id %}">
                             Edit
-                        </button>
                     </a>
-                    <a id="delete-profile-anchor" class="confirm-delete" href="{% url 'delete_profile' request.user.id %}">
-                        <button type="button" class="btn btn-danger">
+                    <a class="btn btn-danger confirm-delete" id="delete-profile-anchor" href="{% url 'delete_profile' request.user.id %}">
                             Delete
-                        </button>
                     </a>
                 </div>
             </div>
         </div>
         <!-- Month Selection -->
         <div class="col-12 col-md-6 col-lg-4 p-2 pl-md-4 pl-lg-2 mx-auto mt-4 h5">
-            <form action="" method="get" id="my_form">
-                <select onchange="submit_form('my_form')" class="d-flex mx-lg-auto p-3 text-center select-month text-dark" name="months" id="months">
+            <form method="get" id="my_form">
+                <select class="d-flex mx-lg-auto p-3 text-center select-month text-dark" name="months" id="months">
                     <option disabled>Select Month</option>
                     <option value='1'>Janaury</option>
                     <option value='2'>February</option>
@@ -55,8 +51,8 @@
                     <option value='12'>December</option>
                 </select>
             </form>
-        <!-- Today's Date -->
         </div>
+        <!-- Today Is -->
         <div class="col-12 col-md-6 col-lg-4 p-2 pr-md-4 pr-lg-2 h5 mx-auto mt-4">
             <div class="mw-50 w-100 ml-md-auto today-is"><strong>Today is:</strong>
                 <div id="date"></div>
@@ -80,14 +76,14 @@
                 <!-- Headings -->
                 <thead>
                     <tr class="table-head">
-                        <th onclick="sortTable(0)">ID</th>
-                        <th onclick="sortTable(1)">Status</th>
-                        <th onclick="sortTable(2)">Owner</th>
-                        <th onclick="sortTable(3)">Priority</th>
-                        <th onclick="sortTable(4)">Title</th>
-                        <th onclick="sortTable(5)" id="end-date">
+                        <th >ID</th>
+                        <th >Status</th>
+                        <th >Owner</th>
+                        <th >Priority</th>
+                        <th >Title</th>
+                        <th  id="end-date">
                             End Date <i class="fas fa-caret-up"></i></th>
-                        <th onclick="sortTable(6)">Approval</th>
+                        <th >Approval</th>
                     </tr>
                 </thead>
                 <!-- Table Body -->
@@ -112,7 +108,14 @@
                             <td>{{ forloop.counter }}</td>
                             <!-- Status -->
                             <td>
-                            {% if task.assigned_to == request.user and request.user.rank == 2 and task.approval_status == 0 or request.user.rank == 1 and task.approval_status != 1 or request.user.is_superuser %}
+                                
+                            {% if request.user.rank == 3 or request.user.rank == 2 and task.assigned_to != request.user or task.approval_status == 1 or task.assigned_to.rank == 0 and not request.user.is_superuser %}
+                                {% if task.status == 1 %} 
+                                    <i class="fas fa-check-circle clr-green"></i> 
+                                {% else %} 
+                                    {{ task.get_status_display }} 
+                                {% endif %}
+                            {% else %}
                                 <button class="
                                 border-0 bg-transparent m-auto clr-black
                                 {% if task.status == 0 and task.is_past_due.1 <= 2 %} 
@@ -134,16 +137,10 @@
                                         {{ task.get_status_display }} 
                                     {% endif %}
                                 </button>
-                            {% else %}
-                                {% if task.status == 1 %} 
-                                    <i class="fas fa-check-circle clr-green"></i> 
-                                {% else %} 
-                                    {{ task.get_status_display }} 
-                                {% endif %}
                             {% endif %}
                             </td>
                             <!-- Owner -->
-                            <td id="task-assigned">
+                            <td class="task-assigned">
                                 <span class="assigned-rank">{{ task.assigned_to.get_rank_display }}</span>
                                 <span class="assigned-username">{{ task.assigned_to }}</span>
                             </td>
@@ -153,7 +150,7 @@
                             <td class="btn-title" data-toggle="modal"
                             data-target="#exampleModal" data-title="{{ task.title }}"
                             data-description="{{ task.description }}" data-assigned="{{ task.assigned_to }}"
-                            data-id="{{ task.id }}" data-username="{{ request.user.username }}"
+                            data-assigned-rank="{{ task.assigned_to.rank }}" data-id="{{ task.id }}" data-username="{{ request.user.username }}"
                             data-user-rank="{{ request.user.rank }}" data-created-on="{{ task.created_on | date:'d F Y' }}"
                             data-updated-on="{{ task.updated_on | date:'d F Y' }}" data-start-date="{{ task.start_date | date:'d F Y' }}"
                             data-end-date="{{ task.end_date | date:'d F Y' }}" data-duration="{{ task.duration }}">
@@ -232,7 +229,7 @@
     <!-- Hide Completed -->
     <div class="row text-right clear-completed-row">
         <div class="col-12 mx-auto col-sm-4 mb-5 mt-md-4 mt-lg-5 ml-sm-auto mr-sm-0 pr-0 pr-md-4 pr-lg-2 text-center">
-            <form action="" method="post">
+            <form method="post">
                 {% csrf_token %}
                 <button class="add-task-btn mr-sm-0 border-0" type="submit">
                     Hide Completed
@@ -247,7 +244,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <span class="modal-title h5" id="exampleModalLabel"></span>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -291,15 +288,11 @@
                 </div>
                 {% if user.rank != 3 %}
                     <div class="description-buttons d-flex justify-content-around p-2">
-                        <a id="edit-task-anchor" href="#">
-                            <button type="button" class="btn btn-warning">
+                        <a class="btn btn-warning" id="edit-task-anchor" href="#">
                                 Edit Task
-                            </button>
                         </a>
-                        <a id="delete-task-anchor" class="confirm-delete" href="">
-                            <button type="button" class="btn btn-danger">
+                        <a class="btn btn-danger confirm-delete" id="delete-task-anchor" href="">
                                 Delete Task
-                            </button>
                         </a>
                     </div>
                 {% endif %}
@@ -311,18 +304,18 @@
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="completeModalLabel"></h5>
+                    <span class="modal-title h5" id="completeModalLabel"></span>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body text-center"></div>
                 <div class="description-buttons d-flex justify-content-around p-2">
-                    <a id="yes-anchor" href="#">
-                        <button type="button" class="btn btn-success">Yes</button>
+                    <a class="btn btn-success" id="yes-anchor" href="#">
+                        Yes
                     </a>
-                    <a id="no-anchor" href="">
-                        <button type="button" class="btn btn-danger">No</button>
+                    <a class="btn btn-danger" id="no-anchor" href="">
+                        No
                     </a>
                 </div>
             </div>
@@ -333,5 +326,5 @@
 {% endblock %}
 
 {% block postloadjs %}
-<script src="{% static 'js/profile_home.js' %}"></script>
+<script src="{% static 'js/base.js' %}"></script>
 {% endblock%}

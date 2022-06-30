@@ -1,23 +1,18 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
+<!-- Head -->
 <head>
     {% block meta %}
-    {% comment %} Required meta tags {% endcomment %}
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <meta name="description" content="One Team web application for managing work onboard ships" />
-    <meta name="keywords"
-        content="shipboard management system, martirime industry management, crew onboard management, ship work manager" />
-    <meta name="author" content="Milosz Misiek" />
-    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}">
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-
-
+        {% comment %} Required meta tags {% endcomment %}
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <meta name="description" content="One Team web application for managing work onboard ships" />
+        <meta name="keywords"
+            content="shipboard management system, martirime industry management, crew onboard management, ship work manager" />
+        <meta name="author" content="Milosz Misiek" />
+        <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}">
     {% endblock%}
 
     {% block extra_meta %}
@@ -44,7 +39,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
         crossorigin="anonymous"></script>
-    {% include 'session_security/all.html' %}
+
     <!-- Bootstrap script -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
@@ -53,27 +48,37 @@
 
     {% block extra_js %}
     {% endblock%}
-
+    <!-- Title -->
     <title>One Team {% block extra_title %}{% endblock %}</title>
-</head>
 
+</head>
+<!--- Required for Security Session - Fatal Eroor during W3C validation. -->
+{% include 'session_security/all.html' %}
+
+<!-- Body -->
 <body class="d-flex flex-column min-vh-100">
+    <!-- Header -->
     <header class="container-fluid bg-gray">
+        <!-- Navbar -->
         <nav class="my-navbar">
             <div class="row">
+                <!-- Logo -->
                 <div class="col-12 col-md-6 my-auto text-center text-md-left py-1">
                     <a href="{% url 'home' %}" class="nav-link main-logo-link">
-                        <h1 class="my-0 pl-4 white-font logo-font text-shadow">OneTeam <i
-                                class="bi bi-chevron-double-down px-2 chevron__logo text-shadow"></i></h1>
+                        <h2 class="my-0 pl-4 white-font logo-font text-shadow">OneTeam <i
+                                class="bi bi-chevron-double-down px-2 chevron__logo text-shadow"></i></h2>
                     </a>
                 </div>
+                <!-- Home & Menu -->
                 <div class="col-12 col-md-6 text-center my-auto py-1 text-md-right">
                     <ul class="list-inline list-unstyled my-0 nav-list">
+                        <!-- Home -->
                         <li class="list-inline-item">
                             <a href="{% url 'home' %}" class="nav-link">
                                 <h3 class="white-font home-btn">Home</h3>
                             </a>
                         </li>
+                        <!-- Menu -->
                         <li class="list-inline-item dropdown">
                             <a class="nav-link" href="#" id="user-options" data-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">
@@ -96,47 +101,49 @@
             </div>
         </nav>
     </header>
-
+    
+    <!-- Messages -->
     {% if messages %}
-        <div class="container mt-2">
-            <div class="row">
-                <div class="col-md-8 offset-md-2">
-                    {% for message in messages %}
-                        {% if message.tags == "alert-success" %}
-                            <!-- all attribiutes here are standard bootstrap controls for alert messages -->
-                            <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
-                                {{ message | safe }}
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
+    <div class="container mt-2">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                {% for message in messages %}
+                {% if message.tags == "alert-success" %}
+                <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
+                    {{ message | safe }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
+                {% endif %}
+                {% endfor %}
             </div>
         </div>
+    </div>
     {% endif %}
     
-    <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    <!-- Back on the Top button -->
+    <button id="myBtn" title="Go to top">Top</button>
 
     {% block page_header %}
     {% endblock %}
 
-    <main role="main" class="w-100 h-100 m-auto">
+    <!-- Main -->
+    <main class="w-100 h-100 m-auto">
         {% block content %}
-
         {% endblock %}
     </main>
 
     {% block postloadjs %}
     {% endblock %}
 
+    <!-- Footer -->
     <footer class="container-fluid bg-gray">
         <div class="row p-3">
             <div class="col-12 py-3 col-lg-4 my-auto text-center text-lg-left">
                 <a href="{% url 'home' %}" class="nav-link main-logo-link">
-                    <h1 class="my-0 pl-4 white-font logo-font text-shadow">OneTeam <i
-                            class="bi bi-chevron-double-down px-2 chevron__logo text-shadow"></i></h1>
+                    <h2 class="my-0 pl-4 white-font logo-font text-shadow h1">OneTeam <i
+                            class="bi bi-chevron-double-down px-2 chevron__logo text-shadow"></i></h2>
                 </a>
             </div>
             <div class="col-12 py-3 col-lg-4 my-auto text-center text-lg-left footer-text">
@@ -177,13 +184,31 @@
         </div>
 
     </footer>
+    <!-- Script -->
     <script>
-        setTimeout(function (){
+        // Messages timeout handler
+        setTimeout(function () {
             let messages = document.getElementById("msg");
             // standard bootstrap JavaScrip toolkit
             let alert = new bootstrap.Alert(messages);
             alert.close();
         }, 5000);
+
+        // Back on the Top button
+        const mybutton = document.getElementById("myBtn");
+        window.onscroll = function () { scrollFunction(); };
+        document.getElementById('myBtn').addEventListener('click', () => topFunction());
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+        function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+        }
     </script>
 
 </body>
