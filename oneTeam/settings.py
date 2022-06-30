@@ -16,7 +16,7 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # required by session-security
 SESSION_SECURITY_INSECURE = True  # required by session-security
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["ci-pp4-one--team.herokuapp.com", "localhost", "127.0.0.1"]
 

@@ -1,18 +1,19 @@
 # Testing
 
 ## Contents
-  - [Manual Testing](#manual-testing)
-  - [Testing User Story](#testing-user-story)
-  - [Bugs](#bugs)
-  - [Automated Teststing](#automated-teststing)
+  - [**Manual Testing**](#manual-testing)
+  - [**Testing User Story**](#testing-user-story)
+  - [**Bugs**](#bugs)
+  - [**Automated Teststing**](#automated-teststing)
     - [Users Coverage](#users-coverage)
     - [Tasks Coverage](#tasks-coverage)
-  - [Validation:](#validation)
-    - [HTML Validation:](#html-validation)
-    - [CSS Validation:](#css-validation)
-    - [JS Validation:](#js-validation)
-    - [Python Validation:](#python-validation)
-  - [Lighthouse Reports](#lighthouse-reports)
+  - [**Validation:**](#validation)
+    - [HTML Validation](#html-validation)
+    - [CSS Validation](#css-validation)
+    - [JS Validation](#js-validation)
+    - [Python Validation](#python-validation)
+  - [**Lighthouse Reports**](#lighthouse-reports)
+  - [**Responsiveness**](#responsiveness)
 
 ## Manual Testing
 
@@ -272,5 +273,14 @@ The report was generated for the majority of app functional pages. Below attache
 
 
 [Back to contents](#contents)
+
+## Responsiveness
+Responsiveness design was checked with [Google Chrome Dev Tools](https://developer.chrome.com/), [Safari Web Development Tools](https://developer.apple.com/safari/tools/) and with [Am I responsive?](http://ami.responsivedesign.is/). The website responds well to different screen sizes.
+
+|        | Moto G4 | Galaxy S5 | iPhone 5/SE | iPhone X | iPad | iPad Pro | 1366 x 768 | 1920 x 1080 |
+|--------|:-------:|:---------:|:-----------:|:--------:|:----:|:--------:|:----------:|:-----------:|
+| Render |   pass  |    pass   |     pass    |   pass   | pass |   pass   |    pass    |     pass    |
+| Images |   pass  |    pass   |     pass    |   pass   | pass |   pass   |    pass    |     pass    |
+| Sounds |   pass  |    pass   |     pass    |   pass   | pass |   pass   |    pass    |     pass    |
 
   
