@@ -1,8 +1,7 @@
-from django.urls import reverse
 from django.test.client import Client
 from django.test import TestCase
 from .models import CustomUser
-from allauth.account.forms import ChangePasswordForm
+
 
 
 class TestViews(TestCase):

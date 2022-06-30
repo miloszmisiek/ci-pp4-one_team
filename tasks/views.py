@@ -5,9 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from .models import Task
 from .forms import AddTask
-from django.contrib.auth.decorators import user_passes_test
 from datetime import date, timedelta
-from users.models import CustomUser
+
 
 USER = get_user_model()
 ALL_USERS = USER.objects.all()
@@ -29,8 +28,6 @@ def profile_home(request):
     tasks.filter(end_date__lt=TODAY, status=0).update(status=2)
     tasks.filter(end_date__gte=TODAY, status=2).update(status=0)
 
-    # tasks = tasks.exclude(Q(updated_on__lte=CLEAR_UPDATED) & Q(status=1))
-
     if request.GET and "months" in request.GET:
         months = request.GET["months"]
         tasks = tasks.filter(Q(created_on__month=months) | Q(end_date__month=months))
@@ -47,11 +44,13 @@ def profile_home(request):
 @login_required(login_url="/accounts/login/")
 def my_tasks(request):
     """A view to return the tasks home page"""
-    tasks = Task.objects.all().filter(assigned_to=request.user)
+    tasks = (
+        Task.objects.all()
+        .filter(assigned_to=request.user)
+        .exclude(Q(updated_on__lte=CLEAR_UPDATED) & Q(status=1))
+    )
     tasks.filter(end_date__lt=TODAY, status=0).update(status=2)
     tasks.filter(end_date__gte=TODAY, status=2).update(status=0)
-
-    tasks = tasks.exclude(Q(updated_on__lte=CLEAR_UPDATED) & Q(status=1))
 
     if request.GET and "months" in request.GET:
         months = request.GET["months"]

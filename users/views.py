@@ -51,6 +51,7 @@ def delete_profile(request, user_id):
 
 
 class CustomPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
+    """A view to change success url for change password redirect"""
     def get_success_url(self):
         success_url = reverse("edit_profile", kwargs={"user_id": self.request.user.id})
         return success_url

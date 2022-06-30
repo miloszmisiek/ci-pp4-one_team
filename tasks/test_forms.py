@@ -1,7 +1,7 @@
 from django import forms
 from django.test import TestCase
 from .forms import AddTask
-from .models import Task, TASK_APPROVAL, TASK_PRIORITY, TASK_STATUS
+from .models import TASK_PRIORITY
 from users.models import CustomUser
 from django.contrib.auth import get_user_model
 
