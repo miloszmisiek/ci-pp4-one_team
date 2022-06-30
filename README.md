@@ -126,6 +126,7 @@ OneTeam is developed for ship members.
     + [Django-session-security](https://django-session-security.readthedocs.io/en/master/index.html): was used to handlw automatic logout after inactivity and browser close
     + [Coolorc.co](https://coolors.co/): was used to choose pallete colors for website
     + [CSSgradient.io](https://cssgradient.io/): was used for genertating background gradients
+    + [Grammarly](https://www.grammarly.com/): was used to check grammar and typo errors.
 
 [Back to contents](#contents)
 
